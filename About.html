@@ -1,121 +1,256 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-    <title>THE BMW CARS-About</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Discover the rich heritage, engineering milestones, and forward-looking vision of BMW Group from 1916 to the electric era.">
+    <title>About BMW | Heritage, Innovation & Excellence</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo2h.png">
 </head>
-
 <body>
-    <div class="mane1">
-        <header>
-            <div>
-                <a href=" home.html">
-                    <img id="logo"src="img/logo2h.png" alt="BMW"
-                        title="BMW - CARS">
-                </a>
-            </div>
-            <h2 style="text-align: center;">B M W  SHOP</h2>
-            <div>
-                <nav>
-                    <!-- <table cellspacing="5" cellpadding="5"> -->
-                    <tr>
-                        <div class="navbar1">
-                            <td><a id="nav2" href="index.html"> Home </a></td>
-                            <td> <a id="nav2" href="services.html"> Services</a></td>
-                            <td> <a id="nav2" href="about.html">About</a></td>
-                            <td> <a id="nav2" href="contact.html">Contact</a></td>
-                        </div>
-                    </tr>
 
-                </nav>
-            </div>
-        </header>
-        <div class="models3">
-            <h1>THE BMW</h1>
-            <p>Bayerische Motoren Werke Aktiengesellschaft (BMW AG),[4] trading as BMW Group (commonly abbreviated to
-                BMW
-                , sometimes anglicised as Bavarian Motor Works), is a German multinational conglomerate
-                manufacturer of luxury vehicles and motorcycles headquartered in Munich, Bavaria, Germany. In 1922, the
-                name
-                and assets
-                of Bayerische Motoren Werke GmbH (formerly Rapp Motorenwerke) were transferred to Bayerische
-                Flugzeugwerke
-                AG (formerly
-                Otto Flugmaschinenfabrik), thereby giving rise to the company known today as BMW AG.</p>
-            <img class="ind" id="others" align="right" src="img/BMW7.png" width="40%" height="40%" float="center"
-                title="Everything in eistence holds a perfect harmonic blueprint">
-            <ul>
-                <li>The company's automobiles are marketed under the BMW, Mini and Rolls-Royce brands, and motorcycles
-                    are
-                    marketed under
-                    the BMW Motorrad brand. In 2023, BMW was the world's ninth-largest producer of motor vehicles, and
-                    the
-                    6th largest by
-                    revenue,[7] with 2,555,341 vehicles produced in that year alone.[8] In 2023, the company was ranked
-                    46th
-                    in the Forbes
-                    Global 2000.[9] The company has significant motor-sport history, especially in touring cars, sports
-                    cars, and the Isle
-                    of Man TT.
-                </li>
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo-wrap" title="BMW Official Experience">
+                <img class="brand-logo-img" src="img/logo2h.png" alt="BMW Logo">
+                <span class="brand-title">BMW SHOP</span>
+            </a>
 
-                <li>BMW is headquartered in Munich and produces motor vehicles in Germany, the United Kingdom, the
-                    United
-                    States, Brazil,
-                    Mexico, South Africa, India, China, and previously also in the Netherlands (ceased in 2023).[10] The
-                    Quandt family [de]
-                    is a long-term shareholder of the company, following investments by the brothers Herbert and Harald
-                    Quandt in 1959,
-                    saved BMW from bankruptcy, with remaining shares owned by the public.</li>
-            </ul>
-            <div>
-                <h1>History of BMW</h1>
-                <p>The official founding date of the German motor vehicle manufacturer BMW is 7 March 1916, when an
-                    aircraft
-                    producer
-                    called Bayerische Flugzeugwerke (formerly Otto Flugmaschinenfabrik) was established.[1][2] This
-                    company
-                    was renamed to
-                    Bayerische Motoren Werke (BMW) in 1922. However, the BMW name dates back to 1917, when Rapp
-                    Motorenwerke
-                    changed its
-                    name to Bayerische Motoren Werke.[3] BMW's first product was a straight-six aircraft engine called
-                    the
-                    BMW IIIa.
-                    Following the end of World War I, BMW remained in business by producing motorcycle engines, farm
-                    equipment, household
-                    items and railway brakes.</p>
-                <p>This was not enough and the company was suspended, effectively bankrupt, from 6 November 1918 to 1
-                    February 1919. BMW
-                    turned to motorcycle engine manufacturing, building a smooth operating horizontally opposed engine
-                    to
-                    keep the centre of
-                    mass low and thus make a more responsive machine. The engine was well received but the motorcycles
-                    made
-                    using it were
-                    not and sold slowly. BMW's General Director Franz Josef Popp had to branch out again and BMW became
-                    a
-                    sub-contract
-                    manufacturer for braking system manufacturer Knorr Bremse.</p>
-                <p>The major shareholder in BMW, Vienna based Italian speculator Camillo Castiglionli, sold all of his
-                    shares to Knorr
-                    Bremse in May 1920, who then acquired the remaining shares to make BMW a wholly owned subsidiary
-                    still
-                    run by Popp. Less
-                    than two years later Popp persuaded Castiglionli buy back the BMW company name and buy the
-                    Bayerische
-                    Flugzeugwerke for
-                    its production site on the other side of the air field. There the company produced its first
-                    motorcycle
-                    in 1923. This
-                    was the legendary Max Fritz designed BMW R32 shaft drive motorcycle, which featured an integrated
-                    gearbox, recirculating
-                    rather than total loss lubrication and with the cylinder heads poking out for cooling.</p>
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="Services.html" class="nav-link">Services</a></li>
+                    <li><a href="About.html" class="nav-link active">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn-header-cta open-booking-modal" data-car="BMW Heritage Tour">Book Test Drive</button>
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Hero -->
+    <section class="hero-section about-hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle-tag">Over A Century of Driving Innovation</span>
+            <h1 class="hero-title">THE LEGEND OF BMW</h1>
+            <p class="hero-description">
+                From aircraft engines in 1916 to cutting-edge electrified high-performance machines today, the BMW Group defines the pinnacle of German automotive engineering.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main About Content -->
+    <main class="page-container">
+
+        <!-- Company Overview Grid -->
+        <div class="about-grid">
+            <div class="about-text-content">
+                <span class="section-tag">Corporate Profile</span>
+                <h2>Pioneering the Ultimate Driving Machine</h2>
+                <p>
+                    <strong>Bayerische Motoren Werke AG (BMW)</strong> is a globally renowned German multinational manufacturer of luxury automobiles and motorcycles headquartered in Munich, Bavaria, Germany.
+                </p>
+                <p>
+                    Under its four legendary brands — <strong>BMW, MINI, Rolls-Royce, and BMW Motorrad</strong> — the BMW Group delivers premium customer experiences across more than 140 countries. In 2023 alone, the company produced over <strong>2,555,000 vehicles</strong> worldwide and consistently ranks among the top global leaders in innovation and sustainability.
+                </p>
+                <p>
+                    With manufacturing facilities across Germany, the United States, South Africa, the United Kingdom, Mexico, India, and China, BMW unites precision craftsmanship with groundbreaking technological visionary spirit.
+                </p>
+            </div>
+
+            <div class="about-image-box">
+                <img src="img/BMW7.png" alt="BMW 7 Series Flagship Luxury Vehicle">
+            </div>
+        </div>
+
+        <!-- Global Stats Ribbon -->
+        <div class="hero-stats-bar" style="margin-bottom: 4rem;">
+            <div class="stat-item">
+                <span class="stat-number">1916</span>
+                <span class="stat-label">Founded in Munich</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">2.55M+</span>
+                <span class="stat-label">Annual Vehicle Output</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">#46</span>
+                <span class="stat-label">Forbes Global 2000</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">140+</span>
+                <span class="stat-label">Global Markets Served</span>
+            </div>
+        </div>
+
+        <!-- Heritage Timeline -->
+        <div class="timeline-section">
+            <div class="section-header">
+                <span class="section-tag">Our History</span>
+                <h2 class="section-title">Milestones of Excellence</h2>
+                <p class="section-subtitle">A journey through over a century of bold reinvention and unmatched engineering leadership.</p>
+            </div>
+
+            <div class="timeline">
+                <!-- 1916 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">March 7, 1916</div>
+                    <h3 class="timeline-title">Founding of Bayerische Flugzeugwerke (BFW)</h3>
+                    <p class="timeline-desc">
+                        BMW traces its roots to aircraft manufacturer Bayerische Flugzeugwerke, established in Munich. In 1917, Rapp Motorenwerke adopted the iconic name Bayerische Motoren Werke (BMW) with the famous blue-and-white propeller roundel.
+                    </p>
+                </div>
+
+                <!-- 1923 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1923</div>
+                    <h3 class="timeline-title">The Legendary BMW R32 Motorcycle</h3>
+                    <p class="timeline-desc">
+                        Designed by Chief Engineer Max Fritz, the BMW R32 featured a horizontally-opposed Boxer engine and shaft drive — a blueprint of mechanical precision that defined BMW Motorrad for the next century.
+                    </p>
+                </div>
+
+                <!-- 1959 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1959</div>
+                    <h3 class="timeline-title">The "Neue Klasse" Era & Financial Rebirth</h3>
+                    <p class="timeline-desc">
+                        Following strategic investment by Herbert and Harald Quandt, BMW introduced the 'Neue Klasse' sports sedans (BMW 1500), cementing the brand's identity for agile handling and driver-focused luxury.
+                    </p>
+                </div>
+
+                <!-- 1972 -->
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-year">1972 - Present</div>
+                    <h3 class="timeline-title">Birth of BMW M & The Modern Electrified Era</h3>
+                    <p class="timeline-desc">
+                        From the founding of BMW Motorsport GmbH (M Power) in 1972 to the launch of BMW i electric vehicles in 2011 and today’s ultra-advanced Neue Klasse electric architectures, BMW continues to redefine the future of sheer driving pleasure.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Test Drive Booking Modal -->
+    <div class="modal-backdrop" id="bookingModal">
+        <div class="modal-dialog">
+            <button class="modal-close-btn" id="closeBookingModal" aria-label="Close modal">&times;</button>
+            <div class="modal-car-header">
+                <span class="modal-car-series">Exclusive Experience</span>
+                <h2 class="modal-car-title">Schedule a VIP Test Drive</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Fill in your details below to book an exclusive test drive with our authorized BMW product specialists.</p>
             </div>
             
+            <form id="bookingForm" class="luxury-form" style="padding: 1.5rem 0 0; background: transparent; border: none; box-shadow: none;">
+                <div class="form-group">
+                    <label class="form-label" for="bookingName">Full Name *</label>
+                    <input type="text" id="bookingName" class="form-control" placeholder="e.g. Johnathan Vance" required>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="bookingEmail">Email Address *</label>
+                        <input type="email" id="bookingEmail" class="form-control" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookingPhone">Phone Number *</label>
+                        <input type="tel" id="bookingPhone" class="form-control" placeholder="+1 (555) 000-0000" required>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="bookingCarModel">Select Preferred Vehicle *</label>
+                        <select id="bookingCarModel" class="form-control" required>
+                            <option value="BMW i7 xDrive60">BMW i7 xDrive60 (Electric)</option>
+                            <option value="BMW iX xDrive50">BMW iX xDrive50 (Electric SAV)</option>
+                            <option value="BMW M4 Competition">BMW M4 Competition Coupé</option>
+                            <option value="BMW X6 M Competition">BMW X6 M Competition</option>
+                            <option value="BMW 750e xDrive">BMW 750e xDrive (Hybrid)</option>
+                            <option value="BMW X5 xDrive40i">BMW X5 xDrive40i</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookingDate">Preferred Date *</label>
+                        <input type="date" id="bookingDate" class="form-control" required>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeBookingModalFunc()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+                </div>
+            </form>
         </div>
     </div>
-    <footer id="footers">
-        Copyright &copy;BMW-CARS-2024-2025.
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Scroll to top">↑</button>
+
+    <!-- Modern Luxury Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                    <img src="img/logo2h.png" alt="BMW" style="width: 38px; height: 38px; border-radius: 50%;">
+                    <h3 style="margin: 0;">BMW SHOP</h3>
+                </div>
+                <p>The pioneer of sheer driving pleasure, technological supremacy, and sustainable high performance across the globe.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Models</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">BMW i Electric</a></li>
+                    <li><a href="index.html">BMW M Performance</a></li>
+                    <li><a href="index.html">BMW X Series (SAV)</a></li>
+                    <li><a href="index.html">BMW Sedans & Coupés</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="About.html">About BMW Group</a></li>
+                    <li><a href="Services.html">Services & Care</a></li>
+                    <li><a href="contact.html">Executive Team & Contact</a></li>
+                    <li><a href="Services.html#appointment">Book Appointment</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-newsletter">
+                <h4>Stay Informed</h4>
+                <p>Subscribe for exclusive previews of upcoming BMW concepts and limited editions.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to BMW Exclusive Updates.'); this.reset();">
+                    <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                    <button type="submit" class="btn btn-primary btn-sm">Join</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 BMW Group. All rights reserved. Built for educational and showcase excellence.</p>
+            <p>Sheer Driving Pleasure &bull; Munich, Germany</p>
+        </div>
     </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
+</html>

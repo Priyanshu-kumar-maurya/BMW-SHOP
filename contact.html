@@ -1,88 +1,293 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-    <title>THE BMW CARS-Contact</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get in touch with BMW Support, locate authorized dealerships, and explore BMW Board of Management leadership profiles.">
+    <title>Contact BMW & Management | Global Support</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo2h.png">
 </head>
-
 <body>
-    <div class="mane1">
-        <header>
-            <div>
-                <a href=" home.html">
-                    <img id="logo" src="img/logo2h.png" alt="BMW" title="BMW - CARS">
-                </a>
-            </div>
-            <div>
-                <h2 style="text-align: center;">B M W SHOP</h2>
-            </div>
+
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo-wrap" title="BMW Official Experience">
+                <img class="brand-logo-img" src="img/logo2h.png" alt="BMW Logo">
+                <span class="brand-title">BMW SHOP</span>
+            </a>
+
             <nav>
-                <tr>
-                    <div class="navbar1">
-                        <td><a id="nav2" href="index.html"> Home </a></td>
-                        <td> <a id="nav2" href="services.html"> Services</a></td>
-                        <td> <a id="nav2" href="about.html">About</a></td>
-                        <td> <a id="nav2" href="contact.html">Contact</a></td>
-                    </div>
-                </tr>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="Services.html" class="nav-link">Services</a></li>
+                    <li><a href="About.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link active">Contact</a></li>
+                </ul>
             </nav>
-        </header>
-        <div class="models3">
-            <h1 id="Mg">BMW Management</h1>
-            <div class="management-container">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" alt="Oliver Zipse">
-                    <div class="card-content">
-                        <h3>Oliver Zipse</h3>
-                        <p>Chairman of the Board of Management (CEO). Responsible for corporate strategy and
-                            transformation to
-                            e-mobility.</p>
-                    </div>
-                </div>
 
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" alt="Ilka Horstmeier">
-                    <div class="card-content">
-                        <h3>Ilka Horstmeier</h3>
-                        <p>Board Member - People & Real Estate; Labour Relations Director. Focus on workforce and plant
-                            management.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img id="in" src="https://via.placeholder.com/300x200" alt="Walter Mertl">
-                    <div class="card-content">
-                        <h3>Walter Mertl</h3>
-                        <p>Board Member - Finance (CFO). Oversees financial strategy and corporate controlling.</p>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" alt="Dr. Milan Nedeljković">
-                    <div class="card-content">
-                        <h3>Dr. Milan Nedeljković</h3>
-                        <p>Board Member - Production. Responsible for global manufacturing and plant operations.</p>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center;">
-                <hr>
-                <h1 style="text-align: center;">Contact Us</h1>
-                <!-- <hr width="12%" size="2px" color="black"> -->
-                 <div>
-
-                     <p>If you have any questions or need further information, please feel free to reach out to us.</p>
-                    </div>
-                <div class="contact-info">
-                    <h2>Contact Information</h2>
-                    <p>Email: <a href="mailto:info@bmw.com">info@bmw.com</a></p>
-                    <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
-                </div>
+            <div class="header-actions">
+                <button class="btn-header-cta open-booking-modal" data-car="BMW Direct Inquiry">Book Test Drive</button>
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
+    </header>
+
+    <!-- Contact Hero -->
+    <section class="hero-section" style="min-height: 65vh; background-image: radial-gradient(circle at 50% 20%, rgba(0, 102, 177, 0.28) 0%, rgba(7, 10, 16, 0.95) 75%), url('img/BMW.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle-tag">🤝 Dedicated Customer Experience</span>
+            <h1 class="hero-title">CONNECT WITH BMW</h1>
+            <p class="hero-description">
+                Whether you wish to consult our executive advisors, locate an authorized partner, or request specialized product details, our team is at your disposal.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="page-container">
+
+        <!-- Board of Management Section -->
+        <section class="management-section">
+            <div class="section-header">
+                <span class="section-tag">Executive Leadership</span>
+                <h2 class="section-title">BMW Board of Management</h2>
+                <p class="section-subtitle">Guiding the BMW Group towards the sustainable future of luxury mobility.</p>
+            </div>
+
+            <div class="management-grid">
+                <!-- Leader 1 -->
+                <div class="executive-card">
+                    <div class="executive-avatar-box">OZ</div>
+                    <h3 class="executive-name">Oliver Zipse</h3>
+                    <div class="executive-role">Chairman of the Board (CEO)</div>
+                    <p class="executive-bio">Directs overarching corporate strategy, product portfolio expansion, and the global transformation toward electric Neue Klasse architectures.</p>
+                </div>
+
+                <!-- Leader 2 -->
+                <div class="executive-card">
+                    <div class="executive-avatar-box">IH</div>
+                    <h3 class="executive-name">Ilka Horstmeier</h3>
+                    <div class="executive-role">People, Real Estate & Labour</div>
+                    <p class="executive-bio">Oversees global talent development, sustainable real estate infrastructure, and workforce readiness across all international BMW production plants.</p>
+                </div>
+
+                <!-- Leader 3 -->
+                <div class="executive-card">
+                    <div class="executive-avatar-box">WM</div>
+                    <h3 class="executive-name">Walter Mertl</h3>
+                    <div class="executive-role">Finance (CFO)</div>
+                    <p class="executive-bio">Responsible for global financial strategy, controlling, capital allocation, and driving disciplined, highly profitable long-term investments.</p>
+                </div>
+
+                <!-- Leader 4 -->
+                <div class="executive-card">
+                    <div class="executive-avatar-box">MN</div>
+                    <h3 class="executive-name">Dr. Milan Nedeljković</h3>
+                    <div class="executive-role">Production & iFACTORY</div>
+                    <p class="executive-bio">Leads global automotive manufacturing facilities, introducing AI-driven BMW iFACTORY lean production standards and carbon-neutral operations.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form & Info Layout -->
+        <div class="section-header" style="margin-top: 4rem;">
+            <span class="section-tag">Get in Touch</span>
+            <h2 class="section-title">Direct Customer Support</h2>
+            <p class="section-subtitle">Send us a message or contact our specialized global hotlines directly.</p>
+        </div>
+
+        <div class="contact-layout">
+            <!-- Contact Information Cards -->
+            <div class="contact-info-cards">
+                <div class="contact-tile">
+                    <div class="contact-tile-icon">📍</div>
+                    <div>
+                        <h4>Global Headquarters</h4>
+                        <p>BMW AG, Petuelring 130, 80788 Munich, Germany</p>
+                    </div>
+                </div>
+
+                <div class="contact-tile">
+                    <div class="contact-tile-icon">📞</div>
+                    <div>
+                        <h4>BMW Customer Hotline</h4>
+                        <p>Toll Free: <a href="tel:+18008311117">+1 (800) 831-1117</a></p>
+                        <p>International: <a href="tel:+49893820">+49 89 382-0</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-tile">
+                    <div class="contact-tile-icon">✉️</div>
+                    <div>
+                        <h4>Official Inquiries</h4>
+                        <p>Customer Care: <a href="mailto:customercare@bmw.com">customercare@bmw.com</a></p>
+                        <p>Press & Media: <a href="mailto:press@bmwgroup.com">press@bmwgroup.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-tile">
+                    <div class="contact-tile-icon">⏱️</div>
+                    <div>
+                        <h4>Operating Hours</h4>
+                        <p>Monday – Friday: 08:00 AM – 08:00 PM CET</p>
+                        <p>24/7 Emergency Roadside Assistance Available</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Contact Form -->
+            <form id="contactForm" class="luxury-form">
+                <h3 style="font-size: 1.4rem; margin-bottom: 1.5rem;">Send Us an Inquiry</h3>
+
+                <div class="form-group">
+                    <label class="form-label" for="contactName">Your Name *</label>
+                    <input type="text" id="contactName" class="form-control" placeholder="e.g. Eleanor Rigby" required>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="contactEmail">Email Address *</label>
+                        <input type="email" id="contactEmail" class="form-control" placeholder="eleanor@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="contactPhone">Phone Number</label>
+                        <input type="tel" id="contactPhone" class="form-control" placeholder="+1 (555) 000-0000">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="contactSubject">Inquiry Subject</label>
+                    <select id="contactSubject" class="form-control">
+                        <option value="Vehicle Purchase & Custom Build">Vehicle Purchase & Custom Build</option>
+                        <option value="Schedule VIP Test Drive">Schedule VIP Test Drive</option>
+                        <option value="Service & Technical Support">Service & Technical Support</option>
+                        <option value="Corporate Fleet & Business Sales">Corporate Fleet & Business Sales</option>
+                        <option value="Other Feedback">Other Feedback</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="contactMessage">Your Message *</label>
+                    <textarea id="contactMessage" class="form-control" placeholder="How can we assist your BMW driving experience today?" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Inquiry</button>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- Test Drive Booking Modal -->
+    <div class="modal-backdrop" id="bookingModal">
+        <div class="modal-dialog">
+            <button class="modal-close-btn" id="closeBookingModal" aria-label="Close modal">&times;</button>
+            <div class="modal-car-header">
+                <span class="modal-car-series">Exclusive Experience</span>
+                <h2 class="modal-car-title">Schedule a VIP Test Drive</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Fill in your details below to book an exclusive test drive with our authorized BMW product specialists.</p>
+            </div>
+            
+            <form id="bookingForm" class="luxury-form" style="padding: 1.5rem 0 0; background: transparent; border: none; box-shadow: none;">
+                <div class="form-group">
+                    <label class="form-label" for="bookingName">Full Name *</label>
+                    <input type="text" id="bookingName" class="form-control" placeholder="e.g. Johnathan Vance" required>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="bookingEmail">Email Address *</label>
+                        <input type="email" id="bookingEmail" class="form-control" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookingPhone">Phone Number *</label>
+                        <input type="tel" id="bookingPhone" class="form-control" placeholder="+1 (555) 000-0000" required>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="bookingCarModel">Select Preferred Vehicle *</label>
+                        <select id="bookingCarModel" class="form-control" required>
+                            <option value="BMW i7 xDrive60">BMW i7 xDrive60 (Electric)</option>
+                            <option value="BMW iX xDrive50">BMW iX xDrive50 (Electric SAV)</option>
+                            <option value="BMW M4 Competition">BMW M4 Competition Coupé</option>
+                            <option value="BMW X6 M Competition">BMW X6 M Competition</option>
+                            <option value="BMW 750e xDrive">BMW 750e xDrive (Hybrid)</option>
+                            <option value="BMW X5 xDrive40i">BMW X5 xDrive40i</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookingDate">Preferred Date *</label>
+                        <input type="date" id="bookingDate" class="form-control" required>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeBookingModalFunc()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <footer id="footers">
-        Copyright &copy;LifeCraft.love 2024-2025.
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Scroll to top">↑</button>
+
+    <!-- Modern Luxury Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                    <img src="img/logo2h.png" alt="BMW" style="width: 38px; height: 38px; border-radius: 50%;">
+                    <h3 style="margin: 0;">BMW SHOP</h3>
+                </div>
+                <p>The pioneer of sheer driving pleasure, technological supremacy, and sustainable high performance across the globe.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Models</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">BMW i Electric</a></li>
+                    <li><a href="index.html">BMW M Performance</a></li>
+                    <li><a href="index.html">BMW X Series (SAV)</a></li>
+                    <li><a href="index.html">BMW Sedans & Coupés</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="About.html">About BMW Group</a></li>
+                    <li><a href="Services.html">Services & Care</a></li>
+                    <li><a href="contact.html">Executive Team & Contact</a></li>
+                    <li><a href="Services.html#appointment">Book Appointment</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-newsletter">
+                <h4>Stay Informed</h4>
+                <p>Subscribe for exclusive previews of upcoming BMW concepts and limited editions.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to BMW Exclusive Updates.'); this.reset();">
+                    <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                    <button type="submit" class="btn btn-primary btn-sm">Join</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 BMW Group. All rights reserved. Built for educational and showcase excellence.</p>
+            <p>Sheer Driving Pleasure &bull; Munich, Germany</p>
+        </div>
     </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
+</html>

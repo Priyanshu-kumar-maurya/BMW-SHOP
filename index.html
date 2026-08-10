@@ -1,176 +1,748 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-    <title> THE BMW CARS </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="BMW Shop - Explore the complete lineup of BMW luxury electric, hybrid, and high-performance vehicles. Experience Sheer Driving Pleasure.">
+    <title>BMW SHOP | The Ultimate Driving Machine</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo2h.png">
 </head>
-
 <body>
-    <div class="mane1">
-        <header>
-            <div>
-                <a href="home.html">
-                    <img id="logo" src="img/logo2h.png" alt="BMW" title="BMW - CARS">
-                </a>
-            </div>
-            <div style="text-align: center;">
-                <h2>B M W SHOP</h2>
-            </div>
+
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo-wrap" title="BMW Official Experience">
+                <img class="brand-logo-img" src="img/logo2h.png" alt="BMW Logo">
+                <span class="brand-title">BMW SHOP</span>
+            </a>
+
             <nav>
-                <tr>
-                    <div class="navbar1">
-                        <td> <a id="nav2" href="index.html"> Home </a></td>
-                        <td> <a id="nav2" href="Services.html"> Services</a></td>
-                        <td> <a id="nav2" href="about.html">About</a></td>
-                        <td> <a id="nav2" href="contact.html">Contact</a></td>
-                    </div>
-                </tr>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="Services.html" class="nav-link">Services</a></li>
+                    <li><a href="About.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
             </nav>
-        </header>
+
+            <div class="header-actions">
+                <button class="btn-header-cta open-booking-modal" data-car="BMW i7">Book Test Drive</button>
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle-tag">⚡ The Future of Electric & Luxury</span>
+            <h1 class="hero-title">SHEER DRIVING PLEASURE.</h1>
+            <p class="hero-description">
+                Experience next-generation performance, pioneering electric mobility, and handcrafted automotive luxury designed to thrill every sense.
+            </p>
+            <div class="hero-cta-group">
+                <a href="#modelsSection" class="btn btn-primary">Explore All Models</a>
+                <button class="btn btn-secondary open-booking-modal" data-car="BMW Experience">Schedule VIP Experience</button>
+            </div>
+
+            <!-- Quick Specs Ribbon -->
+            <div class="hero-stats-bar">
+                <div class="stat-item">
+                    <span class="stat-number">3.4s</span>
+                    <span class="stat-label">0-100 km/h (M4 Comp)</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">630 km</span>
+                    <span class="stat-label">Max Electric Range</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">738 HP</span>
+                    <span class="stat-label">Peak V8 Hybrid Power</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Precision German Engineering</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Models Showcase Section -->
+    <main class="page-container" id="modelsSection">
+        <div class="section-header">
+            <span class="section-tag">Featured Fleet</span>
+            <h2 class="section-title">ALL BMW MODELS</h2>
+            <p class="section-subtitle">Discover the perfect synergy of luxury, electrifying innovation, and raw racetrack heritage.</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="filter-wrapper">
+            <button class="filter-btn active" data-filter="all">All Models</button>
+            <button class="filter-btn" data-filter="electric">⚡ Electric & i-Series</button>
+            <button class="filter-btn" data-filter="x-series">🚙 X-Series (SAVs)</button>
+            <button class="filter-btn" data-filter="m-series">🏁 M-Performance</button>
+            <button class="filter-btn" data-filter="sedans">🚗 Luxury Sedans</button>
+            <button class="filter-btn" data-filter="roadster">🏎️ Z4 Roadster</button>
+        </div>
+
+        <!-- Dynamic Cars Grid -->
+        <div class="cars-grid" id="carsGrid">
+
+            <!-- 1. BMW i7 -->
+            <div class="car-card" data-category="electric sedans">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW i-SERIES</span>
+                            <h3 class="car-model-title">BMW i7 xDrive60</h3>
+                        </div>
+                        <span class="badge badge-accent">100% Electric</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMWi7.png" alt="BMW i7 Luxury Electric Sedan">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">536 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">4.5s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">625 km</span>
+                            <span class="car-spec-key">Range</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        A milestone in automotive luxury. The fully electric BMW i7 delivers visionary multisensory comfort, the panoramic 31.3-inch Theatre Screen, and emission-free prestige.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-i7">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW i7">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 2. BMW iX -->
+            <div class="car-card" data-category="electric x-series">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW i-SERIES</span>
+                            <h3 class="car-model-title">BMW iX xDrive50</h3>
+                        </div>
+                        <span class="badge badge-blue">Electric SAV</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMWiX.png" alt="BMW iX Electric SAV">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">516 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">4.4s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">630 km</span>
+                            <span class="car-spec-key">Range</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        Born from a vision for sustainable luxury. With pioneering aerodynamics, dual-motor all-wheel drive, and lounge-inspired interior architecture.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-ix">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW iX">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 3. BMW X5 -->
+            <div class="car-card" data-category="x-series">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW X-SERIES</span>
+                            <h3 class="car-model-title">BMW X5 xDrive40i</h3>
+                        </div>
+                        <span class="badge badge-blue">All-Terrain SAV</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMWX5.png" alt="BMW X5 Luxury SUV">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">375 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">5.2s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">250 km/h</span>
+                            <span class="car-spec-key">Top Speed</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        The definitive Sports Activity Vehicle. Sharp lines, striking BMW illuminated kidney grille, and effortless confidence in any weather or terrain.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-x5">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW X5">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 4. BMW X7 -->
+            <div class="car-card" data-category="x-series">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW X-SERIES</span>
+                            <h3 class="car-model-title">BMW X7 M60i</h3>
+                        </div>
+                        <span class="badge badge-accent">Luxury 7-Seater</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMWX7.png" alt="BMW X7 Full-Size SUV">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">523 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">4.5s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">4.4L V8</span>
+                            <span class="car-spec-key">Engine</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        Unmatched grandeur and executive status. Three expansive rows of plush comfort powered by a twin-turbocharged V8 engine.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-x7">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW X7">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 5. BMW M4 -->
+            <div class="car-card" data-category="m-series">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW M-SERIES</span>
+                            <h3 class="car-model-title">BMW M4 Competition</h3>
+                        </div>
+                        <span class="badge badge-m">Pure Motorsport</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMWM4.png" alt="BMW M4 Competition Coupe">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">503 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">3.4s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">290 km/h</span>
+                            <span class="car-spec-key">Top Speed</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        Racetrack DNA tailored for road dominance. High-revving inline-6 twin-turbo performance, M carbon bucket seats, and uncompromising agility.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-m4">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW M4">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 6. BMW X6 M -->
+            <div class="car-card" data-category="m-series x-series">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW M-SERIES</span>
+                            <h3 class="car-model-title">BMW X6 M Competition</h3>
+                        </div>
+                        <span class="badge badge-m">High-Performance SAC</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMWX6M.png" alt="BMW X6 M Sports Activity Coupe">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">617 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">3.7s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">750 Nm</span>
+                            <span class="car-spec-key">Torque</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        A sculpture of pure athletic adrenaline. Combines dramatic coupè lines with thunderous twin-turbo V8 dominance and M adaptive suspension.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-x6m">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW X6 M">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 7. BMW 7-Series -->
+            <div class="car-card" data-category="sedans">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW 7-SERIES</span>
+                            <h3 class="car-model-title">BMW 750e xDrive</h3>
+                        </div>
+                        <span class="badge badge-accent">Plug-in Hybrid</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMW7.png" alt="BMW 7 Series Flagship Sedan">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">483 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">4.6s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">80 km</span>
+                            <span class="car-spec-key">Pure EV</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        Harmonious combustion and electric engineering. Travel silently with zero local emissions in the city, or command high-speed autobahn comfort.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-7">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW 7 Series">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 8. BMW 5-Series -->
+            <div class="car-card" data-category="sedans">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW 5-SERIES</span>
+                            <h3 class="car-model-title">BMW 530i Sedan (G68)</h3>
+                        </div>
+                        <span class="badge badge-blue">Executive Sedan</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMW530.png" alt="BMW 5 Series Sedan">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">255 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">5.9s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">48V Hybrid</span>
+                            <span class="car-spec-key">Tech</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        The world’s quintessential business sedan. Engineered with BMW Curved Display, Highway Assistant automated driving, and refined athletic poise.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-5">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW 5 Series">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 9. BMW 3-Series -->
+            <div class="car-card" data-category="sedans">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW 3-SERIES</span>
+                            <h3 class="car-model-title">BMW 330i M Sport</h3>
+                        </div>
+                        <span class="badge badge-blue">Sports Sedan Icon</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMW3.png" alt="BMW 3 Series Sports Sedan">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">255 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">5.4s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">50:50</span>
+                            <span class="car-spec-key">Balance</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        Mind-blowing driving dynamics and razor-sharp agility that set the global benchmark for sports sedans for more than four decades.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-3">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW 3 Series">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 10. BMW 2-Series -->
+            <div class="car-card" data-category="sedans">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW 2-SERIES</span>
+                            <h3 class="car-model-title">BMW 2 Series Gran Coupé</h3>
+                        </div>
+                        <span class="badge badge-blue">Compact Coupé</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMW2.png" alt="BMW 2 Series Gran Coupe">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">241 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">6.0s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">OS 9</span>
+                            <span class="car-spec-key">Infotainment</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        Sporty silhouette, frameless doors, and bold athletic character. Features Adaptive M Suspension and standard BMW Digital Key Plus.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-2">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW 2 Series">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 11. BMW Z4 Roadster -->
+            <div class="car-card" data-category="roadster">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW Z4-SERIES</span>
+                            <h3 class="car-model-title">BMW Z4 M40i Roadster</h3>
+                        </div>
+                        <span class="badge badge-m">Open-Air Thrill</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMWZ4.png" alt="BMW Z4 M40i Roadster">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">382 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">3.9s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">Inline-6</span>
+                            <span class="car-spec-key">TwinPower</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        Drop the soft-top in 10 seconds and feel pure open-air exhilaration. Agile cornering, intoxicating inline-6 exhaust note, and driver-centric cockpit.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-z4">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW Z4 Roadster">Test Drive</button>
+                </div>
+            </div>
+
+            <!-- 12. BMW XM -->
+            <div class="car-card" data-category="m-series x-series">
+                <div>
+                    <div class="car-card-header">
+                        <div>
+                            <span class="car-series-name">THE BMW M-SERIES</span>
+                            <h3 class="car-model-title">BMW XM Label Red</h3>
+                        </div>
+                        <span class="badge badge-m">Most Powerful M</span>
+                    </div>
+
+                    <div class="car-image-container">
+                        <img src="img/BMWXM.png" alt="BMW XM Hybrid SUV">
+                    </div>
+
+                    <div class="car-specs-row">
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">738 HP</span>
+                            <span class="car-spec-key">Power</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">3.7s</span>
+                            <span class="car-spec-key">0-100 km/h</span>
+                        </div>
+                        <div class="car-spec-box">
+                            <span class="car-spec-val">1,000 Nm</span>
+                            <span class="car-spec-key">Torque</span>
+                        </div>
+                    </div>
+
+                    <p class="car-card-desc">
+                        The apex of electrified M engineering. High-performance M HYBRID system uniting a 4.4L twin-turbo V8 with an electric motor for unprecedented power.
+                    </p>
+                </div>
+
+                <div class="car-card-actions">
+                    <button class="btn btn-primary open-specs-btn" data-car="bmw-xm">View Specs</button>
+                    <button class="btn btn-secondary open-booking-modal" data-car="BMW XM">Test Drive</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Additional Fleet / Quick Access Grid -->
+        <section class="other-cars-section">
+            <div class="section-header">
+                <span class="section-tag">Explore More</span>
+                <h2 class="section-title">THE COMPLETE BMW FLEET</h2>
+                <p class="section-subtitle">Click on any model to view instant detailed technical specifications.</p>
+            </div>
+
+            <div class="other-cars-grid">
+                <div class="other-car-tile open-specs-btn" data-car="bmw-8" style="cursor: pointer;">
+                    <img src="img/BMW8.png" alt="BMW 8-Series Coupe">
+                    <h4 class="other-car-name">BMW 8-Series Coupé</h4>
+                    <span class="other-car-link">Explore Specs &rarr;</span>
+                </div>
+
+                <div class="other-car-tile open-specs-btn" data-car="bmw-i5" style="cursor: pointer;">
+                    <img src="img/BMWi5.png" alt="BMW i5 Electric Sedan">
+                    <h4 class="other-car-name">BMW i5 All-Electric</h4>
+                    <span class="other-car-link">Explore Specs &rarr;</span>
+                </div>
+
+                <div class="other-car-tile open-specs-btn" data-car="bmw-i4" style="cursor: pointer;">
+                    <img src="img/BMWi4.png" alt="BMW i4 Gran Coupe">
+                    <h4 class="other-car-name">BMW i4 M50 Gran Coupé</h4>
+                    <span class="other-car-link">Explore Specs &rarr;</span>
+                </div>
+
+                <div class="other-car-tile open-specs-btn" data-car="bmw-x7" style="cursor: pointer;">
+                    <img src="img/BMW4.png" alt="BMW X6 Coupe SUV">
+                    <h4 class="other-car-name">BMW X6 Luxury SAC</h4>
+                    <span class="other-car-link">Explore Specs &rarr;</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Quick Vehicle Specs Modal -->
+    <div class="modal-backdrop" id="specsModal">
+        <div class="modal-dialog">
+            <button class="modal-close-btn" id="closeSpecsModal" aria-label="Close modal">&times;</button>
+            <div id="specsModalContent">
+                <!-- Injected via JavaScript -->
+            </div>
+        </div>
     </div>
-    <div class="models3">
-        <h2 id="modelsh2">All BMW MODELS</h2>
-        <div>
-            <h1>THE BMW-i-SERIES</h1>
-            <div class="cars">
-                <p>Accompany us on a journey through the history of BMW electric cars. Since 2010, BMW i has been
-                    working on cars with
-                    fully electric and partially electric drives. And at the same time developing a new holistic
-                    approach to automotive
-                    engineering and sustainability. Discover the models of the BMW i series.</p>
-                <img id="BMW" src="img/BMWi7.png" alt="">
-                <img id="BMW" src="img/BMWiX.png" alt="">
-                <p>For drivers who refuse to compromise no matter the weather or terrain. The BMWi delivers the perfect
-                    balance of
-                    versatility, style, comfort, and power.</p>
-                <button id="btn"><a id="link" href="https://www.bmwusa.com/vehicles/bmw-i-series.html">VIWE MORE...</a></button>
+
+    <!-- VIP Test Drive & Service Booking Modal -->
+    <div class="modal-backdrop" id="bookingModal">
+        <div class="modal-dialog">
+            <button class="modal-close-btn" id="closeBookingModal" aria-label="Close modal">&times;</button>
+            <div class="modal-car-header">
+                <span class="modal-car-series">Exclusive Experience</span>
+                <h2 class="modal-car-title">Schedule a VIP Test Drive</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Fill in your details below to book an exclusive test drive with our authorized BMW product specialists.</p>
             </div>
-            <h1>THE BMW-X-SERIES</h1>
-            <div class="cars">
-                <p>Sharp lines meet strong stance. With its bold wheel arches and raised profile, the BMW X1,X2...X7
-                    balances rugged attitude with
-                    refined style.</p>
-                <img id="BMW" src="img/BMWX5.png" alt="">
-                <img id="BMW" src="img/BMWX7.png" alt="">
-                <p>Even at first glance, the versatile design of the BMW X1 is unmistakable. Up front, the striking
-                    double kidney grill and
-                    slimline LED headlights combine to create a powerful presence. The flowing lines of the X1's
-                    silhouette show off a bold,
-                    upright stance with clean, expansive design details. The modern rear makes a striking impression
-                    with three-dimensional
-                    L-shaped taillights. The BMW X1 embraces every adventure in style.</p>
-                <button id="btn"><a id="link" href="https://www.bmw.in/en/all-models/x-series.html">VIWE MORE...</a></button>
+            
+            <form id="bookingForm" class="luxury-form" style="padding: 1.5rem 0 0; background: transparent; border: none; box-shadow: none;">
+                <div class="form-group">
+                    <label class="form-label" for="bookingName">Full Name *</label>
+                    <input type="text" id="bookingName" class="form-control" placeholder="e.g. Johnathan Vance" required>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="bookingEmail">Email Address *</label>
+                        <input type="email" id="bookingEmail" class="form-control" placeholder="john@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookingPhone">Phone Number *</label>
+                        <input type="tel" id="bookingPhone" class="form-control" placeholder="+1 (555) 000-0000" required>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="bookingCarModel">Select Preferred Vehicle *</label>
+                        <select id="bookingCarModel" class="form-control" required>
+                            <option value="BMW i7 xDrive60">BMW i7 xDrive60 (Electric)</option>
+                            <option value="BMW iX xDrive50">BMW iX xDrive50 (Electric SAV)</option>
+                            <option value="BMW M4 Competition">BMW M4 Competition Coupé</option>
+                            <option value="BMW X6 M Competition">BMW X6 M Competition</option>
+                            <option value="BMW 750e xDrive">BMW 750e xDrive (Hybrid)</option>
+                            <option value="BMW X5 xDrive40i">BMW X5 xDrive40i</option>
+                            <option value="BMW 530i Sedan">BMW 530i Sedan</option>
+                            <option value="BMW 330i M Sport">BMW 330i M Sport</option>
+                            <option value="BMW Z4 M40i Roadster">BMW Z4 M40i Roadster</option>
+                            <option value="BMW XM Label Red">BMW XM Label Red</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookingDate">Preferred Date *</label>
+                        <input type="date" id="bookingDate" class="form-control" required>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeBookingModalFunc()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm Appointment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Scroll to top">↑</button>
+
+    <!-- Modern Luxury Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                    <img src="img/logo2h.png" alt="BMW" style="width: 38px; height: 38px; border-radius: 50%;">
+                    <h3 style="margin: 0;">BMW SHOP</h3>
+                </div>
+                <p>The pioneer of sheer driving pleasure, technological supremacy, and sustainable high performance across the globe.</p>
             </div>
-            <h1>THE BMW-M-SERIES</h1>
-            <div class="cars">
-                <p>Packed with power and made to maneuver, BMW M excels on the track and in the street. And after four
-                    decades of thrills,
-                    it’s still pushing the limits. Grip the wheel of any of our M vehicles and elevate your adrenaline
-                    rushes to a higher
-                    level.</p>
-                <img id="BMW" src="img/BMWM4.png" alt="">
-                <img id="BMW" src="img/BMWX6M.png" alt="">
-                <p>It may have started on the racetrack, but BMW enthusiasts took M for their own joyride – bringing
-                    high performance
-                    engines and aerodynamic design to everyday roads.</p>
-                <button id="btn"><a id="link" href="https://www.bmw.in/en/all-models/m-series.html">VIWE MORE...</a></button>
+
+            <div class="footer-col">
+                <h4>Models</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">BMW i Electric</a></li>
+                    <li><a href="index.html">BMW M Performance</a></li>
+                    <li><a href="index.html">BMW X Series (SAV)</a></li>
+                    <li><a href="index.html">BMW Sedans & Coupés</a></li>
+                </ul>
             </div>
-            <h1>THE BMW-7-SERIES</h1>
-            <div class="cars">
-                <p>The BMW 750e xDrive plug-in hybrid combines a combustion engine and electric motor for a harmonious
-                    driving experience.
-                    Across shorter distances, you can use the electric drive to arrive at your destination almost
-                    silently and with zero
-                    emissions. In fact, the all electric range will take you up to 36 miles</p>
-                <img id="BMW" src="img/BMW7.png" alt="">
-                <img id="BMW" src="img/BMWi7.png" alt="">
-                <p>Operate at peak performance and enhance the efficiency of your plug-in hybrid with BMW Charging: the
-                    advanced,
-                    comprehensive charging program that offers tailored solutions for both home and public charging.</p>
-                <button id="btn"><a id="link"
-                        href="https://www.bmw.in/en/all-models/7-series/7-series-sedan/bmw-7-series-sedan.html">VIWE
-                        MORE...</a></button>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="About.html">About BMW Group</a></li>
+                    <li><a href="Services.html">Services & Care</a></li>
+                    <li><a href="contact.html">Executive Team & Contact</a></li>
+                    <li><a href="Services.html#appointment">Book Appointment</a></li>
+                </ul>
             </div>
-            <h1>THE BMW-5-SERIES</h1>
-            <div class="cars">
-                <p>The 2026 BMW 5 Series Sedan blends the latest innovative tech, exquisite style, and finest BMW
-                    engineering to show off
-                    without apology.</p>
-                <img id="BMW" src="img/BMW5.png" alt="">
-                <img id="BMW" src="img/BMW530.png" alt="">
-                <p>BMW ConnectedDrive seamlessly integrates your mobile devices, smart home technology, and your
-                    vehicle's intelligent
-                    interfaces into a complete driver's environment</p>
-                <button id="btn"><a id="link"
-                        href="https://www.bmw.in/en/all-models/5-series/sedan/bmw-5-series-sedan-g68.html">VIWE
-                        MORE...</a></button>
-            </div>
-            <h1>THE BMW-3-SERIES</h1>
-            <div class="cars">
-                <p>The BMW 3 Series brings mind-blowing driving dynamics and modern style together in a striking sports
-                    sedan. Innovative
-                    technology and intelligent driver assistance systems transform every journey into an unforgettable
-                    experience. Bold
-                    exterior design, classy interiors, and intuitive touches throughout are sure to thrill drivers and
-                    passengers alike.</p>
-                <img id="BMW" src="img/BMW3.png" alt="">
-                <img id="BMW" src="img/BMW3b.png" alt="">
-                <p>The 330i models combine iconic performance, style, and technology in a compact sports sedan that
-                    thrills both drivers
-                    and passengers.</p>
-                <button id="btn"><a id="link" href="https://www.bmw.in/en/all-models/3-series.html">VIWE MORE..</a></button>
-            </div>
-            <h1>THE BMW-2-SERIES</h1>
-            <div class="cars">
-                <p>The BMW 2 Series Gran Coupe attracts attention everywhere it goes with its sporty silhouette and bold
-                    styling. Exciting
-                    premium features—like M Sport Exterior Elements, Adaptive M Suspension, and BMW Digital Key Plus—are
-                    included as
-                    standard. And from everyday drives to epic adventures, dynamic engines ensure the perfect mix of
-                    thrills and comfort,
-                    while driver assistance systems make every journey safer.</p>
-                <img id="BMW" src="img/BMW2.png" alt="">
-                <img id="BMW" src="img/BMW2b.png" alt="">
-                <button id="btn"><a id="link"
-                        href="https://www.bmw.in/en/all-models/2-series/2-series-gran-coupe/2-series-gran-coupe-2025-f74.html">VIWE
-                        MORE...</a></button>
-            </div>
-            <h1>THE BMW-Z4-SERIES</h1>
-            <div class="cars">
-                <p>Experience the intensity of every drive in the Z4. Hit the curve just right. Take a tight turn on an
-                    open highway. Drop
-                    the top to feel the thrill of the wind in your hair. The BMW Z4 Roadster is the machine to make
-                    these extraordinary
-                    moments matter.</p>
-                <img id="BMW" src="img/BMWZ4.png" alt="">
-                <img id="BMW" src="img/BMWZ4b.png" alt="">
-                <p>Discover the pure excitement of driving in the BMW Z4 Roadster. Start shopping for your roadster
-                    online today or contact
-                    your local BMW Center to see one in person.</p>
-                <button id="btn"><a id="link"
-                        href="https://www.bmw.in/en/all-models/z-series/Z4/2025/bmw-z4-overview.html#design">VIWE
-                        MORE...</a></button>
+
+            <div class="footer-col footer-newsletter">
+                <h4>Stay Informed</h4>
+                <p>Subscribe for exclusive previews of upcoming BMW concepts and limited editions.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to BMW Exclusive Updates.'); this.reset();">
+                    <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                    <button type="submit" class="btn btn-primary btn-sm">Join</button>
+                </form>
             </div>
         </div>
 
-        <div class="others">
-            <h1>OTHER CARS</h1>
-            <ul>
-                <a href="https://www.bmwusa.com/vehicles/8-series/overview.html"><img id="others" src="img/BMW8.png" alt="SERIES-8"></a>
-                <a href="https://www.bmwusa.com/vehicles/4-series/overview.htm"><img id="others" src="img/BMW8B.png" alt=""></a>
-                <a href="https://www.bmwusa.com/vehicles/bmw-i-series/ix/bmw-ix.html"><img id="others" src="img/BMWiX.png" alt=""></a>
-                <a href="https://www.bmwusa.com/vehicles/i-series/i7/bmw-i7-limousine.html"><img id="others" src="img/BMWi7.png" alt=""></a>
-                <a href="https://www.bmwusa.com/vehicles/x-models/x6/suv/overview.html"><img id="others" src="img/BMW4.png" alt=""></a>
-                <a href="https://www.bmwusa.com/vehicles/i-series/i5/bmw-i5-overview.html"><img id="others" src="img/BMWi5.png" alt=""></a>
-                <a href="https://www.bmwusa.com/vehicles/i-series/i4/bmw-i4-gran-coupe.html"><img id="others" src="img/BMWi4.png" alt=""></a>
-                <a href="https://www.bmwusa.com/vehicles/x-models/x7/suv/overview.html"><img id="others" src="img/BMWXM.png" alt=""></a>
-            </ul>
+        <div class="footer-bottom">
+            <p>&copy; 2026 BMW Group. All rights reserved. Built for educational and showcase excellence.</p>
+            <p>Sheer Driving Pleasure &bull; Munich, Germany</p>
         </div>
-        <hr>
-    </div>
-    <div>
-        <footer id="footers">
-            Copyright &copy; LifeCraft.love 2019-2020.
-        </footer>
-    </div>
+    </footer>
+
+    <!-- JavaScript Execution -->
+    <script src="script.js"></script>
 </body>
+</html>

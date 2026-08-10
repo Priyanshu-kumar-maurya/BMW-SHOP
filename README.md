@@ -1,77 +1,58 @@
-# 🚗 BMW-SHOP Website Clone
+# 🚗 BMW-SHOP | Modern Luxury Automotive Web Experience
 
-This is a front-end clone of the **BMW Shop** website, built using only **HTML** and **CSS**. It replicates the layout and styling of the official BMW online store for educational purposes.
-
----
-
-## 📌 Project Details
-
-- 🔧 **Technologies Used**: HTML5, CSS3
-- 🎯 **Goal**: Practice web design, layout, and responsive styling by cloning a real-world website.
-- 💼 **Type**: Static website (No JavaScript or back-end functionality)
+An ultra-modern, responsive front-end website showcasing the **BMW Fleet**, built using semantic **HTML5**, modern **CSS3** (Glassmorphism & Dark Luxury Aesthetic), and interactive **Vanilla JavaScript**.
 
 ---
 
-## 📁 Folder Structure
+## ✨ Key Features
 
+- 🏎️ **Dynamic Car Showcase & Category Filter**: Filter BMW models seamlessly by *Electric / i-Series*, *X-Series SAVs*, *M-Performance*, *Luxury Sedans*, and *Z4 Roadster*.
+- ⚡ **Interactive Quick Specs Modal**: Instant pop-up modal displaying 0-100 km/h acceleration, horsepower, top speed, electric range, battery capacity, and estimated pricing.
+- 📅 **VIP Test Drive & Service Booking System**: Interactive booking modal with dynamic car selection, date picking, real-time field validation, and animated toast notifications.
+- 💎 **Ultra-Modern BMW Luxury Design**:
+  - Deep German automotive dark palette with BMW Electric Cyan and M-Performance Red accents.
+  - Modern typography using Google Fonts (`Outfit` and `Inter`).
+  - Glassmorphic sticky navigation with smooth blur on scroll.
+  - Responsive mobile drawer menu with animated hamburger toggle.
+  - 3D hover effects, vehicle specification pills, and glowing badge states.
+- 📖 **Full Multi-Page Architecture**:
+  - `index.html`: Home page & complete fleet showcase with dynamic filtering.
+  - `About.html`: Over a century of BMW history, heritage timeline (1916 to present), and global corporate statistics.
+  - `Services.html`: Certified service offerings, workshop gallery, verified owner testimonials, and appointment booking.
+  - `contact.html`: Executive Board of Management leadership cards, direct global hotlines, and interactive inquiry form.
+
+---
+
+## 📁 Project Structure
+
+```
 BMW-SHOP/
 │
-├── index.html # Main HTML file
-├── style.css # CSS stylesheet
-├── /images # Folder for images used in the website
-├── README.md # Project documentation (this file)
-
-
-## 📷 Screenshots
-
-> *(Add screenshots of your website here if you want. You can drag and drop them into GitHub later.)*
+├── index.html       # Home page & vehicle showcase
+├── About.html       # Heritage timeline & company profile
+├── Services.html    # Maintenance services & verified testimonials
+├── contact.html     # Management team & direct inquiry form
+├── style.css        # Luxury design system & responsive styling
+├── script.js        # Dynamic filtering, modals, validations & toast notifications
+├── img/             # Vehicle images, backgrounds, and badges
+└── README.md        # Documentation
+```
 
 ---
 
-## 🚀 How to View the Project
-
-You can view the project locally by following these steps:
+## 🚀 How to View Locally
 
 1. **Clone the repository:**
    ```bash
-   https://github.com/Priyanshu-kumar-maurya/BMW-SHOP.git
-Navigate to the folder:
-
-bash
-Copy code
-cd BMW-SHOP
-Open index.html in your browser:
-
-Double-click index.html
-OR
-
-Use a live server extension in VS Code
-
-🌐 Live Demo
-Coming soon... (You can host this on GitHub Pages and add the link here)
-
-✍️ Author
-Priyanshu
-GitHub Profile
-
-📄 License
-This project is licensed for educational and non-commercial use only.
-All trademarks and images belong to their respective owners (BMW AG).
-
-
-### 🛠️ What You Need to Do:
-
-1. Replace:
-   - `yourusername` with your actual GitHub username.
-   - `Your Name` with your real or display name.
-2. (Optional) Add **screenshots**.
-3. (Optional) Add a **live demo link** if you deploy it on GitHub Pages or similar.
+   git clone https://github.com/Priyanshu-kumar-maurya/BMW-SHOP.git
+   ```
+2. **Open the project:**
+   - Double-click `index.html` in your browser, or
+   - Use the **Live Server** extension in VS Code.
 
 ---
 
-Let me know if you want help with:
-- Deploying this on **GitHub Pages**
-- Adding screenshots
-- Creating a `.gitignore` file
+## ✍️ Author & License
 
-Would you like to go ahead and publish this live now?
+- **Author**: Priyanshu Kumar Maurya
+- **License**: Educational & non-commercial use. All trademarks and brand logos belong to **BMW AG**.

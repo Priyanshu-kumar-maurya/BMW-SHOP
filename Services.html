@@ -1,71 +1,294 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
-    <title>THE BMW CARS-Services</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Official BMW Services, Scheduled Maintenance, TeleServices, 24/7 Roadside Assistance, and Online Appointment Booking.">
+    <title>BMW Services & Care | Precision Maintenance</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/logo2h.png">
 </head>
-
 <body>
-    <div>
-        <header>
-            <div>
-                <a href=" home.html">
-                    <img id="logo"src="img/logo2h.png" alt="BMW"
-                        title="BMW - CARS">
-                </a>
-            </div>
-            <div>
-                <h2 style="text-align: center;">B M W SHOP</h2>
-                <nav>
-                    <!-- <table cellspacing="5" cellpadding="5"> -->
-                    <tr>
-                        <div class="navbar1">
-                            <td><a id="nav2" href="index.html"> Home </a></td>
-                            <td> <a id="nav2" href="services.html"> Services</a></td>
-                            <td> <a id="nav2" href="about.html">About</a></td>
-                            <td> <a id="nav2" href="contact.html">Contact</a></td>
-                        </div>
-                    </tr>
-                    </table>
-                </nav>
-        </header>
-        <div class="models3">
-            <p>Hi, the technician has been really helpful and I would totally recommend this to anyone. They help you get on the right
-            track to repairing your problem. Still working with my technician to get my issue resolved. Very happy customer!</p>
-            <div class="images">
-                <img id="image" src="img/BMWS.jpg" width="40%" height="345vh" float="center"
-                    title="Everything in eistence holds a perfect harmonic blueprint">
-                <img id="image" src="img/BMWS.webp" width="40%" height="40%" float="center"
-                    title="Everything in eistence holds a perfect harmonic blueprint">
-                <img id="image" src="img/BMWS1.jpg" width="40%" height="380vh" float="center"
-                    title="Everything in eistence holds a perfect harmonic blueprint">
-                <img id="image" src="img/BMWS2.jpg" width="40%" height="40%" float="center"
-                    title="Everything in eistence holds a perfect harmonic blueprint">
-            </div>
-            <div>
-                <h1>ONLINE APPOINTMENT SYSTEM</h1>
-                <ul>
-                    <li>Easily schedule your BMW service from anywhere, at any time, and at any authorised BMW
-                        dealership.
-                        Enjoy the complete
-                        freedom of choosing your date and time, desired service and even your preferred staff member.
-                        You
-                        also have the option
-                        to modify the appointment later and booking an online appointment without registering.</li>
-                    <li>Connect with verified mechanics in minutes, 24/7. Your membership can save you time & money every time you use it.</li>
-                    <li>This site has saved me hundreds of dollars in the last week alone. The experts helped me diagnose a check engine light
-                    in my car and assisted with a software problem. I recommend it highly.</li>
-                    <li>This site has saved me hundreds of dollars in the last week alone. The experts helped me diagnose a check engine light
-                    in my car and assisted with a software problem. I recommend it highly.</li>
-                    <li>Spot on Answer! Had the exact answer for our truck that wouldn't start. Very odd scenario and gave us guidance on a
-                    couple of things to do to get it going again with minor fuse and other replacements and we were back on the road! Saved
-                    us a 125 mile tow to the dealership!!!
-                    </li>
+
+    <!-- Header & Navigation -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo-wrap" title="BMW Official Experience">
+                <img class="brand-logo-img" src="img/logo2h.png" alt="BMW Logo">
+                <span class="brand-title">BMW SHOP</span>
+            </a>
+
+            <nav>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="Services.html" class="nav-link active">Services</a></li>
+                    <li><a href="About.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
                 </ul>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn-header-cta open-booking-modal" data-car="BMW Service Appointment">Book Service</button>
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
         </div>
+    </header>
+
+    <!-- Services Hero -->
+    <section class="hero-section" style="min-height: 65vh; background-image: radial-gradient(circle at 50% 20%, rgba(0, 102, 177, 0.28) 0%, rgba(7, 10, 16, 0.95) 75%), url('img/BMWS2.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle-tag">🔧 BMW Service Inclusive & Maintenance</span>
+            <h1 class="hero-title">PRECISION CARE FOR YOUR BMW</h1>
+            <p class="hero-description">
+                Unrivaled expertise, factory-trained master technicians, and 100% Genuine BMW Parts to maintain peak driving performance and safety.
+            </p>
+            <div class="hero-cta-group">
+                <button class="btn btn-primary open-booking-modal" data-car="BMW Full Service">Book Online Appointment</button>
+                <a href="#serviceOfferings" class="btn btn-secondary">Explore Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="page-container" id="serviceOfferings">
+
+        <!-- Service Pillars -->
+        <div class="section-header">
+            <span class="section-tag">Comprehensive Care</span>
+            <h2 class="section-title">Our Premium Services</h2>
+            <p class="section-subtitle">Tailored care designed exclusively for combustion, hybrid, and all-electric BMW vehicles.</p>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon-box">📡</div>
+                <h3>BMW TeleServices</h3>
+                <p>Intelligent sensors detect when your vehicle needs maintenance or fluids, automatically transmitting diagnostic telemetry directly to your preferred BMW Service Partner.</p>
+                <button class="btn btn-secondary btn-sm open-booking-modal" data-car="BMW TeleServices Check">Request Diagnostics</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-box">⚡</div>
+                <h3>High-Voltage Battery Care</h3>
+                <p>Specialized diagnostic checkups, capacity calibration, and health certification for all BMW i and plug-in hybrid high-voltage lithium battery systems.</p>
+                <button class="btn btn-secondary btn-sm open-booking-modal" data-car="BMW High-Voltage Check">Check Battery Health</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-box">🛞</div>
+                <h3>Brakes & Wheel Alignment</h3>
+                <p>Complete precision brake rotor service, laser 3D wheel alignment, and BMW Star-marked approved tire replacements designed for ultimate grip.</p>
+                <button class="btn btn-secondary btn-sm open-booking-modal" data-car="BMW Brake & Tire Service">Book Brake Inspection</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-box">⚙️</div>
+                <h3>Genuine BMW Parts & Fluids</h3>
+                <p>Every replacement component is manufactured to exact BMW factory tolerances and backed by a comprehensive 2-year manufacturer warranty.</p>
+                <button class="btn btn-secondary btn-sm open-booking-modal" data-car="BMW Genuine Parts Inquiry">Inquire Parts</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-box">🛡️</div>
+                <h3>24/7 Roadside Assistance</h3>
+                <p>Around-the-clock emergency support, towing to authorized BMW centers, on-site quick repair, and replacement vehicle mobility solutions.</p>
+                <button class="btn btn-secondary btn-sm open-booking-modal" data-car="BMW Roadside Membership">View Coverage</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon-box">💻</div>
+                <h3>Over-The-Air Software Upgrades</h3>
+                <p>Remote software upgrades keep your BMW operating system, driver assistance features, and infotainment systems up to date with new capabilities.</p>
+                <button class="btn btn-secondary btn-sm open-booking-modal" data-car="BMW OS Upgrade">Check Updates</button>
+            </div>
+        </div>
+
+        <!-- Service Workshop Gallery -->
+        <div class="section-header" style="margin-top: 5rem;">
+            <span class="section-tag">State-of-the-Art Facilities</span>
+            <h2 class="section-title">BMW Certified Workshop Experience</h2>
+            <p class="section-subtitle">Take a look inside our specialized diagnostic bays and certified service lounges.</p>
+        </div>
+
+        <div class="service-gallery">
+            <div class="service-img-tile">
+                <img src="img/BMWS.jpg" alt="BMW Master Technician inspecting vehicle">
+            </div>
+            <div class="service-img-tile">
+                <img src="img/BMWS.webp" alt="BMW Diagnostic Workstation">
+            </div>
+            <div class="service-img-tile">
+                <img src="img/BMWS1.jpg" alt="BMW Genuine Engine Inspection">
+            </div>
+            <div class="service-img-tile">
+                <img src="img/BMWS2.jpg" alt="BMW Customer Service Lounge & Bay">
+            </div>
+        </div>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials-section">
+            <div class="section-header">
+                <span class="section-tag">Owner Feedback</span>
+                <h2 class="section-title">What BMW Drivers Say</h2>
+                <p class="section-subtitle">Real experiences from our global community of BMW owners.</p>
+            </div>
+
+            <div class="testimonials-grid">
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-quote">"The BMW master technician was extremely helpful and diagnosed an elusive sensor issue within minutes. Smooth booking and top-tier customer hospitality."</p>
+                    </div>
+                    <div class="reviewer-meta">
+                        <div class="reviewer-avatar">MS</div>
+                        <div>
+                            <div class="reviewer-name">Marcus Sterling</div>
+                            <div class="reviewer-tag">BMW M4 Competition Owner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-quote">"Online Appointment system is effortless. Booked my i7 maintenance in 60 seconds and received a transparent digital health report on my phone."</p>
+                    </div>
+                    <div class="reviewer-meta">
+                        <div class="reviewer-avatar">EK</div>
+                        <div>
+                            <div class="reviewer-name">Elena Krause</div>
+                            <div class="reviewer-tag">BMW i7 xDrive60 Owner</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div>
+                        <div class="review-stars">★★★★★</div>
+                        <p class="review-quote">"Spot on precision! The roadside assistance team resolved a software glitch remotely, saving me hours of towing time. Simply outstanding customer care."</p>
+                    </div>
+                    <div class="reviewer-meta">
+                        <div class="reviewer-avatar">RJ</div>
+                        <div>
+                            <div class="reviewer-name">Rajesh Patel</div>
+                            <div class="reviewer-tag">BMW X5 xDrive40i Owner</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Appointment Booking Modal -->
+    <div class="modal-backdrop" id="bookingModal">
+        <div class="modal-dialog">
+            <button class="modal-close-btn" id="closeBookingModal" aria-label="Close modal">&times;</button>
+            <div class="modal-car-header">
+                <span class="modal-car-series">Certified Maintenance</span>
+                <h2 class="modal-car-title">Schedule Service Appointment</h2>
+                <p style="color: var(--text-secondary); font-size: 0.9rem;">Select your service package and preferred date. Our master technicians will ensure your BMW stays in pristine condition.</p>
+            </div>
+            
+            <form id="bookingForm" class="luxury-form" style="padding: 1.5rem 0 0; background: transparent; border: none; box-shadow: none;">
+                <div class="form-group">
+                    <label class="form-label" for="bookingName">Full Name *</label>
+                    <input type="text" id="bookingName" class="form-control" placeholder="e.g. Marcus Sterling" required>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="bookingEmail">Email Address *</label>
+                        <input type="email" id="bookingEmail" class="form-control" placeholder="marcus@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookingPhone">Phone Number *</label>
+                        <input type="tel" id="bookingPhone" class="form-control" placeholder="+1 (555) 000-0000" required>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 1rem;">
+                    <div class="form-group">
+                        <label class="form-label" for="bookingCarModel">Service Category *</label>
+                        <select id="bookingCarModel" class="form-control" required>
+                            <option value="BMW Scheduled Annual Maintenance">BMW Scheduled Annual Maintenance</option>
+                            <option value="BMW TeleServices Diagnostics">BMW TeleServices Diagnostics</option>
+                            <option value="High-Voltage EV Battery Check">High-Voltage EV Battery Check</option>
+                            <option value="Precision Brake & Tire Replacement">Precision Brake & Tire Replacement</option>
+                            <option value="BMW Software & OS Updates">BMW Software & OS Updates</option>
+                            <option value="BMW Genuine Parts Installation">BMW Genuine Parts Installation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="bookingDate">Preferred Service Date *</label>
+                        <input type="date" id="bookingDate" class="form-control" required>
+                    </div>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 1rem; margin-top: 1.5rem;">
+                    <button type="button" class="btn btn-secondary" onclick="closeBookingModalFunc()">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm Booking</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <footer id="footers">
-        Copyright &copy;BMW.CARs 2025-2026.
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Scroll to top">↑</button>
+
+    <!-- Modern Luxury Footer -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
+                    <img src="img/logo2h.png" alt="BMW" style="width: 38px; height: 38px; border-radius: 50%;">
+                    <h3 style="margin: 0;">BMW SHOP</h3>
+                </div>
+                <p>The pioneer of sheer driving pleasure, technological supremacy, and sustainable high performance across the globe.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Models</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">BMW i Electric</a></li>
+                    <li><a href="index.html">BMW M Performance</a></li>
+                    <li><a href="index.html">BMW X Series (SAV)</a></li>
+                    <li><a href="index.html">BMW Sedans & Coupés</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="About.html">About BMW Group</a></li>
+                    <li><a href="Services.html">Services & Care</a></li>
+                    <li><a href="contact.html">Executive Team & Contact</a></li>
+                    <li><a href="Services.html#appointment">Book Appointment</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-newsletter">
+                <h4>Stay Informed</h4>
+                <p>Subscribe for exclusive previews of upcoming BMW concepts and limited editions.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing to BMW Exclusive Updates.'); this.reset();">
+                    <input type="email" placeholder="Your email address" class="newsletter-input" required>
+                    <button type="submit" class="btn btn-primary btn-sm">Join</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 BMW Group. All rights reserved. Built for educational and showcase excellence.</p>
+            <p>Sheer Driving Pleasure &bull; Munich, Germany</p>
+        </div>
     </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
 </body>
+</html>
