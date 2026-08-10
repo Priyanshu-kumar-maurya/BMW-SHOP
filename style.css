@@ -1,5 +1,5 @@
 /* ==========================================================================
-   BMW SHOP - LUXURY AUTOMOTIVE DESIGN SYSTEM
+   BMW SHOP - LUXURY AUTOMOTIVE DESIGN SYSTEM & 3D STUDIO
    Modern, Ultra-Premium, Responsive & Clean CSS
    ========================================================================== */
 
@@ -111,7 +111,7 @@ img {
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(7, 10, 16, 0.7);
+    background: rgba(7, 10, 16, 0.75);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border-color);
@@ -133,7 +133,6 @@ img {
     justify-content: space-between;
 }
 
-/* Logo */
 .brand-logo-wrap {
     display: flex;
     align-items: center;
@@ -164,7 +163,6 @@ img {
     -webkit-text-fill-color: transparent;
 }
 
-/* Nav Menu */
 .nav-menu {
     display: flex;
     align-items: center;
@@ -205,7 +203,6 @@ img {
     width: 100%;
 }
 
-/* Header CTA */
 .header-actions {
     display: flex;
     align-items: center;
@@ -232,7 +229,6 @@ img {
     background: linear-gradient(135deg, var(--bmw-cyan), var(--bmw-blue));
 }
 
-/* Hamburger for Mobile */
 .hamburger-btn {
     display: none;
     flex-direction: column;
@@ -345,42 +341,44 @@ img {
 }
 
 /* ==========================================================================
-   HERO SECTION
+   3D HERO SECTION & ROTATING AUTOMOTIVE STUDIO
    ========================================================================== */
 
 .hero-section {
     position: relative;
-    padding: 8.5rem 2rem 5rem;
-    min-height: 85vh;
+    padding: 7.5rem 2rem 4rem;
+    min-height: 90vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at 50% 20%, rgba(0, 102, 177, 0.22) 0%, rgba(7, 10, 16, 0.95) 70%),
-                url('img/BMW.jpg') center/cover no-repeat;
-    background-blend-mode: overlay;
+    background: radial-gradient(circle at 50% 15%, rgba(0, 102, 177, 0.25) 0%, rgba(7, 10, 16, 0.96) 65%),
+                linear-gradient(180deg, #070a10 0%, #0d131f 100%);
     border-bottom: 1px solid var(--border-color);
+    overflow: hidden;
 }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(7, 10, 16, 0.4) 0%, rgba(7, 10, 16, 0.92) 90%, var(--bg-primary) 100%);
+    background: radial-gradient(circle at 50% 50%, transparent 40%, rgba(7, 10, 16, 0.85) 100%);
     pointer-events: none;
 }
 
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     text-align: center;
+    width: 100%;
 }
 
 .hero-subtitle-tag {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
     font-size: 0.85rem;
     letter-spacing: 0.2em;
     font-weight: 700;
@@ -389,10 +387,10 @@ img {
 }
 
 .hero-title {
-    font-size: clamp(2.4rem, 5vw, 4.2rem);
+    font-size: clamp(2.3rem, 5vw, 4.4rem);
     font-weight: 900;
     letter-spacing: -0.03em;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.8rem;
     line-height: 1.1;
     background: linear-gradient(135deg, #ffffff 30%, #cbd5e1 70%, var(--bmw-cyan) 100%);
     -webkit-background-clip: text;
@@ -400,20 +398,142 @@ img {
 }
 
 .hero-description {
-    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
     color: var(--text-secondary);
     max-width: 720px;
-    margin: 0 auto 2.2rem;
-    line-height: 1.6;
+    margin: 0 auto 1.5rem;
+    line-height: 1.5;
 }
 
+/* 3D Stage Container */
+.hero-3d-stage {
+    position: relative;
+    width: 100%;
+    max-width: 950px;
+    height: 380px;
+    margin: 1.5rem auto 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    perspective: 1200px;
+    cursor: grab;
+    user-select: none;
+}
+
+.hero-3d-stage.grabbing {
+    cursor: grabbing;
+}
+
+.hero-speed-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 3D Glowing Floor Pedestal */
+.hero-ground-pedestal {
+    position: absolute;
+    bottom: 30px;
+    width: 75%;
+    height: 220px;
+    background: radial-gradient(ellipse at center, rgba(0, 163, 224, 0.4) 0%, rgba(0, 102, 177, 0.15) 45%, transparent 75%);
+    border-radius: 50%;
+    filter: blur(14px);
+    pointer-events: none;
+    z-index: 1;
+    border: 1px solid rgba(0, 163, 224, 0.35);
+    box-shadow: 0 0 50px rgba(0, 163, 224, 0.3);
+}
+
+.hero-3d-car-wrap {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-style: preserve-3d;
+}
+
+.hero-3d-car-img {
+    max-height: 260px;
+    max-width: 90%;
+    object-fit: contain;
+    filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 20px rgba(0, 163, 224, 0.2));
+    transition: filter 0.3s ease, opacity 0.25s ease;
+    pointer-events: none;
+}
+
+/* 3D Controls & Pill Badges */
+.hero-3d-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    z-index: 3;
+    position: relative;
+}
+
+.hero-model-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 1.1rem;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.hero-model-pill:hover {
+    color: #ffffff;
+    border-color: rgba(0, 163, 224, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.hero-model-pill.active {
+    background: linear-gradient(135deg, var(--bmw-blue), var(--bmw-cyan));
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 2px 12px rgba(0, 163, 224, 0.4);
+}
+
+.btn-toggle-orbit {
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 163, 224, 0.4);
+    color: var(--bmw-cyan);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.45rem 1.1rem;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    backdrop-filter: blur(8px);
+}
+
+.btn-toggle-orbit:hover,
+.btn-toggle-orbit.active {
+    background: rgba(0, 163, 224, 0.2);
+    color: #ffffff;
+}
+
+/* Quick CTA Group */
 .hero-cta-group {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1.2rem;
     flex-wrap: wrap;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.8rem;
+    position: relative;
+    z-index: 3;
 }
 
 /* Quick Stats Bar in Hero */
@@ -427,6 +547,8 @@ img {
     padding: 1.5rem 2rem;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
+    position: relative;
+    z-index: 3;
 }
 
 .stat-item {
@@ -576,7 +698,6 @@ img {
     opacity: 1;
 }
 
-/* Card Header */
 .car-card-header {
     display: flex;
     justify-content: space-between;
@@ -599,7 +720,6 @@ img {
     font-weight: 700;
 }
 
-/* Card Image Box */
 .car-image-container {
     position: relative;
     padding: 1.5rem 0;
@@ -621,7 +741,6 @@ img {
     transform: scale(1.08) translateY(-4px);
 }
 
-/* Card Specs Pill Row */
 .car-specs-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -652,7 +771,6 @@ img {
     letter-spacing: 0.05em;
 }
 
-/* Card Description */
 .car-card-desc {
     color: var(--text-secondary);
     font-size: 0.9rem;
@@ -664,7 +782,6 @@ img {
     overflow: hidden;
 }
 
-/* Card Actions */
 .car-card-actions {
     display: flex;
     align-items: center;
@@ -1048,7 +1165,6 @@ img {
     line-height: 1.5;
 }
 
-/* Contact Info & Forms */
 .contact-info-cards {
     display: flex;
     flex-direction: column;
@@ -1137,7 +1253,7 @@ textarea.form-control {
 }
 
 /* ==========================================================================
-   MODALS (Quick Specs & Test Drive Booking)
+   MODALS
    ========================================================================== */
 
 .modal-backdrop {
@@ -1205,7 +1321,6 @@ textarea.form-control {
     transform: rotate(90deg);
 }
 
-/* Modal Internal Layouts */
 .modal-car-header {
     margin-bottom: 1.5rem;
 }
@@ -1512,6 +1627,14 @@ textarea.form-control {
    ========================================================================== */
 
 @media (max-width: 1024px) {
+    .hero-3d-stage {
+        height: 320px;
+    }
+
+    .hero-3d-car-img {
+        max-height: 220px;
+    }
+
     .about-grid {
         grid-template-columns: 1fr;
         gap: 2.5rem;
@@ -1559,7 +1682,15 @@ textarea.form-control {
     }
 
     .hero-section {
-        padding-top: 7rem;
+        padding-top: 6.5rem;
+    }
+
+    .hero-3d-stage {
+        height: 250px;
+    }
+
+    .hero-3d-car-img {
+        max-height: 170px;
     }
 
     .modal-car-body {
@@ -1587,6 +1718,15 @@ textarea.form-control {
 
     .hero-cta-group .btn {
         width: 100%;
+    }
+
+    .hero-3d-controls {
+        gap: 0.4rem;
+    }
+
+    .hero-model-pill {
+        padding: 0.35rem 0.8rem;
+        font-size: 0.78rem;
     }
 
     .car-specs-row {

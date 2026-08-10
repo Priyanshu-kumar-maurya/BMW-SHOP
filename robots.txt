@@ -1,0 +1,15 @@
+# robots.txt for BMW-SHOP
+# https://bmw-shop-kappa.vercel.app/
+
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /About.html
+Allow: /Services.html
+Allow: /contact.html
+Allow: /style.css
+Allow: /script.js
+Allow: /img/
+
+# Sitemap Location
+Sitemap: https://bmw-shop-kappa.vercel.app/sitemap.xml

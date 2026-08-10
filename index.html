@@ -1,12 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="BMW Shop - Explore the complete lineup of BMW luxury electric, hybrid, and high-performance vehicles. Experience Sheer Driving Pleasure.">
-    <title>BMW SHOP | The Ultimate Driving Machine</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Primary SEO & Google Ranking Meta Tags -->
+    <title>BMW SHOP | The Ultimate Driving Machine - Explore All Models & 3D Studio</title>
+    <meta name="title" content="BMW SHOP | The Ultimate Driving Machine - Explore All Models & 3D Studio">
+    <meta name="description" content="Explore the official lineup of BMW luxury electric, hybrid, and high-performance vehicles. Experience the 360° 3D Interactive Studio, explore full vehicle specs, and book VIP test drives.">
+    <meta name="keywords" content="BMW Cars, BMW Electric Cars, BMW i7, BMW iX, BMW M4 Competition, BMW X5, BMW X7, BMW M Series, BMW Z4 Roadster, Luxury Automotive, Sheer Driving Pleasure, Buy BMW, BMW Test Drive">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="author" content="Priyanshu Kumar Maurya">
+    <meta name="theme-color" content="#0066b1">
+    <link rel="canonical" href="https://bmw-shop-kappa.vercel.app/">
+
+    <!-- Open Graph / Facebook / WhatsApp SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bmw-shop-kappa.vercel.app/">
+    <meta property="og:title" content="BMW SHOP | The Ultimate Driving Machine">
+    <meta property="og:description" content="Experience pioneering electric mobility, 360° 3D interactive car rotation, and precision German automotive engineering.">
+    <meta property="og:image" content="https://bmw-shop-kappa.vercel.app/img/BMWi7.png">
+    <meta property="og:site_name" content="BMW SHOP">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card SEO -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://bmw-shop-kappa.vercel.app/">
+    <meta name="twitter:title" content="BMW SHOP | Luxury Electric & High-Performance Cars">
+    <meta name="twitter:description" content="Explore the full BMW fleet with 360° 3D interactive inspection and instant technical specifications.">
+    <meta name="twitter:image" content="https://bmw-shop-kappa.vercel.app/img/BMWM4.png">
+
+    <!-- Favicon & Stylesheet -->
     <link rel="icon" type="image/png" href="img/logo2h.png">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Schema.org JSON-LD Structured Data for Google Top Rich Results -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "AutoDealer",
+          "@id": "https://bmw-shop-kappa.vercel.app/#autodealer",
+          "name": "BMW SHOP",
+          "url": "https://bmw-shop-kappa.vercel.app/",
+          "logo": "https://bmw-shop-kappa.vercel.app/img/logo2h.png",
+          "image": "https://bmw-shop-kappa.vercel.app/img/BMWi7.png",
+          "description": "Official showcase of BMW luxury electric, hybrid, and high-performance M-Series vehicles.",
+          "priceRange": "$$$$",
+          "telephone": "+18008311117",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Petuelring 130",
+            "addressLocality": "Munich",
+            "postalCode": "80788",
+            "addressCountry": "DE"
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "08:00",
+            "closes": "20:00"
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://bmw-shop-kappa.vercel.app/#website",
+          "url": "https://bmw-shop-kappa.vercel.app/",
+          "name": "BMW SHOP",
+          "publisher": {
+            "@id": "https://bmw-shop-kappa.vercel.app/#autodealer"
+          },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://bmw-shop-kappa.vercel.app/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "ItemList",
+          "name": "Featured BMW Fleet",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "item": {
+                "@type": "Car",
+                "name": "BMW i7 xDrive60",
+                "image": "https://bmw-shop-kappa.vercel.app/img/BMWi7.png",
+                "vehicleConfiguration": "100% Electric Luxury Flagship Sedan",
+                "vehicleEngine": "Dual Electric Motors (536 HP)",
+                "accelerationTime": "4.5 seconds (0-100 km/h)",
+                "speed": "240 km/h",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "105700",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock"
+                }
+              }
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "item": {
+                "@type": "Car",
+                "name": "BMW M4 Competition Coupé",
+                "image": "https://bmw-shop-kappa.vercel.app/img/BMWM4.png",
+                "vehicleConfiguration": "TwinPower Turbo Motorsport Coupe",
+                "vehicleEngine": "3.0L M TwinPower Turbo S58 (503 HP)",
+                "accelerationTime": "3.4 seconds (0-100 km/h)",
+                "speed": "290 km/h",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "82200",
+                  "priceCurrency": "USD",
+                  "availability": "https://schema.org/InStock"
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 
@@ -14,11 +137,11 @@
     <header class="main-header">
         <div class="header-container">
             <a href="index.html" class="brand-logo-wrap" title="BMW Official Experience">
-                <img class="brand-logo-img" src="img/logo2h.png" alt="BMW Logo">
+                <img class="brand-logo-img" src="img/logo2h.png" alt="BMW Logo" width="44" height="44">
                 <span class="brand-title">BMW SHOP</span>
             </a>
 
-            <nav>
+            <nav aria-label="Main Navigation">
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="index.html" class="nav-link active">Home</a></li>
                     <li><a href="Services.html" class="nav-link">Services</a></li>
@@ -38,18 +161,39 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- 3D Interactive Hero Section -->
     <section class="hero-section">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="hero-subtitle-tag">⚡ The Future of Electric & Luxury</span>
-            <h1 class="hero-title">SHEER DRIVING PLEASURE.</h1>
+            <span class="hero-subtitle-tag" id="heroActiveModelTag">⚡ 100% Electric Luxury & Performance</span>
+            <h1 class="hero-title" id="heroActiveModelName">BMW i7 xDrive60</h1>
             <p class="hero-description">
-                Experience next-generation performance, pioneering electric mobility, and handcrafted automotive luxury designed to thrill every sense.
+                Interactive 3D Automotive Studio &bull; Drag to rotate 360° &bull; Sheer Driving Pleasure redefined.
             </p>
+
+            <!-- 3D Studio Stage -->
+            <div class="hero-3d-stage" id="hero3DContainer" title="Click and drag horizontally to rotate 360°">
+                <canvas id="heroSpeedCanvas" class="hero-speed-canvas"></canvas>
+                <div class="hero-ground-pedestal" id="heroGroundPedestal"></div>
+                <div class="hero-3d-car-wrap" id="hero3DStage">
+                    <img id="hero3DCar" class="hero-3d-car-img" src="img/BMWi7.png" alt="BMW i7 3D Rotating Showcase">
+                </div>
+            </div>
+
+            <!-- 3D Model Switcher & Orbit Controls -->
+            <div class="hero-3d-controls">
+                <button class="btn-toggle-orbit active" id="toggleAutoRotateBtn"><span>🔄 360° Auto-Orbit [ON]</span></button>
+                <button class="hero-model-pill active" data-model="i7">BMW i7 (Electric)</button>
+                <button class="hero-model-pill" data-model="m4">BMW M4 (M-Power)</button>
+                <button class="hero-model-pill" data-model="ix">BMW iX (Electric SAV)</button>
+                <button class="hero-model-pill" data-model="z4">BMW Z4 (Roadster)</button>
+                <button class="hero-model-pill" data-model="xm">BMW XM (738 HP)</button>
+            </div>
+
+            <!-- CTA Group -->
             <div class="hero-cta-group">
                 <a href="#modelsSection" class="btn btn-primary">Explore All Models</a>
-                <button class="btn btn-secondary open-booking-modal" data-car="BMW Experience">Schedule VIP Experience</button>
+                <button class="btn btn-secondary open-booking-modal" data-car="BMW Experience">Schedule VIP Test Drive</button>
             </div>
 
             <!-- Quick Specs Ribbon -->
@@ -68,7 +212,7 @@
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">100%</span>
-                    <span class="stat-label">Precision German Engineering</span>
+                    <span class="stat-label">German Engineering</span>
                 </div>
             </div>
         </div>
@@ -107,7 +251,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMWi7.png" alt="BMW i7 Luxury Electric Sedan">
+                        <img src="img/BMWi7.png" alt="BMW i7 Luxury Electric Sedan" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -148,7 +292,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMWiX.png" alt="BMW iX Electric SAV">
+                        <img src="img/BMWiX.png" alt="BMW iX Electric SAV" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -189,7 +333,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMWX5.png" alt="BMW X5 Luxury SUV">
+                        <img src="img/BMWX5.png" alt="BMW X5 Luxury SUV" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -230,7 +374,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMWX7.png" alt="BMW X7 Full-Size SUV">
+                        <img src="img/BMWX7.png" alt="BMW X7 Full-Size SUV" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -271,7 +415,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMWM4.png" alt="BMW M4 Competition Coupe">
+                        <img src="img/BMWM4.png" alt="BMW M4 Competition Coupe" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -312,7 +456,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMWX6M.png" alt="BMW X6 M Sports Activity Coupe">
+                        <img src="img/BMWX6M.png" alt="BMW X6 M Sports Activity Coupe" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -353,7 +497,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMW7.png" alt="BMW 7 Series Flagship Sedan">
+                        <img src="img/BMW7.png" alt="BMW 7 Series Flagship Sedan" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -394,7 +538,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMW530.png" alt="BMW 5 Series Sedan">
+                        <img src="img/BMW530.png" alt="BMW 5 Series Sedan" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -435,7 +579,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMW3.png" alt="BMW 3 Series Sports Sedan">
+                        <img src="img/BMW3.png" alt="BMW 3 Series Sports Sedan" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -476,7 +620,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMW2.png" alt="BMW 2 Series Gran Coupe">
+                        <img src="img/BMW2.png" alt="BMW 2 Series Gran Coupe" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -517,7 +661,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMWZ4.png" alt="BMW Z4 M40i Roadster">
+                        <img src="img/BMWZ4.png" alt="BMW Z4 M40i Roadster" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -558,7 +702,7 @@
                     </div>
 
                     <div class="car-image-container">
-                        <img src="img/BMWXM.png" alt="BMW XM Hybrid SUV">
+                        <img src="img/BMWXM.png" alt="BMW XM Hybrid SUV" loading="lazy">
                     </div>
 
                     <div class="car-specs-row">
@@ -599,25 +743,25 @@
 
             <div class="other-cars-grid">
                 <div class="other-car-tile open-specs-btn" data-car="bmw-8" style="cursor: pointer;">
-                    <img src="img/BMW8.png" alt="BMW 8-Series Coupe">
+                    <img src="img/BMW8.png" alt="BMW 8-Series Coupe" loading="lazy">
                     <h4 class="other-car-name">BMW 8-Series Coupé</h4>
                     <span class="other-car-link">Explore Specs &rarr;</span>
                 </div>
 
                 <div class="other-car-tile open-specs-btn" data-car="bmw-i5" style="cursor: pointer;">
-                    <img src="img/BMWi5.png" alt="BMW i5 Electric Sedan">
+                    <img src="img/BMWi5.png" alt="BMW i5 Electric Sedan" loading="lazy">
                     <h4 class="other-car-name">BMW i5 All-Electric</h4>
                     <span class="other-car-link">Explore Specs &rarr;</span>
                 </div>
 
                 <div class="other-car-tile open-specs-btn" data-car="bmw-i4" style="cursor: pointer;">
-                    <img src="img/BMWi4.png" alt="BMW i4 Gran Coupe">
+                    <img src="img/BMWi4.png" alt="BMW i4 Gran Coupe" loading="lazy">
                     <h4 class="other-car-name">BMW i4 M50 Gran Coupé</h4>
                     <span class="other-car-link">Explore Specs &rarr;</span>
                 </div>
 
                 <div class="other-car-tile open-specs-btn" data-car="bmw-x7" style="cursor: pointer;">
-                    <img src="img/BMW4.png" alt="BMW X6 Coupe SUV">
+                    <img src="img/BMW4.png" alt="BMW X6 Coupe SUV" loading="lazy">
                     <h4 class="other-car-name">BMW X6 Luxury SAC</h4>
                     <span class="other-car-link">Explore Specs &rarr;</span>
                 </div>
@@ -629,9 +773,7 @@
     <div class="modal-backdrop" id="specsModal">
         <div class="modal-dialog">
             <button class="modal-close-btn" id="closeSpecsModal" aria-label="Close modal">&times;</button>
-            <div id="specsModalContent">
-                <!-- Injected via JavaScript -->
-            </div>
+            <div id="specsModalContent"></div>
         </div>
     </div>
 
@@ -700,7 +842,7 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <div style="display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem;">
-                    <img src="img/logo2h.png" alt="BMW" style="width: 38px; height: 38px; border-radius: 50%;">
+                    <img src="img/logo2h.png" alt="BMW" width="38" height="38" style="border-radius: 50%;">
                     <h3 style="margin: 0;">BMW SHOP</h3>
                 </div>
                 <p>The pioneer of sheer driving pleasure, technological supremacy, and sustainable high performance across the globe.</p>

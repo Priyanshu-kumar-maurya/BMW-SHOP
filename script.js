@@ -1,10 +1,276 @@
 /**
- * BMW SHOP - Interactive JavaScript
+ * BMW SHOP - Interactive JavaScript & 3D Automotive Studio Engine
  * Modern Luxury Automotive Web Experience
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Mobile Menu Toggle
+    // =========================================================================
+    // 1. 3D HERO CAR STUDIO & ROTATION ENGINE
+    // =========================================================================
+    const hero3DContainer = document.getElementById('hero3DContainer');
+    const hero3DCar = document.getElementById('hero3DCar');
+    const hero3DStage = document.getElementById('hero3DStage');
+    const toggleAutoRotateBtn = document.getElementById('toggleAutoRotateBtn');
+    const carModelPills = document.querySelectorAll('.hero-model-pill');
+    const speedCanvas = document.getElementById('heroSpeedCanvas');
+
+    if (hero3DContainer && hero3DCar) {
+        let isDragging = false;
+        let startX = 0;
+        let currentAngle = 0;
+        let targetAngle = 0;
+        let autoRotate = true;
+        let autoRotateSpeed = 0.45; // Degrees per frame
+        let velocity = 0;
+        let lastX = 0;
+        let mouseXPercent = 0;
+        let mouseYPercent = 0;
+        let floatOffsetY = 0;
+        let floatTime = 0;
+
+        // Models asset map
+        const heroModelMap = {
+            'i7': {
+                name: 'BMW i7 xDrive60',
+                src: 'img/BMWi7.png',
+                tag: '⚡ 100% Electric Luxury',
+                hp: '536 HP',
+                acc: '4.5s',
+                range: '625 km'
+            },
+            'm4': {
+                name: 'BMW M4 Competition',
+                src: 'img/BMWM4.png',
+                tag: '🏁 Pure Motorsport DNA',
+                hp: '503 HP',
+                acc: '3.4s',
+                range: '290 km/h'
+            },
+            'ix': {
+                name: 'BMW iX xDrive50',
+                src: 'img/BMWiX.png',
+                tag: '🚙 Electric SAV Flagship',
+                hp: '516 HP',
+                acc: '4.4s',
+                range: '630 km'
+            },
+            'z4': {
+                name: 'BMW Z4 Roadster',
+                src: 'img/BMWZ4.png',
+                tag: '🏎️ Open-Air Thrill',
+                hp: '382 HP',
+                acc: '3.9s',
+                range: 'TwinPower'
+            },
+            'xm': {
+                name: 'BMW XM Label Red',
+                src: 'img/BMWXM.png',
+                tag: '🔥 738 HP M Hybrid',
+                hp: '738 HP',
+                acc: '3.7s',
+                range: '1,000 Nm'
+            }
+        };
+
+        // Mouse Drag / Touch Swipe Handlers for 360 Orbit
+        const onPointerDown = (clientX) => {
+            isDragging = true;
+            startX = clientX;
+            lastX = clientX;
+            velocity = 0;
+            hero3DContainer.classList.add('grabbing');
+        };
+
+        const onPointerMove = (clientX, clientY) => {
+            if (isDragging) {
+                const deltaX = clientX - lastX;
+                velocity = deltaX * 0.4;
+                targetAngle += velocity;
+                lastX = clientX;
+            }
+
+            // Calculate parallax perspective relative to container center
+            const rect = hero3DContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            mouseXPercent = ((clientX - centerX) / (rect.width / 2)) * 12; // Max +/-12 deg tilt
+            mouseYPercent = -((clientY - centerY) / (rect.height / 2)) * 8; // Max +/-8 deg tilt
+        };
+
+        const onPointerUp = () => {
+            if (isDragging) {
+                isDragging = false;
+                hero3DContainer.classList.remove('grabbing');
+            }
+        };
+
+        // Event Listeners for Desktop Mouse
+        hero3DContainer.addEventListener('mousedown', (e) => onPointerDown(e.clientX));
+        window.addEventListener('mousemove', (e) => onPointerMove(e.clientX, e.clientY));
+        window.addEventListener('mouseup', onPointerUp);
+
+        // Event Listeners for Mobile Touch
+        hero3DContainer.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 1) {
+                onPointerDown(e.touches[0].clientX);
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchmove', (e) => {
+            if (e.touches.length === 1) {
+                onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: true });
+
+        window.addEventListener('touchend', onPointerUp);
+
+        // Auto-Rotate Button Toggle
+        if (toggleAutoRotateBtn) {
+            toggleAutoRotateBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                autoRotate = !autoRotate;
+                toggleAutoRotateBtn.classList.toggle('active', autoRotate);
+                toggleAutoRotateBtn.innerHTML = autoRotate ? '<span>🔄 360° Auto-Orbit [ON]</span>' : '<span>⏸️ 360° Orbit [PAUSED]</span>';
+            });
+        }
+
+        // Model Switcher Pills
+        carModelPills.forEach(pill => {
+            pill.addEventListener('click', (e) => {
+                e.stopPropagation();
+                carModelPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                const modelKey = pill.getAttribute('data-model');
+                const modelData = heroModelMap[modelKey];
+
+                if (modelData) {
+                    // Smooth transition animation
+                    hero3DCar.style.transform += ' scale(0.85)';
+                    hero3DCar.style.opacity = '0.4';
+
+                    setTimeout(() => {
+                        hero3DCar.src = modelData.src;
+                        hero3DCar.alt = modelData.name;
+
+                        // Update dynamic badge info if present
+                        const heroModelNameEl = document.getElementById('heroActiveModelName');
+                        const heroModelTagEl = document.getElementById('heroActiveModelTag');
+                        if (heroModelNameEl) heroModelNameEl.textContent = modelData.name;
+                        if (heroModelTagEl) heroModelTagEl.textContent = modelData.tag;
+
+                        hero3DCar.style.opacity = '1';
+                    }, 200);
+                }
+            });
+        });
+
+        // 3D Animation & Rendering Loop
+        function animate3D() {
+            floatTime += 0.035;
+            floatOffsetY = Math.sin(floatTime) * 6; // 6px floating bounce
+
+            if (autoRotate && !isDragging) {
+                targetAngle += autoRotateSpeed;
+            }
+
+            if (!isDragging) {
+                // Apply inertia dampening
+                targetAngle += velocity;
+                velocity *= 0.94;
+            }
+
+            // Smooth interpolation
+            currentAngle += (targetAngle - currentAngle) * 0.12;
+
+            // Apply 3D matrix transform
+            // Rotate horizontally, slight perspective tilt and breathing float
+            const transformStr = `
+                perspective(1200px)
+                translateY(${floatOffsetY}px)
+                rotateX(${mouseYPercent}deg)
+                rotateY(${currentAngle + mouseXPercent}deg)
+            `;
+
+            hero3DCar.style.transform = transformStr;
+
+            // Rotate ground glowing shadow disc in sync
+            const groundPedestal = document.getElementById('heroGroundPedestal');
+            if (groundPedestal) {
+                groundPedestal.style.transform = `
+                    perspective(1200px)
+                    rotateX(75deg)
+                    rotateZ(${-currentAngle * 0.5}deg)
+                `;
+            }
+
+            requestAnimationFrame(animate3D);
+        }
+
+        requestAnimationFrame(animate3D);
+
+        // Dynamic 3D Speed Particle Canvas
+        if (speedCanvas) {
+            const ctx = speedCanvas.getContext('2d');
+            let width, height;
+            let particles = [];
+            const particleCount = 45;
+
+            function resizeCanvas() {
+                width = speedCanvas.width = speedCanvas.parentElement.offsetWidth;
+                height = speedCanvas.height = speedCanvas.parentElement.offsetHeight;
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    length: 15 + Math.random() * 35,
+                    speed: 2 + Math.random() * 5,
+                    opacity: 0.1 + Math.random() * 0.4,
+                    width: 1 + Math.random() * 1.5
+                });
+            }
+
+            function drawParticles() {
+                ctx.clearRect(0, 0, width, height);
+
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    const grad = ctx.createLinearGradient(p.x, p.y, p.x + p.length, p.y + p.length * 0.3);
+                    grad.addColorStop(0, 'rgba(0, 163, 224, 0)');
+                    grad.addColorStop(1, `rgba(0, 163, 224, ${p.opacity})`);
+
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = p.width;
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p.x + p.length, p.y + p.length * 0.3);
+                    ctx.stroke();
+
+                    // Move
+                    p.x -= p.speed * 1.5;
+                    p.y -= p.speed * 0.45;
+
+                    // Reset when out of bounds
+                    if (p.x < -p.length || p.y < -p.length) {
+                        p.x = width + p.length;
+                        p.y = Math.random() * height;
+                    }
+                });
+
+                requestAnimationFrame(drawParticles);
+            }
+
+            requestAnimationFrame(drawParticles);
+        }
+    }
+
+    // =========================================================================
+    // 2. MOBILE MENU & HEADER SCROLL
+    // =========================================================================
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');
 
@@ -15,7 +281,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.toggle('menu-open');
         });
 
-        // Close menu when clicking outside or on a nav link
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 hamburgerBtn.classList.remove('active');
@@ -25,7 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 2. Navbar Scroll Glassmorphism State
     const header = document.querySelector('.main-header');
     const backToTopBtn = document.getElementById('backToTop');
 
@@ -51,14 +315,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 3. Car Models Category Filter
+    // =========================================================================
+    // 3. CAR MODELS CATEGORY FILTER
+    // =========================================================================
     const filterBtns = document.querySelectorAll('.filter-btn');
     const carCards = document.querySelectorAll('.car-card');
 
     if (filterBtns.length > 0 && carCards.length > 0) {
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update active button
                 filterBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
@@ -84,7 +349,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. Vehicle Specifications Data & Modal Handler
+    // =========================================================================
+    // 4. VEHICLE SPECIFICATIONS DATA & MODAL HANDLER
+    // =========================================================================
     const vehicleSpecsData = {
         'bmw-i7': {
             name: 'BMW i7 xDrive60',
@@ -302,7 +569,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const specsModalContent = document.getElementById('specsModalContent');
     const closeSpecsModalBtn = document.getElementById('closeSpecsModal');
 
-    // Open Specs Modal
     document.querySelectorAll('.open-specs-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -384,7 +650,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Test Drive & Service Booking Modal
+    // =========================================================================
+    // 5. TEST DRIVE & SERVICE BOOKING MODAL
+    // =========================================================================
     const bookingModal = document.getElementById('bookingModal');
     const closeBookingModalBtn = document.getElementById('closeBookingModal');
     const bookingForm = document.getElementById('bookingForm');
@@ -412,7 +680,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Open booking modal via general CTA buttons
     document.querySelectorAll('.open-booking-modal').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
@@ -440,7 +707,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Form Submission with Toast Notification
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -480,7 +746,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 6. Generic Contact Form Handler (on contact.html)
+    // =========================================================================
+    // 6. CONTACT FORM HANDLER
+    // =========================================================================
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -514,7 +782,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. Interactive Accordion (FAQ on Services page)
+    // =========================================================================
+    // 7. INTERACTIVE ACCORDION
+    // =========================================================================
     document.querySelectorAll('.accordion-header').forEach(header => {
         header.addEventListener('click', () => {
             const item = header.parentElement;
@@ -528,7 +798,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 8. Custom Toast Notification Helper
+    // =========================================================================
+    // 8. CUSTOM TOAST NOTIFICATIONS
+    // =========================================================================
     function showToast(message, type = 'info', duration = 4000) {
         let toastContainer = document.getElementById('toastContainer');
         if (!toastContainer) {
@@ -561,7 +833,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, duration);
     }
 
-    // Escape Key to close modals
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeSpecsModalFunc();
