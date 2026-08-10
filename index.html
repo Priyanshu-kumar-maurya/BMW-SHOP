@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Primary SEO & Google Ranking Meta Tags -->
-    <title>BMW SHOP | Real 3D Interactive BMW Automotive Studio & Fleet</title>
-    <meta name="title" content="BMW SHOP | Real 3D Interactive BMW Automotive Studio & Fleet">
-    <meta name="description" content="Inspect real 3D BMW cars with 360° rotation, AR (Augmented Reality), metallic color customizer, and full technical specifications. Book exclusive VIP test drives.">
-    <meta name="keywords" content="BMW 3D Car, Real BMW 3D Model, BMW AR, BMW Electric Cars, BMW i7, BMW iX, BMW M4 Competition, BMW X5, BMW X7, BMW M Series, Luxury Automotive, Sheer Driving Pleasure">
+    <!-- Primary SEO & Google Top-Ranking Meta Tags -->
+    <title>BMW Official Visualizer | Sheer Driving Pleasure - 360° Studio & Fleet</title>
+    <meta name="title" content="BMW Official Visualizer | Sheer Driving Pleasure - 360° Studio & Fleet">
+    <meta name="description" content="Official BMW interactive 360° studio visualizer and model configurator. Explore the complete BMW fleet including BMW i7, M4 Competition, BMW XM, iX, and book VIP test drives.">
+    <meta name="keywords" content="BMW Official, BMW Cars, BMW 360 Visualizer, BMW Configurator, BMW i7, BMW iX, BMW M4 Competition, BMW XM, BMW X5, BMW X7, BMW M Series, Luxury Automotive, Sheer Driving Pleasure">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-    <meta name="author" content="Priyanshu Kumar Maurya">
+    <meta name="author" content="BMW Group Experience">
     <meta name="theme-color" content="#0066b1">
     <link rel="canonical" href="https://bmw-shop-kappa.vercel.app/">
 
     <!-- Open Graph / Facebook / WhatsApp SEO -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bmw-shop-kappa.vercel.app/">
-    <meta property="og:title" content="BMW SHOP | Real 3D Interactive BMW Automotive Studio">
-    <meta property="og:description" content="Experience realistic 3D BMW models with 360° interactive rotation, metallic paint customization, and AR support.">
+    <meta property="og:title" content="BMW Official Visualizer | 360° Studio & Fleet">
+    <meta property="og:description" content="Experience realistic 360° studio rotation, official BMW paint visualizer, and luxury fleet specifications.">
     <meta property="og:image" content="https://bmw-shop-kappa.vercel.app/img/BMWi7.png">
     <meta property="og:site_name" content="BMW SHOP">
     <meta property="og:locale" content="en_US">
@@ -26,16 +26,13 @@
     <!-- Twitter Card SEO -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://bmw-shop-kappa.vercel.app/">
-    <meta name="twitter:title" content="BMW SHOP | Real 3D BMW Cars Studio">
-    <meta name="twitter:description" content="Inspect real 3D BMW cars with 360° orbit controls and metallic paint customizer.">
+    <meta name="twitter:title" content="BMW Official Visualizer | 360° Studio & Fleet">
+    <meta name="twitter:description" content="Explore real BMW models with 360° interactive turntable rotation and live paint visualizer.">
     <meta name="twitter:image" content="https://bmw-shop-kappa.vercel.app/img/BMWM4.png">
 
     <!-- Favicon & Stylesheet -->
     <link rel="icon" type="image/png" href="img/logo2h.png">
     <link rel="stylesheet" href="style.css">
-
-    <!-- Google Model-Viewer for Real 3D Automotive GLTF/GLB Models & AR -->
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
     <!-- Schema.org JSON-LD Structured Data for Google Top Rich Results -->
     <script type="application/ld+json">
@@ -49,7 +46,7 @@
           "url": "https://bmw-shop-kappa.vercel.app/",
           "logo": "https://bmw-shop-kappa.vercel.app/img/logo2h.png",
           "image": "https://bmw-shop-kappa.vercel.app/img/BMWi7.png",
-          "description": "Official showcase of BMW luxury electric, hybrid, and high-performance M-Series vehicles with Real 3D WebGL Studio.",
+          "description": "Official showcase of BMW luxury electric, hybrid, and high-performance M-Series vehicles.",
           "priceRange": "$$$$",
           "telephone": "+18008311117",
           "address": {
@@ -100,104 +97,134 @@
         </div>
     </header>
 
-    <!-- REAL 3D BMW HERO STUDIO -->
+    <!-- OFFICIAL BMW 360° STUDIO HERO SECTION -->
     <section class="hero-section">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="hero-subtitle-tag" id="heroActiveModelTag">🏎️ Real 3D Interactive Model &bull; HDR Metallic Reflections</span>
-            <h1 class="hero-title" id="heroActiveModelTitle">BMW M-PERFORMANCE 3D</h1>
-            <p class="hero-description">
-                100% Real 3D Automotive Model &bull; Drag to rotate 360° &bull; Zoom, change metallic paint, and view in Augmented Reality (AR).
+            <span class="hero-subtitle-tag" id="studioTag">THE ALL-NEW BMW i7 &bull; 100% ELECTRIC LUXURY</span>
+            <h1 class="hero-title" id="studioTitle">BMW i7 xDrive60</h1>
+            <p class="hero-description" id="studioDesc">
+                Pure Electric Opulence &bull; 536 HP &bull; Up to 625 km Range &bull; 31.3" 8K Theatre Screen.
             </p>
 
-            <!-- Real 3D Model-Viewer Studio Container -->
-            <div class="webgl-studio-wrapper">
-                <model-viewer 
-                    id="realBmwModelViewer"
-                    src="https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/gltf/ferrari.glb"
-                    alt="Real 3D BMW Sports Car"
-                    auto-rotate
-                    auto-rotate-delay="1000"
-                    rotation-per-second="25deg"
-                    camera-controls
-                    touch-action="pan-y"
-                    shadow-intensity="1.8"
-                    shadow-softness="0.8"
-                    environment-image="neutral"
-                    exposure="1.1"
-                    camera-orbit="45deg 75deg 6.5m"
-                    min-camera-orbit="auto auto 3.8m"
-                    max-camera-orbit="auto 88deg 12m"
-                    ar
-                    ar-modes="webxr scene-viewer quick-look"
-                    class="real-3d-model-viewer">
-                    
-                    <div class="progress-bar hide" slot="progress-bar">
-                        <div class="update-bar"></div>
-                    </div>
-                </model-viewer>
+            <!-- Photorealistic 360° Studio Turntable Stage -->
+            <div class="official-studio-stage" id="studioStage" title="Drag horizontally or swipe to rotate 360° on the studio turntable.">
+                <!-- Studio Atmosphere & Ceiling Light Rig -->
+                <div class="studio-light-rig"></div>
+                
+                <!-- Rotating Turntable Pedestal with Neon Grid -->
+                <div class="studio-turntable-disc" id="turntableDisc">
+                    <div class="turntable-grid-ring"></div>
+                    <div class="turntable-outer-glow"></div>
+                </div>
 
+                <!-- Photorealistic Real BMW Vehicle Container -->
+                <div class="studio-vehicle-anchor" id="vehicleAnchor">
+                    <img id="studioCarImage" src="img/BMWi7.png" alt="Official BMW i7" class="studio-car-img">
+                    <div class="car-contact-shadow"></div>
+                    <div class="car-specular-sweep" id="specularSweep"></div>
+
+                    <!-- Interactive Inspection Hotspots (Official BMW Website Style) -->
+                    <div class="studio-hotspot" style="top: 35%; left: 24%;" data-title="BMW Iconic Glow Kidney Grille" data-desc="Illuminated kidney grille contour and dynamic welcome light orchestration.">
+                        <div class="hotspot-pulse"></div>
+                        <div class="hotspot-tooltip">
+                            <strong>Iconic Glow Kidney Grille</strong>
+                            <span>Dynamic illuminated contour lighting</span>
+                        </div>
+                    </div>
+
+                    <div class="studio-hotspot" style="top: 25%; left: 46%;" data-title="BMW Laserlights / Swarovski Crystal" data-desc="Adaptive LED headlights with Swarovski crystal elements for daylight brilliance.">
+                        <div class="hotspot-pulse"></div>
+                        <div class="hotspot-tooltip">
+                            <strong>Crystal Headlights</strong>
+                            <span>Swarovski elements with Adaptive LED</span>
+                        </div>
+                    </div>
+
+                    <div class="studio-hotspot" style="bottom: 22%; left: 75%;" data-title="Aerodynamic M-Sport Aero Wheels" data-desc="Optimized airflow alloy wheels engineered for maximum EV range and brake cooling.">
+                        <div class="hotspot-pulse"></div>
+                        <div class="hotspot-tooltip">
+                            <strong>Aerodynamic Aero Wheels</strong>
+                            <span>21-inch M aerodynamic alloy wheels</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Studio Interactive Badge -->
                 <div class="studio-badge-overlay">
-                    <span>🎮 360° Real 3D Studio &bull; Drag / Swipe / Scroll to Zoom</span>
+                    <span>🔄 360° BMW Official Studio &bull; Drag / Swipe Horizontally to Spin</span>
                 </div>
             </div>
 
-            <!-- Real 3D Model Switcher & Paint Palette Bar -->
-            <div class="studio-controls-bar">
-                <!-- 3D Model Switcher -->
-                <div class="camera-angles-group">
-                    <span class="control-group-label" style="margin-right: 0.3rem;">3D Model:</span>
-                    <button class="real-3d-model-btn active" data-src="https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/gltf/ferrari.glb" data-name="BMW M-PERFORMANCE GT" data-tag="🏎️ Real 3D M-Power TwinPower V8">BMW M GT</button>
-                    <button class="real-3d-model-btn" data-src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Buggy/glTF-Binary/Buggy.glb" data-name="BMW X-OVERLAND ALL-TERRAIN" data-tag="🚙 Real 3D All-Terrain SAV Concept">BMW X-Terrain</button>
-                </div>
+            <!-- Model Switcher Selector Pills -->
+            <div class="official-model-pills">
+                <button class="official-model-pill active" data-model="bmw-i7" data-img="img/BMWi7.png" data-name="BMW i7 xDrive60" data-tag="THE ALL-NEW BMW i7 &bull; 100% ELECTRIC LUXURY" data-desc="Pure Electric Opulence &bull; 536 HP &bull; Up to 625 km Range &bull; 31.3\" 8K Theatre Screen." data-hp="536 HP" data-acc="4.5s" data-range="625 km" data-top="240 km/h">
+                    <span>⚡ BMW i7</span>
+                </button>
+                <button class="official-model-pill" data-model="bmw-m4" data-img="img/BMWM4.png" data-name="BMW M4 Competition" data-tag="BMW M-POWER &bull; PURE MOTORSPORT DNA" data-desc="3.0L M TwinPower Turbo S58 &bull; 503 HP &bull; 0-100 in 3.4s &bull; Carbon Bucket Seats." data-hp="503 HP" data-acc="3.4s" data-range="3.0L S58" data-top="290 km/h">
+                    <span>🏁 BMW M4</span>
+                </button>
+                <button class="official-model-pill" data-model="bmw-xm" data-img="img/BMWXM.png" data-name="BMW XM Label Red" data-tag="MOST POWERFUL BMW M EVER &bull; 738 HP V8 HYBRID" data-desc="M HYBRID Twin-Turbo V8 &bull; 738 HP &bull; 1,000 Nm Torque &bull; Luxury Lounge Interior." data-hp="738 HP" data-acc="3.7s" data-range="V8 Hybrid" data-top="290 km/h">
+                    <span>🔥 BMW XM</span>
+                </button>
+                <button class="official-model-pill" data-model="bmw-ix" data-img="img/BMWiX.png" data-name="BMW iX xDrive50" data-tag="PIONEERING ELECTRIC SAV &bull; 630 KM RANGE" data-desc="Intelligent xDrive All-Wheel Drive &bull; 516 HP &bull; Carbon Core Architecture." data-hp="516 HP" data-acc="4.4s" data-range="630 km" data-top="200 km/h">
+                    <span>🚙 BMW iX</span>
+                </button>
+                <button class="official-model-pill" data-model="bmw-7" data-img="img/BMW7.png" data-name="BMW 750e xDrive" data-tag="FLAGSHIP LUXURY SEDAN &bull; PLUG-IN HYBRID" data-desc="Combined 483 HP &bull; BMW Interaction Bar &bull; Executive Lounge Seating." data-hp="483 HP" data-acc="4.6s" data-range="80 km EV" data-top="250 km/h">
+                    <span>🚗 BMW 7-Series</span>
+                </button>
+                <button class="official-model-pill" data-model="bmw-z4" data-img="img/BMWZ4.png" data-name="BMW Z4 M40i Roadster" data-tag="OPEN-AIR THRILL &bull; INLINE-6 TWINPOWER TURBO" data-desc="382 HP &bull; 50:50 Perfect Balance &bull; 10-Second Quick Soft-Top." data-hp="382 HP" data-acc="3.9s" data-range="3.0L Turbo" data-top="250 km/h">
+                    <span>🏎️ BMW Z4</span>
+                </button>
+            </div>
 
+            <!-- Official Studio Controls Bar (Paint Configurator & Orbit Toggle) -->
+            <div class="studio-controls-bar">
                 <!-- Paint Color Customizer Swatches -->
                 <div class="color-palette-group">
-                    <span class="control-group-label">Metallic Paint: <strong id="activePaintName" style="color: var(--bmw-cyan);">Marina Bay Blue</strong></span>
+                    <span class="control-group-label">BMW Metallic Paint: <strong id="activePaintName" style="color: var(--bmw-cyan);">Tanzanite Blue Metallic</strong></span>
                     <div class="color-swatches">
-                        <button class="real-paint-swatch active" data-color="#0066b1" data-name="Marina Bay Blue" style="background: #0066b1;" title="Marina Bay Blue"></button>
-                        <button class="real-paint-swatch" data-color="#d91424" data-name="Toronto M Red" style="background: #d91424;" title="Toronto M Red"></button>
-                        <button class="real-paint-swatch" data-color="#00593b" data-name="Isle of Man Green" style="background: #00593b;" title="Isle of Man Green"></button>
-                        <button class="real-paint-swatch" data-color="#1b1e23" data-name="Frozen Carbon Grey" style="background: #1b1e23;" title="Frozen Carbon Grey"></button>
-                        <button class="real-paint-swatch" data-color="#f5f5f7" data-name="Alpine Metallic White" style="background: #f5f5f7;" title="Alpine White"></button>
-                        <button class="real-paint-swatch" data-color="#eab308" data-name="Sao Paulo M Gold" style="background: #eab308;" title="Sao Paulo Gold"></button>
+                        <button class="official-paint-swatch active" data-color="blue" data-name="Tanzanite Blue Metallic" style="background: radial-gradient(circle, #0077cc, #003366);" title="Tanzanite Blue Metallic"></button>
+                        <button class="official-paint-swatch" data-color="red" data-name="Aventurin Red Metallic" style="background: radial-gradient(circle, #d91424, #66050e);" title="Aventurin Red Metallic"></button>
+                        <button class="official-paint-swatch" data-color="green" data-name="Isle of Man Green Metallic" style="background: radial-gradient(circle, #00875a, #003820);" title="Isle of Man Green Metallic"></button>
+                        <button class="official-paint-swatch" data-color="grey" data-name="Dravit Grey Metallic" style="background: radial-gradient(circle, #475569, #1e293b);" title="Dravit Grey Metallic"></button>
+                        <button class="official-paint-swatch" data-color="white" data-name="Mineral White Metallic" style="background: radial-gradient(circle, #ffffff, #cbd5e1);" title="Mineral White Metallic"></button>
+                        <button class="official-paint-swatch" data-color="gold" data-name="Sao Paulo M Gold" style="background: radial-gradient(circle, #fbbf24, #b45309);" title="Sao Paulo Gold"></button>
+                        <button class="official-paint-swatch" data-color="cyan" data-name="Electric Frozen Cyan" style="background: radial-gradient(circle, #00e5ff, #006699);" title="Electric Frozen Cyan"></button>
                     </div>
                 </div>
 
-                <!-- Camera Angle & Auto-Orbit Controls -->
+                <!-- Turntable Spin Actions -->
                 <div class="camera-angles-group">
-                    <button class="camera-angle-btn active" data-orbit="45deg 75deg 6.5m">3/4 View</button>
-                    <button class="camera-angle-btn" data-orbit="0deg 80deg 6.5m">Front</button>
-                    <button class="camera-angle-btn" data-orbit="90deg 80deg 6.5m">Side</button>
-                    <button class="camera-angle-btn" data-orbit="180deg 80deg 6.5m">Rear</button>
-                    <button class="camera-angle-btn" data-orbit="0deg 10deg 7.5m">Top</button>
-                    <button class="btn-toggle-orbit active" id="toggleReal3DOrbitBtn">🔄 Auto-Rotate [ON]</button>
+                    <button class="btn-toggle-orbit active" id="toggleTurntableBtn">🔄 360° Auto-Spin [ON]</button>
+                    <button class="camera-angle-btn" id="resetStudioAngleBtn">Center View</button>
+                    <button class="camera-angle-btn open-specs-btn" id="studioViewSpecsBtn" data-car="bmw-i7">Technical Specs</button>
                 </div>
             </div>
 
-            <!-- CTA Group -->
+            <!-- Quick CTA Group -->
             <div class="hero-cta-group" style="margin-top: 2rem;">
-                <a href="#modelsSection" class="btn btn-primary">Explore All Models</a>
-                <button class="btn btn-secondary open-booking-modal" data-car="BMW 3D VIP Experience">Schedule VIP Test Drive</button>
+                <a href="#modelsSection" class="btn btn-primary">Explore Complete Fleet</a>
+                <button class="btn btn-secondary open-booking-modal" id="heroBookDriveBtn" data-car="BMW i7 xDrive60">Schedule VIP Test Drive</button>
             </div>
 
-            <!-- Quick Stats Bar in Hero -->
+            <!-- Live Performance Stats Ribbon -->
             <div class="hero-stats-bar">
                 <div class="stat-item">
-                    <span class="stat-number">3.4s</span>
-                    <span class="stat-label">0-100 km/h (M-Power)</span>
+                    <span class="stat-number" id="statHp">536 HP</span>
+                    <span class="stat-label">Peak Power Output</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">630 km</span>
-                    <span class="stat-label">Max Electric Range</span>
+                    <span class="stat-number" id="statAcc">4.5s</span>
+                    <span class="stat-label">0-100 km/h Acceleration</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">738 HP</span>
-                    <span class="stat-label">Peak V8 Hybrid Power</span>
+                    <span class="stat-number" id="statRange">625 km</span>
+                    <span class="stat-label">Range / Engine Tech</span>
                 </div>
                 <div class="stat-item">
-                    <span class="stat-number">100%</span>
-                    <span class="stat-label">Real 3D GLTF Model</span>
+                    <span class="stat-number" id="statTop">240 km/h</span>
+                    <span class="stat-label">Governed Top Speed</span>
                 </div>
             </div>
         </div>

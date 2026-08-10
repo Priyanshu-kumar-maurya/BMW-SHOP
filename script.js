@@ -1,126 +1,187 @@
 /**
- * BMW SHOP - Real 3D Automotive Studio & Interactive Systems
- * Powered by Google Model-Viewer (GLTF/GLB Engine) & Modern Web APIs
+ * BMW SHOP - Official 360° Automotive Studio & Visualizer Engine
+ * Modeled after the official BMW.com Digital Showroom Experience
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
-    // 1. REAL 3D AUTOMOTIVE STUDIO ENGINE (Google Model-Viewer)
+    // 1. OFFICIAL BMW 360° TURNTABLE STUDIO ENGINE
     // =========================================================================
-    const modelViewer = document.getElementById('realBmwModelViewer');
-    const heroTitle = document.getElementById('heroActiveModelTitle');
-    const heroTag = document.getElementById('heroActiveModelTag');
-    const activePaintLabel = document.getElementById('activePaintName');
-    const toggleOrbitBtn = document.getElementById('toggleReal3DOrbitBtn');
+    const studioStage = document.getElementById('studioStage');
+    const vehicleAnchor = document.getElementById('vehicleAnchor');
+    const studioCarImg = document.getElementById('studioCarImage');
+    const turntableDisc = document.getElementById('turntableDisc');
+    const specularSweep = document.getElementById('specularSweep');
+    const toggleTurntableBtn = document.getElementById('toggleTurntableBtn');
+    const resetStudioAngleBtn = document.getElementById('resetStudioAngleBtn');
+    const studioViewSpecsBtn = document.getElementById('studioViewSpecsBtn');
+    const heroBookDriveBtn = document.getElementById('heroBookDriveBtn');
 
-    if (modelViewer) {
-        // 1. Real 3D Model Switcher
-        document.querySelectorAll('.real-3d-model-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.real-3d-model-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
+    // Studio Hero Text & Stats elements
+    const studioTitle = document.getElementById('studioTitle');
+    const studioTag = document.getElementById('studioTag');
+    const studioDesc = document.getElementById('studioDesc');
+    const activePaintName = document.getElementById('activePaintName');
+    const statHp = document.getElementById('statHp');
+    const statAcc = document.getElementById('statAcc');
+    const statRange = document.getElementById('statRange');
+    const statTop = document.getElementById('statTop');
 
-                const modelSrc = btn.getAttribute('data-src');
-                const modelName = btn.getAttribute('data-name');
-                const modelTag = btn.getAttribute('data-tag');
+    let currentRotation = 0;
+    let targetRotation = 0;
+    let isDragging = false;
+    let startX = 0;
+    let isAutoRotating = true;
+    let currentPaintClass = 'paint-blue';
+    let currentModelKey = 'bmw-i7';
+    let animFrameId = null;
 
-                if (modelSrc) {
-                    modelViewer.src = modelSrc;
-                }
-                if (heroTitle && modelName) {
-                    heroTitle.textContent = modelName;
-                }
-                if (heroTag && modelTag) {
-                    heroTag.textContent = modelTag;
-                }
+    if (studioStage && vehicleAnchor && studioCarImg) {
+        // Continuous Studio Animation Loop
+        let angleTime = 0;
+        function studioRenderLoop() {
+            if (isAutoRotating && !isDragging) {
+                angleTime += 0.015;
+                // Smooth sinusoidal natural turntable sweep (-18 deg to +18 deg)
+                targetRotation = Math.sin(angleTime) * 16;
+            }
+
+            // Smooth interpolation
+            currentRotation += (targetRotation - currentRotation) * 0.12;
+
+            // Apply 3D Perspective rotation to vehicle & turntable
+            const rotateY = currentRotation;
+            const tiltZ = currentRotation * -0.15;
+            const floatY = Math.sin(angleTime * 1.5) * 4;
+
+            vehicleAnchor.style.transform = `translate(-50%, calc(-50% + ${floatY}px)) rotateY(${rotateY}deg) rotateZ(${tiltZ}deg)`;
+
+            if (turntableDisc) {
+                turntableDisc.style.transform = `translateX(-50%) rotateX(75deg) rotateZ(${currentRotation * 1.5}deg)`;
+            }
+
+            if (specularSweep) {
+                specularSweep.style.transform = `translateX(${currentRotation * 6}px) skewX(${currentRotation * 0.8}deg)`;
+            }
+
+            animFrameId = requestAnimationFrame(studioRenderLoop);
+        }
+
+        // Start Loop
+        animFrameId = requestAnimationFrame(studioRenderLoop);
+
+        // Pointer Drag & Touch Handling for 360° Studio Spin
+        function onPointerDown(e) {
+            isDragging = true;
+            isAutoRotating = false;
+            startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+            if (toggleTurntableBtn) {
+                toggleTurntableBtn.classList.remove('active');
+                toggleTurntableBtn.innerHTML = '⏸️ 360° Auto-Spin [PAUSED]';
+            }
+        }
+
+        function onPointerMove(e) {
+            if (!isDragging) return;
+            const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+            const deltaX = currentX - startX;
+            startX = currentX;
+
+            // Update rotation angle
+            targetRotation += deltaX * 0.45;
+            // Clamp within realistic studio viewing angle
+            targetRotation = Math.max(-42, Math.min(42, targetRotation));
+        }
+
+        function onPointerUp() {
+            isDragging = false;
+        }
+
+        studioStage.addEventListener('mousedown', onPointerDown);
+        window.addEventListener('mousemove', onPointerMove);
+        window.addEventListener('mouseup', onPointerUp);
+
+        studioStage.addEventListener('touchstart', onPointerDown, { passive: true });
+        window.addEventListener('touchmove', onPointerMove, { passive: true });
+        window.addEventListener('touchend', onPointerUp);
+
+        // Toggle Auto-Spin Button
+        if (toggleTurntableBtn) {
+            toggleTurntableBtn.addEventListener('click', () => {
+                isAutoRotating = !isAutoRotating;
+                toggleTurntableBtn.classList.toggle('active', isAutoRotating);
+                toggleTurntableBtn.innerHTML = isAutoRotating ? '🔄 360° Auto-Spin [ON]' : '⏸️ 360° Auto-Spin [PAUSED]';
+            });
+        }
+
+        // Reset Angle Button
+        if (resetStudioAngleBtn) {
+            resetStudioAngleBtn.addEventListener('click', () => {
+                targetRotation = 0;
+                angleTime = 0;
+            });
+        }
+
+        // 2. Official BMW Model Switcher Pills
+        document.querySelectorAll('.official-model-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.official-model-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                const modelKey = pill.getAttribute('data-model');
+                const imgSrc = pill.getAttribute('data-img');
+                const name = pill.getAttribute('data-name');
+                const tag = pill.getAttribute('data-tag');
+                const desc = pill.getAttribute('data-desc');
+                const hp = pill.getAttribute('data-hp');
+                const acc = pill.getAttribute('data-acc');
+                const range = pill.getAttribute('data-range');
+                const top = pill.getAttribute('data-top');
+
+                currentModelKey = modelKey;
+
+                // Morph car image smoothly
+                studioCarImg.style.opacity = '0';
+                studioCarImg.style.transform = 'scale(0.92)';
+
+                setTimeout(() => {
+                    studioCarImg.src = imgSrc;
+                    studioCarImg.className = `studio-car-img ${currentPaintClass}`;
+                    studioCarImg.style.opacity = '1';
+                    studioCarImg.style.transform = 'scale(1)';
+                }, 200);
+
+                // Update text & stats
+                if (studioTitle) studioTitle.textContent = name;
+                if (studioTag) studioTag.innerHTML = tag;
+                if (studioDesc) studioDesc.innerHTML = desc;
+                if (statHp) statHp.textContent = hp;
+                if (statAcc) statAcc.textContent = acc;
+                if (statRange) statRange.textContent = range;
+                if (statTop) statTop.textContent = top;
+
+                if (studioViewSpecsBtn) studioViewSpecsBtn.setAttribute('data-car', modelKey);
+                if (heroBookDriveBtn) heroBookDriveBtn.setAttribute('data-car', name);
             });
         });
 
-        // 2. Real 3D Material Metallic Paint Color Customizer
-        document.querySelectorAll('.real-paint-swatch').forEach(swatch => {
+        // 3. Official BMW Paint Color Configurator Swatches
+        document.querySelectorAll('.official-paint-swatch').forEach(swatch => {
             swatch.addEventListener('click', () => {
-                document.querySelectorAll('.real-paint-swatch').forEach(s => s.classList.remove('active'));
+                document.querySelectorAll('.official-paint-swatch').forEach(s => s.classList.remove('active'));
                 swatch.classList.add('active');
 
-                const hexColor = swatch.getAttribute('data-color');
+                const colorKey = swatch.getAttribute('data-color');
                 const colorName = swatch.getAttribute('data-name');
 
-                if (activePaintLabel && colorName) {
-                    activePaintLabel.textContent = colorName;
-                    activePaintLabel.style.color = hexColor;
-                }
+                currentPaintClass = `paint-${colorKey}`;
+                studioCarImg.className = `studio-car-img ${currentPaintClass}`;
 
-                // Apply color to 3D model materials
-                if (modelViewer.model && modelViewer.model.materials) {
-                    const materials = modelViewer.model.materials;
-                    materials.forEach(material => {
-                        const matName = material.name ? material.name.toLowerCase() : '';
-                        // Target car body paint or main metallic surfaces
-                        if (matName.includes('body') || matName.includes('car_body') || matName.includes('paint') || matName.includes('exterior') || matName.includes('red') || matName.includes('color')) {
-                            material.pbrMetallicRoughness.setBaseColorFactor(hexToRgba(hexColor));
-                        }
-                    });
+                if (activePaintName && colorName) {
+                    activePaintName.textContent = colorName;
                 }
             });
         });
-
-        // Helper to convert hex to RGBA for Model-Viewer PBR
-        function hexToRgba(hex) {
-            let c = hex.replace('#', '');
-            if (c.length === 3) c = c.split('').map(x => x + x).join('');
-            const num = parseInt(c, 16);
-            return [
-                ((num >> 16) & 255) / 255,
-                ((num >> 8) & 255) / 255,
-                (num & 255) / 255,
-                1.0
-            ];
-        }
-
-        // When 3D model loads, apply initial metallic clearcoat
-        modelViewer.addEventListener('load', () => {
-            const activeSwatch = document.querySelector('.real-paint-swatch.active');
-            if (activeSwatch) {
-                const hexColor = activeSwatch.getAttribute('data-color');
-                if (modelViewer.model && modelViewer.model.materials) {
-                    modelViewer.model.materials.forEach(material => {
-                        const matName = material.name ? material.name.toLowerCase() : '';
-                        if (matName.includes('body') || matName.includes('car_body') || matName.includes('paint') || matName.includes('red') || matName.includes('exterior')) {
-                            material.pbrMetallicRoughness.setBaseColorFactor(hexToRgba(hexColor));
-                        }
-                    });
-                }
-            }
-        });
-
-        // 3. Camera Angle Presets
-        document.querySelectorAll('.camera-angle-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.camera-angle-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const orbit = btn.getAttribute('data-orbit');
-                if (orbit && modelViewer) {
-                    modelViewer.cameraOrbit = orbit;
-                }
-            });
-        });
-
-        // 4. Auto-Rotate Toggle Button
-        if (toggleOrbitBtn) {
-            toggleOrbitBtn.addEventListener('click', () => {
-                const isRotating = modelViewer.hasAttribute('auto-rotate');
-                if (isRotating) {
-                    modelViewer.removeAttribute('auto-rotate');
-                    toggleOrbitBtn.classList.remove('active');
-                    toggleOrbitBtn.innerHTML = '⏸️ Auto-Rotate [PAUSED]';
-                } else {
-                    modelViewer.setAttribute('auto-rotate', '');
-                    toggleOrbitBtn.classList.add('active');
-                    toggleOrbitBtn.innerHTML = '🔄 Auto-Rotate [ON]';
-                }
-            });
-        }
     }
 
     // =========================================================================
@@ -427,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.open-specs-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            const carKey = btn.getAttribute('data-car');
+            const carKey = btn.getAttribute('data-car') || currentModelKey;
             const data = vehicleSpecsData[carKey];
 
             if (data && specsModal && specsModalContent) {
@@ -538,7 +599,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.open-booking-modal').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            const preferredCar = btn.getAttribute('data-car') || '';
+            const preferredCar = btn.getAttribute('data-car') || 'BMW i7 xDrive60';
             window.openBookingModalForCar(preferredCar);
         });
     });
