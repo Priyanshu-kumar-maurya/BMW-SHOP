@@ -1,275 +1,489 @@
 /**
- * BMW SHOP - Interactive JavaScript & 3D Automotive Studio Engine
- * Modern Luxury Automotive Web Experience
+ * BMW SHOP - Interactive JavaScript & True WebGL 3D Automotive Studio
+ * Powered by Three.js & Modern Web Technologies
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
-    // 1. 3D HERO CAR STUDIO & ROTATION ENGINE
+    // 1. TRUE 3D WEBGL AUTOMOTIVE STUDIO (Three.js)
     // =========================================================================
-    const hero3DContainer = document.getElementById('hero3DContainer');
-    const hero3DCar = document.getElementById('hero3DCar');
-    const hero3DStage = document.getElementById('hero3DStage');
-    const toggleAutoRotateBtn = document.getElementById('toggleAutoRotateBtn');
-    const carModelPills = document.querySelectorAll('.hero-model-pill');
-    const speedCanvas = document.getElementById('heroSpeedCanvas');
+    const webglContainer = document.getElementById('webglCarStudio');
 
-    if (hero3DContainer && hero3DCar) {
-        let isDragging = false;
-        let startX = 0;
-        let currentAngle = 0;
-        let targetAngle = 0;
-        let autoRotate = true;
-        let autoRotateSpeed = 0.45; // Degrees per frame
-        let velocity = 0;
-        let lastX = 0;
-        let mouseXPercent = 0;
-        let mouseYPercent = 0;
-        let floatOffsetY = 0;
-        let floatTime = 0;
+    if (webglContainer && typeof THREE !== 'undefined') {
+        let scene, camera, renderer, controls;
+        let carGroup, bodyMaterial, glassMaterial, wheelMeshes = [];
+        let headlightSpotlights = [], ambientLight, dirLight1, dirLight2;
+        let isAutoRotating = true;
+        let lightsOn = true;
 
-        // Models asset map
-        const heroModelMap = {
-            'i7': {
-                name: 'BMW i7 xDrive60',
-                src: 'img/BMWi7.png',
-                tag: '⚡ 100% Electric Luxury',
-                hp: '536 HP',
-                acc: '4.5s',
-                range: '625 km'
-            },
-            'm4': {
-                name: 'BMW M4 Competition',
-                src: 'img/BMWM4.png',
-                tag: '🏁 Pure Motorsport DNA',
-                hp: '503 HP',
-                acc: '3.4s',
-                range: '290 km/h'
-            },
-            'ix': {
-                name: 'BMW iX xDrive50',
-                src: 'img/BMWiX.png',
-                tag: '🚙 Electric SAV Flagship',
-                hp: '516 HP',
-                acc: '4.4s',
-                range: '630 km'
-            },
-            'z4': {
-                name: 'BMW Z4 Roadster',
-                src: 'img/BMWZ4.png',
-                tag: '🏎️ Open-Air Thrill',
-                hp: '382 HP',
-                acc: '3.9s',
-                range: 'TwinPower'
-            },
-            'xm': {
-                name: 'BMW XM Label Red',
-                src: 'img/BMWXM.png',
-                tag: '🔥 738 HP M Hybrid',
-                hp: '738 HP',
-                acc: '3.7s',
-                range: '1,000 Nm'
-            }
+        // Color Presets (Hex values for metallic paint)
+        const paintColors = {
+            'blue': 0x0066b1,    // Marina Bay Blue Metallic
+            'red': 0xd91424,     // Toronto M Red Metallic
+            'green': 0x00593b,   // Isle of Man Green Metallic
+            'grey': 0x22262c,    // Frozen Deep Grey Matte
+            'white': 0xededed,   // Alpine Metallic White
+            'yellow': 0xd9b300,  // Sao Paulo M Gold
+            'cyan': 0x00a3e0     // Electric Cyan Metallic
         };
 
-        // Mouse Drag / Touch Swipe Handlers for 360 Orbit
-        const onPointerDown = (clientX) => {
-            isDragging = true;
-            startX = clientX;
-            lastX = clientX;
-            velocity = 0;
-            hero3DContainer.classList.add('grabbing');
-        };
+        // Initialize 3D Scene
+        function init3DStudio() {
+            const width = webglContainer.offsetWidth;
+            const height = webglContainer.offsetHeight || 420;
 
-        const onPointerMove = (clientX, clientY) => {
-            if (isDragging) {
-                const deltaX = clientX - lastX;
-                velocity = deltaX * 0.4;
-                targetAngle += velocity;
-                lastX = clientX;
+            // 1. Scene & Background
+            scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x070a10, 0.035);
+
+            // 2. Camera
+            camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
+            camera.position.set(4.8, 1.9, 5.2);
+
+            // 3. WebGL Renderer with Anti-Aliasing & Shadows
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.15;
+            webglContainer.appendChild(renderer.domElement);
+
+            // 4. Orbit Controls for full 360 rotation & zoom
+            if (typeof THREE.OrbitControls !== 'undefined') {
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.enableDamping = true;
+                controls.dampingFactor = 0.05;
+                controls.maxPolarAngle = Math.PI / 2 - 0.04; // Don't go under ground
+                controls.minDistance = 3.5;
+                controls.maxDistance = 11;
+                controls.enablePan = false;
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 1.6;
             }
 
-            // Calculate parallax perspective relative to container center
-            const rect = hero3DContainer.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            mouseXPercent = ((clientX - centerX) / (rect.width / 2)) * 12; // Max +/-12 deg tilt
-            mouseYPercent = -((clientY - centerY) / (rect.height / 2)) * 8; // Max +/-8 deg tilt
-        };
+            // 5. Studio Lighting Setup
+            setupLighting();
 
-        const onPointerUp = () => {
-            if (isDragging) {
-                isDragging = false;
-                hero3DContainer.classList.remove('grabbing');
-            }
-        };
+            // 6. Ground Studio Floor with Grid & Radial Reflection
+            setupStudioFloor();
 
-        // Event Listeners for Desktop Mouse
-        hero3DContainer.addEventListener('mousedown', (e) => onPointerDown(e.clientX));
-        window.addEventListener('mousemove', (e) => onPointerMove(e.clientX, e.clientY));
-        window.addEventListener('mouseup', onPointerUp);
+            // 7. Build High-Detail 3D BMW Concept Sports Car
+            build3DCar();
 
-        // Event Listeners for Mobile Touch
-        hero3DContainer.addEventListener('touchstart', (e) => {
-            if (e.touches.length === 1) {
-                onPointerDown(e.touches[0].clientX);
-            }
-        }, { passive: true });
+            // Window Resize Handler
+            window.addEventListener('resize', onWindowResize);
 
-        window.addEventListener('touchmove', (e) => {
-            if (e.touches.length === 1) {
-                onPointerMove(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        }, { passive: true });
-
-        window.addEventListener('touchend', onPointerUp);
-
-        // Auto-Rotate Button Toggle
-        if (toggleAutoRotateBtn) {
-            toggleAutoRotateBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                autoRotate = !autoRotate;
-                toggleAutoRotateBtn.classList.toggle('active', autoRotate);
-                toggleAutoRotateBtn.innerHTML = autoRotate ? '<span>🔄 360° Auto-Orbit [ON]</span>' : '<span>⏸️ 360° Orbit [PAUSED]</span>';
-            });
+            // Start Animation Loop
+            animate();
         }
 
-        // Model Switcher Pills
-        carModelPills.forEach(pill => {
-            pill.addEventListener('click', (e) => {
-                e.stopPropagation();
-                carModelPills.forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
+        function setupLighting() {
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
 
-                const modelKey = pill.getAttribute('data-model');
-                const modelData = heroModelMap[modelKey];
+            // Key Light
+            dirLight1 = new THREE.DirectionalLight(0xffffff, 2.2);
+            dirLight1.position.set(6, 10, 6);
+            dirLight1.castShadow = true;
+            dirLight1.shadow.mapSize.width = 1024;
+            dirLight1.shadow.mapSize.height = 1024;
+            dirLight1.shadow.bias = -0.001;
+            scene.add(dirLight1);
 
-                if (modelData) {
-                    // Smooth transition animation
-                    hero3DCar.style.transform += ' scale(0.85)';
-                    hero3DCar.style.opacity = '0.4';
+            // Fill Light with BMW Cyan Glow
+            dirLight2 = new THREE.DirectionalLight(0x00a3e0, 1.4);
+            dirLight2.position.set(-6, 6, -6);
+            scene.add(dirLight2);
 
-                    setTimeout(() => {
-                        hero3DCar.src = modelData.src;
-                        hero3DCar.alt = modelData.name;
+            // Underglow Cyan Light
+            const underglow = new THREE.PointLight(0x00a3e0, 2.0, 5);
+            underglow.position.set(0, 0.1, 0);
+            scene.add(underglow);
 
-                        // Update dynamic badge info if present
-                        const heroModelNameEl = document.getElementById('heroActiveModelName');
-                        const heroModelTagEl = document.getElementById('heroActiveModelTag');
-                        if (heroModelNameEl) heroModelNameEl.textContent = modelData.name;
-                        if (heroModelTagEl) heroModelTagEl.textContent = modelData.tag;
+            // Headlight beams
+            const headlightL = new THREE.SpotLight(0xaad5ff, 4.0, 14, Math.PI / 6, 0.4, 1.5);
+            headlightL.position.set(1.65, 0.65, 0.62);
+            headlightL.target.position.set(8, 0, 0.62);
+            scene.add(headlightL);
+            scene.add(headlightL.target);
+            headlightSpotlights.push(headlightL);
 
-                        hero3DCar.style.opacity = '1';
-                    }, 200);
+            const headlightR = new THREE.SpotLight(0xaad5ff, 4.0, 14, Math.PI / 6, 0.4, 1.5);
+            headlightR.position.set(1.65, 0.65, -0.62);
+            headlightR.target.position.set(8, 0, -0.62);
+            scene.add(headlightR);
+            scene.add(headlightR.target);
+            headlightSpotlights.push(headlightR);
+        }
+
+        function setupStudioFloor() {
+            // Shadow Receiver Plane
+            const planeGeo = new THREE.PlaneGeometry(35, 35);
+            const planeMat = new THREE.MeshStandardMaterial({
+                color: 0x05080e,
+                roughness: 0.4,
+                metalness: 0.8
+            });
+            const floor = new THREE.Mesh(planeGeo, planeMat);
+            floor.rotation.x = -Math.PI / 2;
+            floor.position.y = 0;
+            floor.receiveShadow = true;
+            scene.add(floor);
+
+            // Studio Circular Grid Ring
+            const ringGeo = new THREE.RingGeometry(2.4, 2.5, 64);
+            const ringMat = new THREE.MeshBasicMaterial({ color: 0x00a3e0, side: THREE.DoubleSide, transparent: true, opacity: 0.6 });
+            const ring = new THREE.Mesh(ringGeo, ringMat);
+            ring.rotation.x = -Math.PI / 2;
+            ring.position.y = 0.01;
+            scene.add(ring);
+
+            const outerRingGeo = new THREE.RingGeometry(3.6, 3.65, 64);
+            const outerRingMat = new THREE.MeshBasicMaterial({ color: 0x0066b1, side: THREE.DoubleSide, transparent: true, opacity: 0.3 });
+            const outerRing = new THREE.Mesh(outerRingGeo, outerRingMat);
+            outerRing.rotation.x = -Math.PI / 2;
+            outerRing.position.y = 0.01;
+            scene.add(outerRing);
+        }
+
+        function build3DCar() {
+            carGroup = new THREE.Group();
+            scene.add(carGroup);
+
+            // 1. Materials
+            bodyMaterial = new THREE.MeshStandardMaterial({
+                color: paintColors['blue'],
+                metalness: 0.9,
+                roughness: 0.18,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.1
+            });
+
+            const carbonMaterial = new THREE.MeshStandardMaterial({
+                color: 0x111113,
+                metalness: 0.6,
+                roughness: 0.4
+            });
+
+            glassMaterial = new THREE.MeshPhysicalMaterial({
+                color: 0x111827,
+                metalness: 0.1,
+                roughness: 0.05,
+                transmission: 0.85,
+                thickness: 0.5,
+                transparent: true,
+                opacity: 0.9
+            });
+
+            const chromeMaterial = new THREE.MeshStandardMaterial({
+                color: 0xffffff,
+                metalness: 0.95,
+                roughness: 0.05
+            });
+
+            const tireMaterial = new THREE.MeshStandardMaterial({
+                color: 0x18181b,
+                roughness: 0.85,
+                metalness: 0.1
+            });
+
+            const lightMaterial = new THREE.MeshBasicMaterial({
+                color: 0x60a5fa
+            });
+
+            const taillightMaterial = new THREE.MeshBasicMaterial({
+                color: 0xef4444
+            });
+
+            // 2. Main Lower Chassis (Streamlined aerodynamic shape)
+            const mainBodyGeo = new THREE.BoxGeometry(3.6, 0.55, 1.75);
+            const mainBody = new THREE.Mesh(mainBodyGeo, bodyMaterial);
+            mainBody.position.y = 0.45;
+            mainBody.castShadow = true;
+            mainBody.receiveShadow = true;
+            carGroup.add(mainBody);
+
+            // 3. Cabin & Curved Roof
+            const cabinGeo = new THREE.BoxGeometry(2.0, 0.58, 1.45);
+            const cabin = new THREE.Mesh(cabinGeo, bodyMaterial);
+            cabin.position.set(-0.2, 0.92, 0);
+            cabin.castShadow = true;
+            carGroup.add(cabin);
+
+            // Windshield (Front Slanted Glass)
+            const windshieldGeo = new THREE.BoxGeometry(0.9, 0.52, 1.42);
+            const windshield = new THREE.Mesh(windshieldGeo, glassMaterial);
+            windshield.position.set(0.65, 0.82, 0);
+            windshield.rotation.z = -0.55;
+            carGroup.add(windshield);
+
+            // Rear Slanted Glass
+            const rearGlassGeo = new THREE.BoxGeometry(0.85, 0.48, 1.42);
+            const rearGlass = new THREE.Mesh(rearGlassGeo, glassMaterial);
+            rearGlass.position.set(-1.05, 0.82, 0);
+            rearGlass.rotation.z = 0.55;
+            carGroup.add(rearGlass);
+
+            // Side Windows (Left & Right)
+            const sideWindowGeo = new THREE.BoxGeometry(1.4, 0.42, 1.48);
+            const sideWindows = new THREE.Mesh(sideWindowGeo, glassMaterial);
+            sideWindows.position.set(-0.2, 0.88, 0);
+            carGroup.add(sideWindows);
+
+            // 4. Hood & Front Nose (Slanted Aerodynamic Front)
+            const hoodGeo = new THREE.BoxGeometry(1.2, 0.28, 1.7);
+            const hood = new THREE.Mesh(hoodGeo, bodyMaterial);
+            hood.position.set(1.4, 0.55, 0);
+            hood.rotation.z = -0.12;
+            hood.castShadow = true;
+            carGroup.add(hood);
+
+            // 5. Signature BMW Kidney Grille (Left & Right)
+            const grilleFrameGeo = new THREE.TorusGeometry(0.18, 0.035, 16, 32);
+            
+            const grilleL = new THREE.Mesh(grilleFrameGeo, chromeMaterial);
+            grilleL.position.set(1.82, 0.45, 0.22);
+            grilleL.rotation.y = Math.PI / 2;
+            carGroup.add(grilleL);
+
+            const grilleR = new THREE.Mesh(grilleFrameGeo, chromeMaterial);
+            grilleR.position.set(1.82, 0.45, -0.22);
+            grilleR.rotation.y = Math.PI / 2;
+            carGroup.add(grilleR);
+
+            // Inner Black Grille Slats
+            const innerGrilleGeo = new THREE.BoxGeometry(0.04, 0.28, 0.28);
+            const innerGrilleL = new THREE.Mesh(innerGrilleGeo, carbonMaterial);
+            innerGrilleL.position.set(1.81, 0.45, 0.22);
+            carGroup.add(innerGrilleL);
+
+            const innerGrilleR = new THREE.Mesh(innerGrilleGeo, carbonMaterial);
+            innerGrilleR.position.set(1.81, 0.45, -0.22);
+            carGroup.add(innerGrilleR);
+
+            // 6. Iconic BMW Twin Laser Headlights
+            const headlightGeo = new THREE.BoxGeometry(0.12, 0.08, 0.4);
+            
+            const hlMeshL = new THREE.Mesh(headlightGeo, lightMaterial);
+            hlMeshL.position.set(1.78, 0.58, 0.62);
+            hlMeshL.rotation.y = 0.2;
+            carGroup.add(hlMeshL);
+
+            const hlMeshR = new THREE.Mesh(headlightGeo, lightMaterial);
+            hlMeshR.position.set(1.78, 0.58, -0.62);
+            hlMeshR.rotation.y = -0.2;
+            carGroup.add(hlMeshR);
+
+            // 7. L-Shaped Sleek BMW OLED Taillights
+            const taillightGeo = new THREE.BoxGeometry(0.08, 0.08, 0.55);
+            
+            const tlMeshL = new THREE.Mesh(taillightGeo, taillightMaterial);
+            tlMeshL.position.set(-1.81, 0.6, 0.55);
+            carGroup.add(tlMeshL);
+
+            const tlMeshR = new THREE.Mesh(taillightGeo, taillightMaterial);
+            tlMeshR.position.set(-1.81, 0.6, -0.55);
+            carGroup.add(tlMeshR);
+
+            // 8. Front & Rear Carbon Diffusers & Side Skirts
+            const frontLipGeo = new THREE.BoxGeometry(0.4, 0.08, 1.8);
+            const frontLip = new THREE.Mesh(frontLipGeo, carbonMaterial);
+            frontLip.position.set(1.75, 0.18, 0);
+            carGroup.add(frontLip);
+
+            const rearDiffuserGeo = new THREE.BoxGeometry(0.4, 0.14, 1.75);
+            const rearDiffuser = new THREE.Mesh(rearDiffuserGeo, carbonMaterial);
+            rearDiffuser.position.set(-1.75, 0.22, 0);
+            carGroup.add(rearDiffuser);
+
+            // Quad M-Performance Exhaust Tips
+            const exhaustGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.15, 16);
+            for (let i of [-0.45, -0.32, 0.32, 0.45]) {
+                const exhaust = new THREE.Mesh(exhaustGeo, chromeMaterial);
+                exhaust.rotation.z = Math.PI / 2;
+                exhaust.position.set(-1.86, 0.22, i);
+                carGroup.add(exhaust);
+            }
+
+            // 9. 4 Alloy Wheels with 3D Rims & Disc Brakes
+            const wheelPositions = [
+                { x: 1.15, y: 0.35, z: 0.88 },   // Front Left
+                { x: 1.15, y: 0.35, z: -0.88 },  // Front Right
+                { x: -1.15, y: 0.35, z: 0.88 },  // Rear Left
+                { x: -1.15, y: 0.35, z: -0.88 }  // Rear Right
+            ];
+
+            const tireGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.28, 32);
+            const rimGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.29, 16);
+            const brakeDiscGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.05, 16);
+            const brakeCaliperGeo = new THREE.BoxGeometry(0.08, 0.14, 0.08);
+            const caliperMat = new THREE.MeshStandardMaterial({ color: 0x0066b1, roughness: 0.3 });
+
+            wheelPositions.forEach((pos) => {
+                const wheelAssembly = new THREE.Group();
+                wheelAssembly.position.set(pos.x, pos.y, pos.z);
+
+                // Tire
+                const tire = new THREE.Mesh(tireGeo, tireMaterial);
+                tire.rotation.x = Math.PI / 2;
+                tire.castShadow = true;
+                wheelAssembly.add(tire);
+
+                // Alloy Rim
+                const rim = new THREE.Mesh(rimGeo, chromeMaterial);
+                rim.rotation.x = Math.PI / 2;
+                wheelAssembly.add(rim);
+
+                // Brake Disc
+                const brakeDisc = new THREE.Mesh(brakeDiscGeo, chromeMaterial);
+                brakeDisc.rotation.x = Math.PI / 2;
+                wheelAssembly.add(brakeDisc);
+
+                // M Brake Caliper
+                const caliper = new THREE.Mesh(brakeCaliperGeo, caliperMat);
+                caliper.position.set(0, 0.12, 0);
+                wheelAssembly.add(caliper);
+
+                carGroup.add(wheelAssembly);
+                wheelMeshes.push(wheelAssembly);
+            });
+
+            // 10. Subtle Floating Animation Anchor
+            carGroup.position.y = 0.05;
+        }
+
+        function onWindowResize() {
+            const width = webglContainer.offsetWidth;
+            const height = webglContainer.offsetHeight || 420;
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        }
+
+        // Animation Loop
+        let clock = new THREE.Clock();
+        function animate() {
+            requestAnimationFrame(animate);
+
+            const elapsedTime = clock.getElapsedTime();
+
+            // Subtle suspension hover breath
+            if (carGroup) {
+                carGroup.position.y = 0.05 + Math.sin(elapsedTime * 2.5) * 0.025;
+            }
+
+            // Update Controls
+            if (controls) {
+                controls.update();
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Initialize Now
+        init3DStudio();
+
+        // =====================================================================
+        // 3D STUDIO UI CONTROLS (Colors, Angles, Lights, Orbit)
+        // =====================================================================
+
+        // 1. Paint Color Customizer Swatches
+        document.querySelectorAll('.color-swatch-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const colorKey = btn.getAttribute('data-color');
+                const selectedHex = paintColors[colorKey] || paintColors['blue'];
+
+                if (bodyMaterial) {
+                    bodyMaterial.color.setHex(selectedHex);
+                }
+
+                // Update UI text badge
+                const colorLabel = document.getElementById('activeColorName');
+                if (colorLabel) {
+                    colorLabel.textContent = btn.getAttribute('data-name') || colorKey.toUpperCase();
                 }
             });
         });
 
-        // 3D Animation & Rendering Loop
-        function animate3D() {
-            floatTime += 0.035;
-            floatOffsetY = Math.sin(floatTime) * 6; // 6px floating bounce
+        // 2. Camera Preset Angle Buttons
+        document.querySelectorAll('.camera-angle-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.camera-angle-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
 
-            if (autoRotate && !isDragging) {
-                targetAngle += autoRotateSpeed;
+                const angle = btn.getAttribute('data-angle');
+                if (!controls) return;
+
+                if (angle === 'front') {
+                    gsapAnimateCamera(4.8, 1.2, 2.5);
+                } else if (angle === 'side') {
+                    gsapAnimateCamera(0.2, 1.1, 6.2);
+                } else if (angle === 'rear') {
+                    gsapAnimateCamera(-4.8, 1.4, 2.8);
+                } else if (angle === 'top') {
+                    gsapAnimateCamera(0.5, 6.5, 1.0);
+                } else {
+                    // Default 3/4 Orbit
+                    gsapAnimateCamera(4.8, 1.9, 5.2);
+                }
+            });
+        });
+
+        function gsapAnimateCamera(targetX, targetY, targetZ) {
+            if (!camera) return;
+            const startX = camera.position.x;
+            const startY = camera.position.y;
+            const startZ = camera.position.z;
+            let progress = 0;
+
+            function step() {
+                progress += 0.06;
+                camera.position.x = startX + (targetX - startX) * progress;
+                camera.position.y = startY + (targetY - startY) * progress;
+                camera.position.z = startZ + (targetZ - startZ) * progress;
+                camera.lookAt(0, 0.4, 0);
+
+                if (progress < 1) {
+                    requestAnimationFrame(step);
+                }
             }
-
-            if (!isDragging) {
-                // Apply inertia dampening
-                targetAngle += velocity;
-                velocity *= 0.94;
-            }
-
-            // Smooth interpolation
-            currentAngle += (targetAngle - currentAngle) * 0.12;
-
-            // Apply 3D matrix transform
-            // Rotate horizontally, slight perspective tilt and breathing float
-            const transformStr = `
-                perspective(1200px)
-                translateY(${floatOffsetY}px)
-                rotateX(${mouseYPercent}deg)
-                rotateY(${currentAngle + mouseXPercent}deg)
-            `;
-
-            hero3DCar.style.transform = transformStr;
-
-            // Rotate ground glowing shadow disc in sync
-            const groundPedestal = document.getElementById('heroGroundPedestal');
-            if (groundPedestal) {
-                groundPedestal.style.transform = `
-                    perspective(1200px)
-                    rotateX(75deg)
-                    rotateZ(${-currentAngle * 0.5}deg)
-                `;
-            }
-
-            requestAnimationFrame(animate3D);
+            requestAnimationFrame(step);
         }
 
-        requestAnimationFrame(animate3D);
+        // 3. Auto-Orbit Toggle Button
+        const orbitBtn = document.getElementById('toggle3DOrbitBtn');
+        if (orbitBtn) {
+            orbitBtn.addEventListener('click', () => {
+                isAutoRotating = !isAutoRotating;
+                if (controls) {
+                    controls.autoRotate = isAutoRotating;
+                }
+                orbitBtn.classList.toggle('active', isAutoRotating);
+                orbitBtn.innerHTML = isAutoRotating ? '🔄 360° Auto-Orbit [ON]' : '⏸️ 360° Orbit [PAUSED]';
+            });
+        }
 
-        // Dynamic 3D Speed Particle Canvas
-        if (speedCanvas) {
-            const ctx = speedCanvas.getContext('2d');
-            let width, height;
-            let particles = [];
-            const particleCount = 45;
-
-            function resizeCanvas() {
-                width = speedCanvas.width = speedCanvas.parentElement.offsetWidth;
-                height = speedCanvas.height = speedCanvas.parentElement.offsetHeight;
-            }
-
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * width,
-                    y: Math.random() * height,
-                    length: 15 + Math.random() * 35,
-                    speed: 2 + Math.random() * 5,
-                    opacity: 0.1 + Math.random() * 0.4,
-                    width: 1 + Math.random() * 1.5
+        // 4. Laser Headlights Toggle Button
+        const lightsBtn = document.getElementById('toggle3DLightsBtn');
+        if (lightsBtn) {
+            lightsBtn.addEventListener('click', () => {
+                lightsOn = !lightsOn;
+                headlightSpotlights.forEach(spot => {
+                    spot.intensity = lightsOn ? 4.0 : 0;
                 });
-            }
-
-            function drawParticles() {
-                ctx.clearRect(0, 0, width, height);
-
-                particles.forEach(p => {
-                    ctx.beginPath();
-                    const grad = ctx.createLinearGradient(p.x, p.y, p.x + p.length, p.y + p.length * 0.3);
-                    grad.addColorStop(0, 'rgba(0, 163, 224, 0)');
-                    grad.addColorStop(1, `rgba(0, 163, 224, ${p.opacity})`);
-
-                    ctx.strokeStyle = grad;
-                    ctx.lineWidth = p.width;
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p.x + p.length, p.y + p.length * 0.3);
-                    ctx.stroke();
-
-                    // Move
-                    p.x -= p.speed * 1.5;
-                    p.y -= p.speed * 0.45;
-
-                    // Reset when out of bounds
-                    if (p.x < -p.length || p.y < -p.length) {
-                        p.x = width + p.length;
-                        p.y = Math.random() * height;
-                    }
-                });
-
-                requestAnimationFrame(drawParticles);
-            }
-
-            requestAnimationFrame(drawParticles);
+                lightsBtn.classList.toggle('active', lightsOn);
+                lightsBtn.innerHTML = lightsOn ? '💡 Laser Lights [ON]' : '🌑 Laser Lights [OFF]';
+            });
         }
     }
 
     // =========================================================================
-    // 2. MOBILE MENU & HEADER SCROLL
+    // 2. MOBILE MENU & NAVBAR SCROLL
     // =========================================================================
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMenu = document.getElementById('navMenu');

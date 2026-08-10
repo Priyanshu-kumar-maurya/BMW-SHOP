@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary SEO & Google Ranking Meta Tags -->
-    <title>BMW SHOP | The Ultimate Driving Machine - Explore All Models & 3D Studio</title>
-    <meta name="title" content="BMW SHOP | The Ultimate Driving Machine - Explore All Models & 3D Studio">
-    <meta name="description" content="Explore the official lineup of BMW luxury electric, hybrid, and high-performance vehicles. Experience the 360° 3D Interactive Studio, explore full vehicle specs, and book VIP test drives.">
+    <title>BMW SHOP | The Ultimate Driving Machine - 3D Interactive WebGL Studio</title>
+    <meta name="title" content="BMW SHOP | The Ultimate Driving Machine - 3D Interactive WebGL Studio">
+    <meta name="description" content="Explore the official lineup of BMW luxury electric, hybrid, and high-performance vehicles. Experience the 360° 3D Interactive WebGL Studio, customize metallic paint, and book VIP test drives.">
     <meta name="keywords" content="BMW Cars, BMW Electric Cars, BMW i7, BMW iX, BMW M4 Competition, BMW X5, BMW X7, BMW M Series, BMW Z4 Roadster, Luxury Automotive, Sheer Driving Pleasure, Buy BMW, BMW Test Drive">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="author" content="Priyanshu Kumar Maurya">
@@ -18,7 +18,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bmw-shop-kappa.vercel.app/">
     <meta property="og:title" content="BMW SHOP | The Ultimate Driving Machine">
-    <meta property="og:description" content="Experience pioneering electric mobility, 360° 3D interactive car rotation, and precision German automotive engineering.">
+    <meta property="og:description" content="Experience pioneering electric mobility, 360° 3D interactive WebGL car rotation, and precision German automotive engineering.">
     <meta property="og:image" content="https://bmw-shop-kappa.vercel.app/img/BMWi7.png">
     <meta property="og:site_name" content="BMW SHOP">
     <meta property="og:locale" content="en_US">
@@ -33,6 +33,10 @@
     <!-- Favicon & Stylesheet -->
     <link rel="icon" type="image/png" href="img/logo2h.png">
     <link rel="stylesheet" href="style.css">
+
+    <!-- Three.js 3D WebGL Engine & OrbitControls via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
     <!-- Schema.org JSON-LD Structured Data for Google Top Rich Results -->
     <script type="application/ld+json">
@@ -161,46 +165,63 @@
         </div>
     </header>
 
-    <!-- 3D Interactive Hero Section -->
+    <!-- 3D WebGL Automotive Studio Hero Section -->
     <section class="hero-section">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="hero-subtitle-tag" id="heroActiveModelTag">⚡ 100% Electric Luxury & Performance</span>
-            <h1 class="hero-title" id="heroActiveModelName">BMW i7 xDrive60</h1>
+            <span class="hero-subtitle-tag">⚡ 3D WebGL Studio &bull; Real-Time Metallic Shader</span>
+            <h1 class="hero-title">BMW M-VISION CONCEPT</h1>
             <p class="hero-description">
-                Interactive 3D Automotive Studio &bull; Drag to rotate 360° &bull; Sheer Driving Pleasure redefined.
+                True 3D Automotive Experience &bull; Drag to rotate 360° &bull; Zoom, change colors & inspect from any angle.
             </p>
 
-            <!-- 3D Studio Stage -->
-            <div class="hero-3d-stage" id="hero3DContainer" title="Click and drag horizontally to rotate 360°">
-                <canvas id="heroSpeedCanvas" class="hero-speed-canvas"></canvas>
-                <div class="hero-ground-pedestal" id="heroGroundPedestal"></div>
-                <div class="hero-3d-car-wrap" id="hero3DStage">
-                    <img id="hero3DCar" class="hero-3d-car-img" src="img/BMWi7.png" alt="BMW i7 3D Rotating Showcase">
+            <!-- 3D WebGL Canvas Studio Container -->
+            <div class="webgl-studio-wrapper">
+                <div id="webglCarStudio" class="webgl-car-studio" title="Click and drag to rotate the 3D car in 360 degrees. Scroll to zoom in/out."></div>
+                <div class="studio-badge-overlay">
+                    <span>🎮 3D WebGL Studio &bull; Drag or Swipe to Orbit 360°</span>
                 </div>
             </div>
 
-            <!-- 3D Model Switcher & Orbit Controls -->
-            <div class="hero-3d-controls">
-                <button class="btn-toggle-orbit active" id="toggleAutoRotateBtn"><span>🔄 360° Auto-Orbit [ON]</span></button>
-                <button class="hero-model-pill active" data-model="i7">BMW i7 (Electric)</button>
-                <button class="hero-model-pill" data-model="m4">BMW M4 (M-Power)</button>
-                <button class="hero-model-pill" data-model="ix">BMW iX (Electric SAV)</button>
-                <button class="hero-model-pill" data-model="z4">BMW Z4 (Roadster)</button>
-                <button class="hero-model-pill" data-model="xm">BMW XM (738 HP)</button>
+            <!-- 3D Studio Interactive Controls Bar -->
+            <div class="studio-controls-bar">
+                <!-- Color Swatches -->
+                <div class="color-palette-group">
+                    <span class="control-group-label">Color: <strong id="activeColorName" style="color: var(--bmw-cyan);">Marina Bay Blue</strong></span>
+                    <div class="color-swatches">
+                        <button class="color-swatch-btn active" data-color="blue" data-name="Marina Bay Blue" style="background: #0066b1;" title="Marina Bay Blue"></button>
+                        <button class="color-swatch-btn" data-color="red" data-name="Toronto M Red" style="background: #d91424;" title="Toronto M Red"></button>
+                        <button class="color-swatch-btn" data-color="green" data-name="Isle of Man Green" style="background: #00593b;" title="Isle of Man Green"></button>
+                        <button class="color-swatch-btn" data-color="grey" data-name="Frozen Carbon Grey" style="background: #22262c;" title="Frozen Carbon Grey"></button>
+                        <button class="color-swatch-btn" data-color="white" data-name="Alpine Metallic White" style="background: #ededed;" title="Alpine White"></button>
+                        <button class="color-swatch-btn" data-color="yellow" data-name="Sao Paulo M Gold" style="background: #d9b300;" title="Sao Paulo Gold"></button>
+                        <button class="color-swatch-btn" data-color="cyan" data-name="Electric Cyan" style="background: #00a3e0;" title="Electric Cyan"></button>
+                    </div>
+                </div>
+
+                <!-- Camera Angle Presets & Controls -->
+                <div class="camera-angles-group">
+                    <button class="camera-angle-btn active" data-angle="orbit">360° Orbit</button>
+                    <button class="camera-angle-btn" data-angle="front">Front 3/4</button>
+                    <button class="camera-angle-btn" data-angle="side">Side View</button>
+                    <button class="camera-angle-btn" data-angle="rear">Rear Exhaust</button>
+                    <button class="camera-angle-btn" data-angle="top">Top View</button>
+                    <button class="btn-toggle-orbit active" id="toggle3DOrbitBtn">🔄 360° Auto-Orbit [ON]</button>
+                    <button class="btn-toggle-orbit active" id="toggle3DLightsBtn">💡 Laser Lights [ON]</button>
+                </div>
             </div>
 
             <!-- CTA Group -->
-            <div class="hero-cta-group">
+            <div class="hero-cta-group" style="margin-top: 2rem;">
                 <a href="#modelsSection" class="btn btn-primary">Explore All Models</a>
-                <button class="btn btn-secondary open-booking-modal" data-car="BMW Experience">Schedule VIP Test Drive</button>
+                <button class="btn btn-secondary open-booking-modal" data-car="BMW M-Vision Experience">Schedule VIP Test Drive</button>
             </div>
 
             <!-- Quick Specs Ribbon -->
             <div class="hero-stats-bar">
                 <div class="stat-item">
                     <span class="stat-number">3.4s</span>
-                    <span class="stat-label">0-100 km/h (M4 Comp)</span>
+                    <span class="stat-label">0-100 km/h (M-Power)</span>
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">630 km</span>
@@ -212,7 +233,7 @@
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">100%</span>
-                    <span class="stat-label">German Engineering</span>
+                    <span class="stat-label">True 3D WebGL Studio</span>
                 </div>
             </div>
         </div>
