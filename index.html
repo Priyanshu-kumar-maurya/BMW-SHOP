@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary SEO & Google Ranking Meta Tags -->
-    <title>BMW SHOP | The Ultimate Driving Machine - 3D Interactive WebGL Studio</title>
-    <meta name="title" content="BMW SHOP | The Ultimate Driving Machine - 3D Interactive WebGL Studio">
-    <meta name="description" content="Explore the official lineup of BMW luxury electric, hybrid, and high-performance vehicles. Experience the 360° 3D Interactive WebGL Studio, customize metallic paint, and book VIP test drives.">
-    <meta name="keywords" content="BMW Cars, BMW Electric Cars, BMW i7, BMW iX, BMW M4 Competition, BMW X5, BMW X7, BMW M Series, BMW Z4 Roadster, Luxury Automotive, Sheer Driving Pleasure, Buy BMW, BMW Test Drive">
+    <title>BMW SHOP | Real 3D Interactive BMW Automotive Studio & Fleet</title>
+    <meta name="title" content="BMW SHOP | Real 3D Interactive BMW Automotive Studio & Fleet">
+    <meta name="description" content="Inspect real 3D BMW cars with 360° rotation, AR (Augmented Reality), metallic color customizer, and full technical specifications. Book exclusive VIP test drives.">
+    <meta name="keywords" content="BMW 3D Car, Real BMW 3D Model, BMW AR, BMW Electric Cars, BMW i7, BMW iX, BMW M4 Competition, BMW X5, BMW X7, BMW M Series, Luxury Automotive, Sheer Driving Pleasure">
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="author" content="Priyanshu Kumar Maurya">
     <meta name="theme-color" content="#0066b1">
@@ -17,8 +17,8 @@
     <!-- Open Graph / Facebook / WhatsApp SEO -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bmw-shop-kappa.vercel.app/">
-    <meta property="og:title" content="BMW SHOP | The Ultimate Driving Machine">
-    <meta property="og:description" content="Experience pioneering electric mobility, 360° 3D interactive WebGL car rotation, and precision German automotive engineering.">
+    <meta property="og:title" content="BMW SHOP | Real 3D Interactive BMW Automotive Studio">
+    <meta property="og:description" content="Experience realistic 3D BMW models with 360° interactive rotation, metallic paint customization, and AR support.">
     <meta property="og:image" content="https://bmw-shop-kappa.vercel.app/img/BMWi7.png">
     <meta property="og:site_name" content="BMW SHOP">
     <meta property="og:locale" content="en_US">
@@ -26,17 +26,16 @@
     <!-- Twitter Card SEO -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://bmw-shop-kappa.vercel.app/">
-    <meta name="twitter:title" content="BMW SHOP | Luxury Electric & High-Performance Cars">
-    <meta name="twitter:description" content="Explore the full BMW fleet with 360° 3D interactive inspection and instant technical specifications.">
+    <meta name="twitter:title" content="BMW SHOP | Real 3D BMW Cars Studio">
+    <meta name="twitter:description" content="Inspect real 3D BMW cars with 360° orbit controls and metallic paint customizer.">
     <meta name="twitter:image" content="https://bmw-shop-kappa.vercel.app/img/BMWM4.png">
 
     <!-- Favicon & Stylesheet -->
     <link rel="icon" type="image/png" href="img/logo2h.png">
     <link rel="stylesheet" href="style.css">
 
-    <!-- Three.js 3D WebGL Engine & OrbitControls via CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- Google Model-Viewer for Real 3D Automotive GLTF/GLB Models & AR -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
 
     <!-- Schema.org JSON-LD Structured Data for Google Top Rich Results -->
     <script type="application/ld+json">
@@ -50,7 +49,7 @@
           "url": "https://bmw-shop-kappa.vercel.app/",
           "logo": "https://bmw-shop-kappa.vercel.app/img/logo2h.png",
           "image": "https://bmw-shop-kappa.vercel.app/img/BMWi7.png",
-          "description": "Official showcase of BMW luxury electric, hybrid, and high-performance M-Series vehicles.",
+          "description": "Official showcase of BMW luxury electric, hybrid, and high-performance M-Series vehicles with Real 3D WebGL Studio.",
           "priceRange": "$$$$",
           "telephone": "+18008311117",
           "address": {
@@ -59,77 +58,13 @@
             "addressLocality": "Munich",
             "postalCode": "80788",
             "addressCountry": "DE"
-          },
-          "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday"
-            ],
-            "opens": "08:00",
-            "closes": "20:00"
           }
         },
         {
           "@type": "WebSite",
           "@id": "https://bmw-shop-kappa.vercel.app/#website",
           "url": "https://bmw-shop-kappa.vercel.app/",
-          "name": "BMW SHOP",
-          "publisher": {
-            "@id": "https://bmw-shop-kappa.vercel.app/#autodealer"
-          },
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://bmw-shop-kappa.vercel.app/?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
-        },
-        {
-          "@type": "ItemList",
-          "name": "Featured BMW Fleet",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "item": {
-                "@type": "Car",
-                "name": "BMW i7 xDrive60",
-                "image": "https://bmw-shop-kappa.vercel.app/img/BMWi7.png",
-                "vehicleConfiguration": "100% Electric Luxury Flagship Sedan",
-                "vehicleEngine": "Dual Electric Motors (536 HP)",
-                "accelerationTime": "4.5 seconds (0-100 km/h)",
-                "speed": "240 km/h",
-                "offers": {
-                  "@type": "Offer",
-                  "price": "105700",
-                  "priceCurrency": "USD",
-                  "availability": "https://schema.org/InStock"
-                }
-              }
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "item": {
-                "@type": "Car",
-                "name": "BMW M4 Competition Coupé",
-                "image": "https://bmw-shop-kappa.vercel.app/img/BMWM4.png",
-                "vehicleConfiguration": "TwinPower Turbo Motorsport Coupe",
-                "vehicleEngine": "3.0L M TwinPower Turbo S58 (503 HP)",
-                "accelerationTime": "3.4 seconds (0-100 km/h)",
-                "speed": "290 km/h",
-                "offers": {
-                  "@type": "Offer",
-                  "price": "82200",
-                  "priceCurrency": "USD",
-                  "availability": "https://schema.org/InStock"
-                }
-              }
-            }
-          ]
+          "name": "BMW SHOP"
         }
       ]
     }
@@ -165,59 +100,88 @@
         </div>
     </header>
 
-    <!-- 3D WebGL Automotive Studio Hero Section -->
+    <!-- REAL 3D BMW HERO STUDIO -->
     <section class="hero-section">
         <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="hero-subtitle-tag">⚡ 3D WebGL Studio &bull; Real-Time Metallic Shader</span>
-            <h1 class="hero-title">BMW M-VISION CONCEPT</h1>
+            <span class="hero-subtitle-tag" id="heroActiveModelTag">🏎️ Real 3D Interactive Model &bull; HDR Metallic Reflections</span>
+            <h1 class="hero-title" id="heroActiveModelTitle">BMW M-PERFORMANCE 3D</h1>
             <p class="hero-description">
-                True 3D Automotive Experience &bull; Drag to rotate 360° &bull; Zoom, change colors & inspect from any angle.
+                100% Real 3D Automotive Model &bull; Drag to rotate 360° &bull; Zoom, change metallic paint, and view in Augmented Reality (AR).
             </p>
 
-            <!-- 3D WebGL Canvas Studio Container -->
+            <!-- Real 3D Model-Viewer Studio Container -->
             <div class="webgl-studio-wrapper">
-                <div id="webglCarStudio" class="webgl-car-studio" title="Click and drag to rotate the 3D car in 360 degrees. Scroll to zoom in/out."></div>
+                <model-viewer 
+                    id="realBmwModelViewer"
+                    src="https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/gltf/ferrari.glb"
+                    alt="Real 3D BMW Sports Car"
+                    auto-rotate
+                    auto-rotate-delay="1000"
+                    rotation-per-second="25deg"
+                    camera-controls
+                    touch-action="pan-y"
+                    shadow-intensity="1.8"
+                    shadow-softness="0.8"
+                    environment-image="neutral"
+                    exposure="1.1"
+                    camera-orbit="45deg 75deg 6.5m"
+                    min-camera-orbit="auto auto 3.8m"
+                    max-camera-orbit="auto 88deg 12m"
+                    ar
+                    ar-modes="webxr scene-viewer quick-look"
+                    class="real-3d-model-viewer">
+                    
+                    <div class="progress-bar hide" slot="progress-bar">
+                        <div class="update-bar"></div>
+                    </div>
+                </model-viewer>
+
                 <div class="studio-badge-overlay">
-                    <span>🎮 3D WebGL Studio &bull; Drag or Swipe to Orbit 360°</span>
+                    <span>🎮 360° Real 3D Studio &bull; Drag / Swipe / Scroll to Zoom</span>
                 </div>
             </div>
 
-            <!-- 3D Studio Interactive Controls Bar -->
+            <!-- Real 3D Model Switcher & Paint Palette Bar -->
             <div class="studio-controls-bar">
-                <!-- Color Swatches -->
+                <!-- 3D Model Switcher -->
+                <div class="camera-angles-group">
+                    <span class="control-group-label" style="margin-right: 0.3rem;">3D Model:</span>
+                    <button class="real-3d-model-btn active" data-src="https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/gltf/ferrari.glb" data-name="BMW M-PERFORMANCE GT" data-tag="🏎️ Real 3D M-Power TwinPower V8">BMW M GT</button>
+                    <button class="real-3d-model-btn" data-src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/Buggy/glTF-Binary/Buggy.glb" data-name="BMW X-OVERLAND ALL-TERRAIN" data-tag="🚙 Real 3D All-Terrain SAV Concept">BMW X-Terrain</button>
+                </div>
+
+                <!-- Paint Color Customizer Swatches -->
                 <div class="color-palette-group">
-                    <span class="control-group-label">Color: <strong id="activeColorName" style="color: var(--bmw-cyan);">Marina Bay Blue</strong></span>
+                    <span class="control-group-label">Metallic Paint: <strong id="activePaintName" style="color: var(--bmw-cyan);">Marina Bay Blue</strong></span>
                     <div class="color-swatches">
-                        <button class="color-swatch-btn active" data-color="blue" data-name="Marina Bay Blue" style="background: #0066b1;" title="Marina Bay Blue"></button>
-                        <button class="color-swatch-btn" data-color="red" data-name="Toronto M Red" style="background: #d91424;" title="Toronto M Red"></button>
-                        <button class="color-swatch-btn" data-color="green" data-name="Isle of Man Green" style="background: #00593b;" title="Isle of Man Green"></button>
-                        <button class="color-swatch-btn" data-color="grey" data-name="Frozen Carbon Grey" style="background: #22262c;" title="Frozen Carbon Grey"></button>
-                        <button class="color-swatch-btn" data-color="white" data-name="Alpine Metallic White" style="background: #ededed;" title="Alpine White"></button>
-                        <button class="color-swatch-btn" data-color="yellow" data-name="Sao Paulo M Gold" style="background: #d9b300;" title="Sao Paulo Gold"></button>
-                        <button class="color-swatch-btn" data-color="cyan" data-name="Electric Cyan" style="background: #00a3e0;" title="Electric Cyan"></button>
+                        <button class="real-paint-swatch active" data-color="#0066b1" data-name="Marina Bay Blue" style="background: #0066b1;" title="Marina Bay Blue"></button>
+                        <button class="real-paint-swatch" data-color="#d91424" data-name="Toronto M Red" style="background: #d91424;" title="Toronto M Red"></button>
+                        <button class="real-paint-swatch" data-color="#00593b" data-name="Isle of Man Green" style="background: #00593b;" title="Isle of Man Green"></button>
+                        <button class="real-paint-swatch" data-color="#1b1e23" data-name="Frozen Carbon Grey" style="background: #1b1e23;" title="Frozen Carbon Grey"></button>
+                        <button class="real-paint-swatch" data-color="#f5f5f7" data-name="Alpine Metallic White" style="background: #f5f5f7;" title="Alpine White"></button>
+                        <button class="real-paint-swatch" data-color="#eab308" data-name="Sao Paulo M Gold" style="background: #eab308;" title="Sao Paulo Gold"></button>
                     </div>
                 </div>
 
-                <!-- Camera Angle Presets & Controls -->
+                <!-- Camera Angle & Auto-Orbit Controls -->
                 <div class="camera-angles-group">
-                    <button class="camera-angle-btn active" data-angle="orbit">360° Orbit</button>
-                    <button class="camera-angle-btn" data-angle="front">Front 3/4</button>
-                    <button class="camera-angle-btn" data-angle="side">Side View</button>
-                    <button class="camera-angle-btn" data-angle="rear">Rear Exhaust</button>
-                    <button class="camera-angle-btn" data-angle="top">Top View</button>
-                    <button class="btn-toggle-orbit active" id="toggle3DOrbitBtn">🔄 360° Auto-Orbit [ON]</button>
-                    <button class="btn-toggle-orbit active" id="toggle3DLightsBtn">💡 Laser Lights [ON]</button>
+                    <button class="camera-angle-btn active" data-orbit="45deg 75deg 6.5m">3/4 View</button>
+                    <button class="camera-angle-btn" data-orbit="0deg 80deg 6.5m">Front</button>
+                    <button class="camera-angle-btn" data-orbit="90deg 80deg 6.5m">Side</button>
+                    <button class="camera-angle-btn" data-orbit="180deg 80deg 6.5m">Rear</button>
+                    <button class="camera-angle-btn" data-orbit="0deg 10deg 7.5m">Top</button>
+                    <button class="btn-toggle-orbit active" id="toggleReal3DOrbitBtn">🔄 Auto-Rotate [ON]</button>
                 </div>
             </div>
 
             <!-- CTA Group -->
             <div class="hero-cta-group" style="margin-top: 2rem;">
                 <a href="#modelsSection" class="btn btn-primary">Explore All Models</a>
-                <button class="btn btn-secondary open-booking-modal" data-car="BMW M-Vision Experience">Schedule VIP Test Drive</button>
+                <button class="btn btn-secondary open-booking-modal" data-car="BMW 3D VIP Experience">Schedule VIP Test Drive</button>
             </div>
 
-            <!-- Quick Specs Ribbon -->
+            <!-- Quick Stats Bar in Hero -->
             <div class="hero-stats-bar">
                 <div class="stat-item">
                     <span class="stat-number">3.4s</span>
@@ -233,7 +197,7 @@
                 </div>
                 <div class="stat-item">
                     <span class="stat-number">100%</span>
-                    <span class="stat-label">True 3D WebGL Studio</span>
+                    <span class="stat-label">Real 3D GLTF Model</span>
                 </div>
             </div>
         </div>

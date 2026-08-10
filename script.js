@@ -1,483 +1,124 @@
 /**
- * BMW SHOP - Interactive JavaScript & True WebGL 3D Automotive Studio
- * Powered by Three.js & Modern Web Technologies
+ * BMW SHOP - Real 3D Automotive Studio & Interactive Systems
+ * Powered by Google Model-Viewer (GLTF/GLB Engine) & Modern Web APIs
  */
 
 document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
-    // 1. TRUE 3D WEBGL AUTOMOTIVE STUDIO (Three.js)
+    // 1. REAL 3D AUTOMOTIVE STUDIO ENGINE (Google Model-Viewer)
     // =========================================================================
-    const webglContainer = document.getElementById('webglCarStudio');
-
-    if (webglContainer && typeof THREE !== 'undefined') {
-        let scene, camera, renderer, controls;
-        let carGroup, bodyMaterial, glassMaterial, wheelMeshes = [];
-        let headlightSpotlights = [], ambientLight, dirLight1, dirLight2;
-        let isAutoRotating = true;
-        let lightsOn = true;
-
-        // Color Presets (Hex values for metallic paint)
-        const paintColors = {
-            'blue': 0x0066b1,    // Marina Bay Blue Metallic
-            'red': 0xd91424,     // Toronto M Red Metallic
-            'green': 0x00593b,   // Isle of Man Green Metallic
-            'grey': 0x22262c,    // Frozen Deep Grey Matte
-            'white': 0xededed,   // Alpine Metallic White
-            'yellow': 0xd9b300,  // Sao Paulo M Gold
-            'cyan': 0x00a3e0     // Electric Cyan Metallic
-        };
-
-        // Initialize 3D Scene
-        function init3DStudio() {
-            const width = webglContainer.offsetWidth;
-            const height = webglContainer.offsetHeight || 420;
-
-            // 1. Scene & Background
-            scene = new THREE.Scene();
-            scene.fog = new THREE.FogExp2(0x070a10, 0.035);
-
-            // 2. Camera
-            camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
-            camera.position.set(4.8, 1.9, 5.2);
-
-            // 3. WebGL Renderer with Anti-Aliasing & Shadows
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(width, height);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-            renderer.shadowMap.enabled = true;
-            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-            renderer.toneMapping = THREE.ACESFilmicToneMapping;
-            renderer.toneMappingExposure = 1.15;
-            webglContainer.appendChild(renderer.domElement);
-
-            // 4. Orbit Controls for full 360 rotation & zoom
-            if (typeof THREE.OrbitControls !== 'undefined') {
-                controls = new THREE.OrbitControls(camera, renderer.domElement);
-                controls.enableDamping = true;
-                controls.dampingFactor = 0.05;
-                controls.maxPolarAngle = Math.PI / 2 - 0.04; // Don't go under ground
-                controls.minDistance = 3.5;
-                controls.maxDistance = 11;
-                controls.enablePan = false;
-                controls.autoRotate = true;
-                controls.autoRotateSpeed = 1.6;
-            }
-
-            // 5. Studio Lighting Setup
-            setupLighting();
-
-            // 6. Ground Studio Floor with Grid & Radial Reflection
-            setupStudioFloor();
-
-            // 7. Build High-Detail 3D BMW Concept Sports Car
-            build3DCar();
-
-            // Window Resize Handler
-            window.addEventListener('resize', onWindowResize);
-
-            // Start Animation Loop
-            animate();
-        }
-
-        function setupLighting() {
-            ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-            scene.add(ambientLight);
-
-            // Key Light
-            dirLight1 = new THREE.DirectionalLight(0xffffff, 2.2);
-            dirLight1.position.set(6, 10, 6);
-            dirLight1.castShadow = true;
-            dirLight1.shadow.mapSize.width = 1024;
-            dirLight1.shadow.mapSize.height = 1024;
-            dirLight1.shadow.bias = -0.001;
-            scene.add(dirLight1);
-
-            // Fill Light with BMW Cyan Glow
-            dirLight2 = new THREE.DirectionalLight(0x00a3e0, 1.4);
-            dirLight2.position.set(-6, 6, -6);
-            scene.add(dirLight2);
-
-            // Underglow Cyan Light
-            const underglow = new THREE.PointLight(0x00a3e0, 2.0, 5);
-            underglow.position.set(0, 0.1, 0);
-            scene.add(underglow);
-
-            // Headlight beams
-            const headlightL = new THREE.SpotLight(0xaad5ff, 4.0, 14, Math.PI / 6, 0.4, 1.5);
-            headlightL.position.set(1.65, 0.65, 0.62);
-            headlightL.target.position.set(8, 0, 0.62);
-            scene.add(headlightL);
-            scene.add(headlightL.target);
-            headlightSpotlights.push(headlightL);
-
-            const headlightR = new THREE.SpotLight(0xaad5ff, 4.0, 14, Math.PI / 6, 0.4, 1.5);
-            headlightR.position.set(1.65, 0.65, -0.62);
-            headlightR.target.position.set(8, 0, -0.62);
-            scene.add(headlightR);
-            scene.add(headlightR.target);
-            headlightSpotlights.push(headlightR);
-        }
-
-        function setupStudioFloor() {
-            // Shadow Receiver Plane
-            const planeGeo = new THREE.PlaneGeometry(35, 35);
-            const planeMat = new THREE.MeshStandardMaterial({
-                color: 0x05080e,
-                roughness: 0.4,
-                metalness: 0.8
-            });
-            const floor = new THREE.Mesh(planeGeo, planeMat);
-            floor.rotation.x = -Math.PI / 2;
-            floor.position.y = 0;
-            floor.receiveShadow = true;
-            scene.add(floor);
-
-            // Studio Circular Grid Ring
-            const ringGeo = new THREE.RingGeometry(2.4, 2.5, 64);
-            const ringMat = new THREE.MeshBasicMaterial({ color: 0x00a3e0, side: THREE.DoubleSide, transparent: true, opacity: 0.6 });
-            const ring = new THREE.Mesh(ringGeo, ringMat);
-            ring.rotation.x = -Math.PI / 2;
-            ring.position.y = 0.01;
-            scene.add(ring);
-
-            const outerRingGeo = new THREE.RingGeometry(3.6, 3.65, 64);
-            const outerRingMat = new THREE.MeshBasicMaterial({ color: 0x0066b1, side: THREE.DoubleSide, transparent: true, opacity: 0.3 });
-            const outerRing = new THREE.Mesh(outerRingGeo, outerRingMat);
-            outerRing.rotation.x = -Math.PI / 2;
-            outerRing.position.y = 0.01;
-            scene.add(outerRing);
-        }
-
-        function build3DCar() {
-            carGroup = new THREE.Group();
-            scene.add(carGroup);
-
-            // 1. Materials
-            bodyMaterial = new THREE.MeshStandardMaterial({
-                color: paintColors['blue'],
-                metalness: 0.9,
-                roughness: 0.18,
-                clearcoat: 1.0,
-                clearcoatRoughness: 0.1
-            });
-
-            const carbonMaterial = new THREE.MeshStandardMaterial({
-                color: 0x111113,
-                metalness: 0.6,
-                roughness: 0.4
-            });
-
-            glassMaterial = new THREE.MeshPhysicalMaterial({
-                color: 0x111827,
-                metalness: 0.1,
-                roughness: 0.05,
-                transmission: 0.85,
-                thickness: 0.5,
-                transparent: true,
-                opacity: 0.9
-            });
-
-            const chromeMaterial = new THREE.MeshStandardMaterial({
-                color: 0xffffff,
-                metalness: 0.95,
-                roughness: 0.05
-            });
-
-            const tireMaterial = new THREE.MeshStandardMaterial({
-                color: 0x18181b,
-                roughness: 0.85,
-                metalness: 0.1
-            });
-
-            const lightMaterial = new THREE.MeshBasicMaterial({
-                color: 0x60a5fa
-            });
-
-            const taillightMaterial = new THREE.MeshBasicMaterial({
-                color: 0xef4444
-            });
-
-            // 2. Main Lower Chassis (Streamlined aerodynamic shape)
-            const mainBodyGeo = new THREE.BoxGeometry(3.6, 0.55, 1.75);
-            const mainBody = new THREE.Mesh(mainBodyGeo, bodyMaterial);
-            mainBody.position.y = 0.45;
-            mainBody.castShadow = true;
-            mainBody.receiveShadow = true;
-            carGroup.add(mainBody);
-
-            // 3. Cabin & Curved Roof
-            const cabinGeo = new THREE.BoxGeometry(2.0, 0.58, 1.45);
-            const cabin = new THREE.Mesh(cabinGeo, bodyMaterial);
-            cabin.position.set(-0.2, 0.92, 0);
-            cabin.castShadow = true;
-            carGroup.add(cabin);
-
-            // Windshield (Front Slanted Glass)
-            const windshieldGeo = new THREE.BoxGeometry(0.9, 0.52, 1.42);
-            const windshield = new THREE.Mesh(windshieldGeo, glassMaterial);
-            windshield.position.set(0.65, 0.82, 0);
-            windshield.rotation.z = -0.55;
-            carGroup.add(windshield);
-
-            // Rear Slanted Glass
-            const rearGlassGeo = new THREE.BoxGeometry(0.85, 0.48, 1.42);
-            const rearGlass = new THREE.Mesh(rearGlassGeo, glassMaterial);
-            rearGlass.position.set(-1.05, 0.82, 0);
-            rearGlass.rotation.z = 0.55;
-            carGroup.add(rearGlass);
-
-            // Side Windows (Left & Right)
-            const sideWindowGeo = new THREE.BoxGeometry(1.4, 0.42, 1.48);
-            const sideWindows = new THREE.Mesh(sideWindowGeo, glassMaterial);
-            sideWindows.position.set(-0.2, 0.88, 0);
-            carGroup.add(sideWindows);
-
-            // 4. Hood & Front Nose (Slanted Aerodynamic Front)
-            const hoodGeo = new THREE.BoxGeometry(1.2, 0.28, 1.7);
-            const hood = new THREE.Mesh(hoodGeo, bodyMaterial);
-            hood.position.set(1.4, 0.55, 0);
-            hood.rotation.z = -0.12;
-            hood.castShadow = true;
-            carGroup.add(hood);
-
-            // 5. Signature BMW Kidney Grille (Left & Right)
-            const grilleFrameGeo = new THREE.TorusGeometry(0.18, 0.035, 16, 32);
-            
-            const grilleL = new THREE.Mesh(grilleFrameGeo, chromeMaterial);
-            grilleL.position.set(1.82, 0.45, 0.22);
-            grilleL.rotation.y = Math.PI / 2;
-            carGroup.add(grilleL);
-
-            const grilleR = new THREE.Mesh(grilleFrameGeo, chromeMaterial);
-            grilleR.position.set(1.82, 0.45, -0.22);
-            grilleR.rotation.y = Math.PI / 2;
-            carGroup.add(grilleR);
-
-            // Inner Black Grille Slats
-            const innerGrilleGeo = new THREE.BoxGeometry(0.04, 0.28, 0.28);
-            const innerGrilleL = new THREE.Mesh(innerGrilleGeo, carbonMaterial);
-            innerGrilleL.position.set(1.81, 0.45, 0.22);
-            carGroup.add(innerGrilleL);
-
-            const innerGrilleR = new THREE.Mesh(innerGrilleGeo, carbonMaterial);
-            innerGrilleR.position.set(1.81, 0.45, -0.22);
-            carGroup.add(innerGrilleR);
-
-            // 6. Iconic BMW Twin Laser Headlights
-            const headlightGeo = new THREE.BoxGeometry(0.12, 0.08, 0.4);
-            
-            const hlMeshL = new THREE.Mesh(headlightGeo, lightMaterial);
-            hlMeshL.position.set(1.78, 0.58, 0.62);
-            hlMeshL.rotation.y = 0.2;
-            carGroup.add(hlMeshL);
-
-            const hlMeshR = new THREE.Mesh(headlightGeo, lightMaterial);
-            hlMeshR.position.set(1.78, 0.58, -0.62);
-            hlMeshR.rotation.y = -0.2;
-            carGroup.add(hlMeshR);
-
-            // 7. L-Shaped Sleek BMW OLED Taillights
-            const taillightGeo = new THREE.BoxGeometry(0.08, 0.08, 0.55);
-            
-            const tlMeshL = new THREE.Mesh(taillightGeo, taillightMaterial);
-            tlMeshL.position.set(-1.81, 0.6, 0.55);
-            carGroup.add(tlMeshL);
-
-            const tlMeshR = new THREE.Mesh(taillightGeo, taillightMaterial);
-            tlMeshR.position.set(-1.81, 0.6, -0.55);
-            carGroup.add(tlMeshR);
-
-            // 8. Front & Rear Carbon Diffusers & Side Skirts
-            const frontLipGeo = new THREE.BoxGeometry(0.4, 0.08, 1.8);
-            const frontLip = new THREE.Mesh(frontLipGeo, carbonMaterial);
-            frontLip.position.set(1.75, 0.18, 0);
-            carGroup.add(frontLip);
-
-            const rearDiffuserGeo = new THREE.BoxGeometry(0.4, 0.14, 1.75);
-            const rearDiffuser = new THREE.Mesh(rearDiffuserGeo, carbonMaterial);
-            rearDiffuser.position.set(-1.75, 0.22, 0);
-            carGroup.add(rearDiffuser);
-
-            // Quad M-Performance Exhaust Tips
-            const exhaustGeo = new THREE.CylinderGeometry(0.05, 0.05, 0.15, 16);
-            for (let i of [-0.45, -0.32, 0.32, 0.45]) {
-                const exhaust = new THREE.Mesh(exhaustGeo, chromeMaterial);
-                exhaust.rotation.z = Math.PI / 2;
-                exhaust.position.set(-1.86, 0.22, i);
-                carGroup.add(exhaust);
-            }
-
-            // 9. 4 Alloy Wheels with 3D Rims & Disc Brakes
-            const wheelPositions = [
-                { x: 1.15, y: 0.35, z: 0.88 },   // Front Left
-                { x: 1.15, y: 0.35, z: -0.88 },  // Front Right
-                { x: -1.15, y: 0.35, z: 0.88 },  // Rear Left
-                { x: -1.15, y: 0.35, z: -0.88 }  // Rear Right
-            ];
-
-            const tireGeo = new THREE.CylinderGeometry(0.35, 0.35, 0.28, 32);
-            const rimGeo = new THREE.CylinderGeometry(0.24, 0.24, 0.29, 16);
-            const brakeDiscGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.05, 16);
-            const brakeCaliperGeo = new THREE.BoxGeometry(0.08, 0.14, 0.08);
-            const caliperMat = new THREE.MeshStandardMaterial({ color: 0x0066b1, roughness: 0.3 });
-
-            wheelPositions.forEach((pos) => {
-                const wheelAssembly = new THREE.Group();
-                wheelAssembly.position.set(pos.x, pos.y, pos.z);
-
-                // Tire
-                const tire = new THREE.Mesh(tireGeo, tireMaterial);
-                tire.rotation.x = Math.PI / 2;
-                tire.castShadow = true;
-                wheelAssembly.add(tire);
-
-                // Alloy Rim
-                const rim = new THREE.Mesh(rimGeo, chromeMaterial);
-                rim.rotation.x = Math.PI / 2;
-                wheelAssembly.add(rim);
-
-                // Brake Disc
-                const brakeDisc = new THREE.Mesh(brakeDiscGeo, chromeMaterial);
-                brakeDisc.rotation.x = Math.PI / 2;
-                wheelAssembly.add(brakeDisc);
-
-                // M Brake Caliper
-                const caliper = new THREE.Mesh(brakeCaliperGeo, caliperMat);
-                caliper.position.set(0, 0.12, 0);
-                wheelAssembly.add(caliper);
-
-                carGroup.add(wheelAssembly);
-                wheelMeshes.push(wheelAssembly);
-            });
-
-            // 10. Subtle Floating Animation Anchor
-            carGroup.position.y = 0.05;
-        }
-
-        function onWindowResize() {
-            const width = webglContainer.offsetWidth;
-            const height = webglContainer.offsetHeight || 420;
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
-            renderer.setSize(width, height);
-        }
-
-        // Animation Loop
-        let clock = new THREE.Clock();
-        function animate() {
-            requestAnimationFrame(animate);
-
-            const elapsedTime = clock.getElapsedTime();
-
-            // Subtle suspension hover breath
-            if (carGroup) {
-                carGroup.position.y = 0.05 + Math.sin(elapsedTime * 2.5) * 0.025;
-            }
-
-            // Update Controls
-            if (controls) {
-                controls.update();
-            }
-
-            renderer.render(scene, camera);
-        }
-
-        // Initialize Now
-        init3DStudio();
-
-        // =====================================================================
-        // 3D STUDIO UI CONTROLS (Colors, Angles, Lights, Orbit)
-        // =====================================================================
-
-        // 1. Paint Color Customizer Swatches
-        document.querySelectorAll('.color-swatch-btn').forEach(btn => {
+    const modelViewer = document.getElementById('realBmwModelViewer');
+    const heroTitle = document.getElementById('heroActiveModelTitle');
+    const heroTag = document.getElementById('heroActiveModelTag');
+    const activePaintLabel = document.getElementById('activePaintName');
+    const toggleOrbitBtn = document.getElementById('toggleReal3DOrbitBtn');
+
+    if (modelViewer) {
+        // 1. Real 3D Model Switcher
+        document.querySelectorAll('.real-3d-model-btn').forEach(btn => {
             btn.addEventListener('click', () => {
-                document.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.real-3d-model-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                const colorKey = btn.getAttribute('data-color');
-                const selectedHex = paintColors[colorKey] || paintColors['blue'];
+                const modelSrc = btn.getAttribute('data-src');
+                const modelName = btn.getAttribute('data-name');
+                const modelTag = btn.getAttribute('data-tag');
 
-                if (bodyMaterial) {
-                    bodyMaterial.color.setHex(selectedHex);
+                if (modelSrc) {
+                    modelViewer.src = modelSrc;
                 }
-
-                // Update UI text badge
-                const colorLabel = document.getElementById('activeColorName');
-                if (colorLabel) {
-                    colorLabel.textContent = btn.getAttribute('data-name') || colorKey.toUpperCase();
+                if (heroTitle && modelName) {
+                    heroTitle.textContent = modelName;
+                }
+                if (heroTag && modelTag) {
+                    heroTag.textContent = modelTag;
                 }
             });
         });
 
-        // 2. Camera Preset Angle Buttons
+        // 2. Real 3D Material Metallic Paint Color Customizer
+        document.querySelectorAll('.real-paint-swatch').forEach(swatch => {
+            swatch.addEventListener('click', () => {
+                document.querySelectorAll('.real-paint-swatch').forEach(s => s.classList.remove('active'));
+                swatch.classList.add('active');
+
+                const hexColor = swatch.getAttribute('data-color');
+                const colorName = swatch.getAttribute('data-name');
+
+                if (activePaintLabel && colorName) {
+                    activePaintLabel.textContent = colorName;
+                    activePaintLabel.style.color = hexColor;
+                }
+
+                // Apply color to 3D model materials
+                if (modelViewer.model && modelViewer.model.materials) {
+                    const materials = modelViewer.model.materials;
+                    materials.forEach(material => {
+                        const matName = material.name ? material.name.toLowerCase() : '';
+                        // Target car body paint or main metallic surfaces
+                        if (matName.includes('body') || matName.includes('car_body') || matName.includes('paint') || matName.includes('exterior') || matName.includes('red') || matName.includes('color')) {
+                            material.pbrMetallicRoughness.setBaseColorFactor(hexToRgba(hexColor));
+                        }
+                    });
+                }
+            });
+        });
+
+        // Helper to convert hex to RGBA for Model-Viewer PBR
+        function hexToRgba(hex) {
+            let c = hex.replace('#', '');
+            if (c.length === 3) c = c.split('').map(x => x + x).join('');
+            const num = parseInt(c, 16);
+            return [
+                ((num >> 16) & 255) / 255,
+                ((num >> 8) & 255) / 255,
+                (num & 255) / 255,
+                1.0
+            ];
+        }
+
+        // When 3D model loads, apply initial metallic clearcoat
+        modelViewer.addEventListener('load', () => {
+            const activeSwatch = document.querySelector('.real-paint-swatch.active');
+            if (activeSwatch) {
+                const hexColor = activeSwatch.getAttribute('data-color');
+                if (modelViewer.model && modelViewer.model.materials) {
+                    modelViewer.model.materials.forEach(material => {
+                        const matName = material.name ? material.name.toLowerCase() : '';
+                        if (matName.includes('body') || matName.includes('car_body') || matName.includes('paint') || matName.includes('red') || matName.includes('exterior')) {
+                            material.pbrMetallicRoughness.setBaseColorFactor(hexToRgba(hexColor));
+                        }
+                    });
+                }
+            }
+        });
+
+        // 3. Camera Angle Presets
         document.querySelectorAll('.camera-angle-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.camera-angle-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                const angle = btn.getAttribute('data-angle');
-                if (!controls) return;
-
-                if (angle === 'front') {
-                    gsapAnimateCamera(4.8, 1.2, 2.5);
-                } else if (angle === 'side') {
-                    gsapAnimateCamera(0.2, 1.1, 6.2);
-                } else if (angle === 'rear') {
-                    gsapAnimateCamera(-4.8, 1.4, 2.8);
-                } else if (angle === 'top') {
-                    gsapAnimateCamera(0.5, 6.5, 1.0);
-                } else {
-                    // Default 3/4 Orbit
-                    gsapAnimateCamera(4.8, 1.9, 5.2);
+                const orbit = btn.getAttribute('data-orbit');
+                if (orbit && modelViewer) {
+                    modelViewer.cameraOrbit = orbit;
                 }
             });
         });
 
-        function gsapAnimateCamera(targetX, targetY, targetZ) {
-            if (!camera) return;
-            const startX = camera.position.x;
-            const startY = camera.position.y;
-            const startZ = camera.position.z;
-            let progress = 0;
-
-            function step() {
-                progress += 0.06;
-                camera.position.x = startX + (targetX - startX) * progress;
-                camera.position.y = startY + (targetY - startY) * progress;
-                camera.position.z = startZ + (targetZ - startZ) * progress;
-                camera.lookAt(0, 0.4, 0);
-
-                if (progress < 1) {
-                    requestAnimationFrame(step);
+        // 4. Auto-Rotate Toggle Button
+        if (toggleOrbitBtn) {
+            toggleOrbitBtn.addEventListener('click', () => {
+                const isRotating = modelViewer.hasAttribute('auto-rotate');
+                if (isRotating) {
+                    modelViewer.removeAttribute('auto-rotate');
+                    toggleOrbitBtn.classList.remove('active');
+                    toggleOrbitBtn.innerHTML = '⏸️ Auto-Rotate [PAUSED]';
+                } else {
+                    modelViewer.setAttribute('auto-rotate', '');
+                    toggleOrbitBtn.classList.add('active');
+                    toggleOrbitBtn.innerHTML = '🔄 Auto-Rotate [ON]';
                 }
-            }
-            requestAnimationFrame(step);
-        }
-
-        // 3. Auto-Orbit Toggle Button
-        const orbitBtn = document.getElementById('toggle3DOrbitBtn');
-        if (orbitBtn) {
-            orbitBtn.addEventListener('click', () => {
-                isAutoRotating = !isAutoRotating;
-                if (controls) {
-                    controls.autoRotate = isAutoRotating;
-                }
-                orbitBtn.classList.toggle('active', isAutoRotating);
-                orbitBtn.innerHTML = isAutoRotating ? '🔄 360° Auto-Orbit [ON]' : '⏸️ 360° Orbit [PAUSED]';
-            });
-        }
-
-        // 4. Laser Headlights Toggle Button
-        const lightsBtn = document.getElementById('toggle3DLightsBtn');
-        if (lightsBtn) {
-            lightsBtn.addEventListener('click', () => {
-                lightsOn = !lightsOn;
-                headlightSpotlights.forEach(spot => {
-                    spot.intensity = lightsOn ? 4.0 : 0;
-                });
-                lightsBtn.classList.toggle('active', lightsOn);
-                lightsBtn.innerHTML = lightsOn ? '💡 Laser Lights [ON]' : '🌑 Laser Lights [OFF]';
             });
         }
     }
